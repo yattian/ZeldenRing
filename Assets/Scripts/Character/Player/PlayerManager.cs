@@ -25,5 +25,26 @@ namespace YT
             // HANDLE MOVEMENT
             playerLocomotionManager.HandleAllMovement();
         }
+
+        protected override void LateUpdate()
+        {
+            if (!IsOwner)
+                return;
+
+            base.LateUpdate();
+
+            PlayerCamera.instance.HandleAllCameraActions();
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+
+            // If this is the player object spawned by this client
+            if (IsOwner)
+            {
+                PlayerCamera.instance.player = this;
+            }
+        }
     }
 }

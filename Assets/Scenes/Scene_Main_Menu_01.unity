@@ -1234,6 +1234,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80fc6753fb03f4946915aae1983dfb39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1878883073 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8589894710155022979, guid: 46c0351ce915cb846b0d75eb46f08dd2,
+    type: 3}
+  m_PrefabInstance: {fileID: 3838198939870708908}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1910482911
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,12 +1318,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910482911}
   m_CullTransparentMesh: 1
---- !u!20 &305037873767945577 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 4633930192889901391, guid: 46c0351ce915cb846b0d75eb46f08dd2,
-    type: 3}
-  m_PrefabInstance: {fileID: 4932761697578542118}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1801783245720302755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1522,7 +1522,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53b60f4112678144bb969be22712f4bb, type: 3}
---- !u!1001 &4932761697578542118
+--- !u!1001 &3838198939870708908
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1532,9 +1532,14 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8892907001084629135, guid: 46c0351ce915cb846b0d75eb46f08dd2,
         type: 3}
-      propertyPath: cameraObject
+      propertyPath: cameraPivotTransform
       value: 
-      objectReference: {fileID: 305037873767945577}
+      objectReference: {fileID: 1878883073}
+    - target: {fileID: -8892907001084629135, guid: 46c0351ce915cb846b0d75eb46f08dd2,
+        type: 3}
+      propertyPath: collideWithLayers.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2839560729047176943, guid: 46c0351ce915cb846b0d75eb46f08dd2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1588,7 +1593,7 @@ PrefabInstance:
     - target: {fileID: 9084927143094805670, guid: 46c0351ce915cb846b0d75eb46f08dd2,
         type: 3}
       propertyPath: m_Name
-      value: Player Camera
+      value: Player Camera (Left & Right)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1675,4 +1680,4 @@ SceneRoots:
   - {fileID: 3616591245985011567}
   - {fileID: 5477924429550667397}
   - {fileID: 3481178254606703167}
-  - {fileID: 4932761697578542118}
+  - {fileID: 3838198939870708908}
