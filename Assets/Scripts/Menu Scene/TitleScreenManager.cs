@@ -10,6 +10,8 @@ namespace YT
         public void StartNetworkAsHost()
         {
             NetworkManager.Singleton.StartHost();
+            //NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("192.168.4.51");
+            //NetworkManager.Singleton.StartClient();
         }
 
         public void StartNewGame()

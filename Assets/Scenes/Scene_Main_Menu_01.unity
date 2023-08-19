@@ -1381,6 +1381,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8767239532973041675, guid: 50fbdafc05086ed489c3e6be2aff83c0,
+        type: 3}
+      propertyPath: ConnectionData.Address
+      value: 192.168.4.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 8767239532973041675, guid: 50fbdafc05086ed489c3e6be2aff83c0,
+        type: 3}
+      propertyPath: ConnectionData.ServerListenAddress
+      value: 0.0.0.0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
