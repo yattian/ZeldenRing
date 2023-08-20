@@ -6,7 +6,8 @@ namespace YT
 {
     public class PlayerManager : CharacterManager
     {
-        PlayerLocomotionManager playerLocomotionManager;
+        [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
+        [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
         protected override void Awake()
         {
             base.Awake();
@@ -14,6 +15,7 @@ namespace YT
             // DO MORE STUFF FOR PLAYER
 
             playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
+            playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
         }
 
         protected override void Update()
@@ -44,6 +46,7 @@ namespace YT
             if (IsOwner)
             {
                 PlayerCamera.instance.player = this;
+                PlayerInputManager.instance.player = this;
             }
         }
     }

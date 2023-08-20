@@ -8,6 +8,7 @@ namespace YT
     public class PlayerInputManager : MonoBehaviour
     {
         public static PlayerInputManager instance;
+        public PlayerManager player;
         PlayerControls playerControls;
 
         [Header("Player Movement Input")]
@@ -114,6 +115,12 @@ namespace YT
             {
                 moveAmount = 1;
             }
+
+            if (player == null)
+                return;
+
+            // If not locked, only use move amount
+            player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
         }
 
         private void HandleCameraMovementInput()

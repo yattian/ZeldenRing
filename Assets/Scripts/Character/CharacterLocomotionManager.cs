@@ -10,5 +10,10 @@ namespace YT {
         {
 
         }
+
+        protected virtual void Update()
+        {
+
+        }
     }
 }
