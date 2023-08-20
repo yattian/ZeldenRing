@@ -129,6 +129,45 @@
             ]
         },
         {
+            "name": "Player Actions",
+            "id": "c93a3633-632b-4f33-bc45-5fec7f3143a9",
+            "actions": [
+                {
+                    "name": "Dodge",
+                    "type": "Button",
+                    "id": "9eeba57e-abf3-4633-b47e-63e1b16212be",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1a9960cc-c51a-4bc4-90c8-a00990d93bc6",
+                    "path": "<XInputController>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8ba17a33-3d0b-4078-80ec-1c31ac573e83",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "Player Camera",
             "id": "6622a78a-afc6-4dc9-9f56-981c5fe69b1b",
             "actions": [
@@ -201,7 +240,7 @@
                 {
                     "name": "Right Stick",
                     "id": "01ace1a5-39bb-4f0a-9c2a-38b9510324b4",
-                    "path": "2DVector",
+                    "path": "2DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

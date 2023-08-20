@@ -11,16 +11,19 @@ namespace YT
         public PlayerManager player;
         PlayerControls playerControls;
 
+        [Header("Camera Movement Input")]
+        [SerializeField] Vector2 cameraInput;
+        public float cameraHorizontalInput;
+        public float cameraVerticalInput;
+
         [Header("Player Movement Input")]
         [SerializeField] Vector2 movementInput;
         public float horizontalInput;
         public float verticalInput;
         public float moveAmount;
 
-        [Header("Camera Movement Input")]
-        [SerializeField] Vector2 cameraInput;
-        public float cameraHorizontalInput;
-        public float cameraVerticalInput;
+        [Header("Player Action Input")]
+        [SerializeField] bool dodgeInput = false;
 
         private void Awake()
         {
@@ -127,6 +130,11 @@ namespace YT
         {
             cameraVerticalInput = cameraInput.y;
             cameraHorizontalInput = cameraInput.x;
+        }
+
+        private void HandleDodgeInput()
+        {
+
         }
     }
 }
