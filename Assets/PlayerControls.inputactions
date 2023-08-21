@@ -28,7 +28,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
+                    "name": "Up",
                     "id": "8e048ec5-7b70-44a5-aa15-52224d57e496",
                     "path": "<Keyboard>/w",
                     "interactions": "",
@@ -39,7 +39,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "down",
+                    "name": "Down",
                     "id": "1cde6c36-db84-4ae6-88d0-ea43adcec4ee",
                     "path": "<Keyboard>/s",
                     "interactions": "",
@@ -50,8 +50,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "left",
-                    "id": "ada5b2a6-6384-4043-94f2-974d21548116",
+                    "name": "Left",
+                    "id": "e65de8f6-8c65-4aec-8f39-a6b10113cd8c",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -61,8 +61,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
-                    "id": "ab764f36-0255-4b43-938b-ce1ae876cc8d",
+                    "name": "Right",
+                    "id": "b8345d96-33e6-4943-85d4-6cb14ef48110",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
@@ -138,7 +138,16 @@
                     "id": "9eeba57e-abf3-4633-b47e-63e1b16212be",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Tap",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "PassThrough",
+                    "id": "706f869e-85ca-416d-8a74-1cd3092fc6ea",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 }
             ],
@@ -162,6 +171,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6a9f9416-bccf-4dbb-9306-f55ecd07387d",
+                    "path": "<XInputController>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "453c5d85-31ea-4e7a-ac23-2fc9578c1c86",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

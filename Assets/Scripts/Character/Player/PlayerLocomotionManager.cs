@@ -17,6 +17,7 @@ namespace YT
         private Vector3 targetRotationDirection;
         [SerializeField] float walkingSpeed = 2;
         [SerializeField] float runningSpeed = 5;
+        [SerializeField] float sprintingSpeed = 8f;
         [SerializeField] float rotationSpeed = 15;
 
         [Header("Dodge")]
@@ -46,7 +47,7 @@ namespace YT
                 moveAmount = player.characterNetworkManager.moveAmount.Value;
 
                 // If not locked, pass move amount
-                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount);
+                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
 
                 // If locked, pass horz and vert
             }
@@ -78,16 +79,23 @@ namespace YT
             // Our movement direction is based on camera perspective and inputs
             moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;
             moveDirection = moveDirection + PlayerCamera.instance.transform.right * horizontalMovement;
-            moveDirection.Normalize();
             moveDirection.y = 0;
+            moveDirection.Normalize();
 
-            if (PlayerInputManager.instance.moveAmount > 0.5f)
+            if (player.playerNetworkManager.isSprinting.Value)
             {
-                player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
+                player.characterController.Move(moveDirection * sprintingSpeed * Time.deltaTime);
             }
-            else if (PlayerInputManager.instance.moveAmount <= 0.5f)
+            else
             {
-                player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
+                if (PlayerInputManager.instance.moveAmount > 0.5f)
+                {
+                    player.characterController.Move(moveDirection * runningSpeed * Time.deltaTime);
+                }
+                else if (PlayerInputManager.instance.moveAmount <= 0.5f)
+                {
+                    player.characterController.Move(moveDirection * walkingSpeed * Time.deltaTime);
+                }
             }
         }
 
@@ -112,6 +120,28 @@ namespace YT
             transform.rotation = targetRotation;
         }
 
+        public void HandleSprinting()
+        {
+            if (player.isPerformingAction)
+            {
+                player.playerNetworkManager.isSprinting.Value = false;
+            }
+
+            // If out of stamina, set sprinting to false
+
+            // If we ware moving, set sprinting to true
+            if (moveAmount >= 0.5)
+            {
+                player.playerNetworkManager.isSprinting.Value = true;
+            }
+            // If stationary or slowly moving, set sprinting to false
+            else
+            {
+                player.playerNetworkManager.isSprinting.Value = false;
+            }
+            
+        }
+
         public void AttemptToPerformDodge()
         {
             if (player.isPerformingAction)
@@ -123,7 +153,7 @@ namespace YT
                 rollDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.verticalInput;
                 rollDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontalInput;
                 rollDirection.y = 0;
-                rollDirection.Normalize();
+                // rollDirection.Normalize();
 
                 Quaternion playerRotation = Quaternion.LookRotation(rollDirection);
                 player.transform.rotation = playerRotation;
