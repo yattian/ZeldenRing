@@ -68,6 +68,7 @@ namespace YT
 
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
+                playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
             }
 
             playerControls.Enable();
@@ -97,9 +98,17 @@ namespace YT
 
         private void Update()
         {
+            HandleAllInputs();
+        }
+
+        private void HandleAllInputs()
+        {
             HandlePlayerMovementInput();
             HandleCameraMovementInput();
+            HandleDodgeInput();
         }
+
+        // Movement
 
         private void HandlePlayerMovementInput()
         {
@@ -132,9 +141,18 @@ namespace YT
             cameraHorizontalInput = cameraInput.x;
         }
 
+        // Actions
+
         private void HandleDodgeInput()
         {
+            if (dodgeInput)
+            {
+                dodgeInput = false;
 
+                // Future note: Return if menu or ui window is open
+                player.playerLocomotionManager.AttemptToPerformDodge();
+                // Perform Dodge
+            }
         }
     }
 }
