@@ -55,6 +55,7 @@ namespace YT
 
         public void HandleAllMovement()
         {
+
             HandleGroundedMovement();
             HandleRotation();
         }
@@ -70,6 +71,9 @@ namespace YT
         private void HandleGroundedMovement()
         {
             GetMovementValues();
+
+            if (!player.canMove)
+                return;
 
             // Our movement direction is based on camera perspective and inputs
             moveDirection = PlayerCamera.instance.transform.forward * verticalMovement;
@@ -89,6 +93,9 @@ namespace YT
 
         private void HandleRotation()
         {
+            if (!player.canRotate)
+                return;
+
             targetRotationDirection = Vector3.zero;
             targetRotationDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
             targetRotationDirection = targetRotationDirection + PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
@@ -128,6 +135,7 @@ namespace YT
             else
             {
                 // Perform backstep animation
+                player.playerAnimatorManager.PlayTargetActionAnimation("Back_Step_01", true, true);
             }
         }
     }

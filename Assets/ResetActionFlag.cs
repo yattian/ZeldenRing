@@ -17,6 +17,9 @@ namespace YT
 
             // This is called when action ends, and state returns to empty
             character.isPerformingAction = false;
+            character.applyRootMotion = false;
+            character.canRotate = true;
+            character.canMove = true;
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
