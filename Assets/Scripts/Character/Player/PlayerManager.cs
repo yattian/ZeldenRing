@@ -9,6 +9,7 @@ namespace YT
         [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
         [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
         [HideInInspector] public PlayerNetworkManager playerNetworkManager;
+        [HideInInspector] public PlayerStatsManager playerStatsManager;
         protected override void Awake()
         {
             base.Awake();
@@ -18,6 +19,7 @@ namespace YT
             playerLocomotionManager = GetComponent<PlayerLocomotionManager>();
             playerAnimatorManager = GetComponent<PlayerAnimatorManager>();
             playerNetworkManager = GetComponent<PlayerNetworkManager>();
+            playerStatsManager = GetComponent<PlayerStatsManager>();
         }
 
         protected override void Update()
@@ -26,8 +28,11 @@ namespace YT
 
             if (!IsOwner)
                 return;
-            // HANDLE MOVEMENT
+            // Handle movement
             playerLocomotionManager.HandleAllMovement();
+
+            // Regen stamina
+            playerStatsManager.RegenerateStamina();
         }
 
         protected override void LateUpdate()
@@ -49,6 +54,15 @@ namespace YT
             {
                 PlayerCamera.instance.player = this;
                 PlayerInputManager.instance.player = this;
+
+                playerNetworkManager.currentStamina.OnValueChanged += PlayerUIManager.instance.playerUIHudManager.SetNewStamniaValue;
+                playerNetworkManager.currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenTimer;
+
+                // This will be moved when saving and loading is added
+                playerNetworkManager.maxStamina.Value = playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
+                playerNetworkManager.currentStamina.Value = playerStatsManager.CalculateStaminaBasedOnEnduranceLevel(playerNetworkManager.endurance.Value);
+
+                PlayerUIManager.instance.playerUIHudManager.SetMaxStaminaValue(playerNetworkManager.maxStamina.Value);
             }
         }
     }

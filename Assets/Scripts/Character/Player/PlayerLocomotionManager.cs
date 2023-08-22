@@ -20,9 +20,11 @@ namespace YT
         [SerializeField] float runningSpeed = 5;
         [SerializeField] float sprintingSpeed = 8f;
         [SerializeField] float rotationSpeed = 15;
+        [SerializeField] int sprintingStaminaCost = 2;
 
         [Header("Dodge")]
         private Vector3 rollDirection;
+        [SerializeField] float dodgeStaminaCost = 25;
 
         protected override void Awake()
         {
@@ -128,6 +130,11 @@ namespace YT
             }
 
             // If out of stamina, set sprinting to false
+            if (player.playerNetworkManager.currentStamina.Value <= 0)
+            {
+                player.playerNetworkManager.isSprinting.Value = false;
+                return;
+            }
 
             // If we ware moving, set sprinting to true
             if (moveAmount >= 0.5)
@@ -140,11 +147,18 @@ namespace YT
                 player.playerNetworkManager.isSprinting.Value = false;
             }
             
+            if (player.playerNetworkManager.isSprinting.Value)
+            {
+                player.playerNetworkManager.currentStamina.Value -= sprintingStaminaCost * Time.deltaTime;
+            }
         }
 
         public void AttemptToPerformDodge()
         {
             if (player.isPerformingAction)
+                return;
+
+            if (player.playerNetworkManager.currentStamina.Value <= 0)
                 return;
 
             // If move when dodge, then roll
@@ -167,6 +181,8 @@ namespace YT
                 // Perform backstep animation
                 player.playerAnimatorManager.PlayTargetActionAnimation("Back_Step_01", true, true);
             }
+
+            player.playerNetworkManager.currentStamina.Value -= dodgeStaminaCost;
         }
     }
 }
