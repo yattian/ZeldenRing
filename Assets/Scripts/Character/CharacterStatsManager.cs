@@ -22,7 +22,6 @@ namespace YT {
         public int CalculateStaminaBasedOnEnduranceLevel(int endurance)
         {
             float stamina = 0;
-
             // Create equation for how you want your stamina to be calculated
 
             stamina = endurance * 10;
