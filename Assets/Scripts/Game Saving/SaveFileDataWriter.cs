@@ -9,12 +9,12 @@ namespace YT
     public class SaveFileDataWriter
     {
         public string saveDataDirectoryPath = "";
-        public string SaveFileName = "";
+        public string saveFileName = "";
 
         // Before create new save, check if file already exists
         public bool CheckToSeeIfFileExists()
         {
-            if (File.Exists(Path.Combine(saveDataDirectoryPath, SaveFileName)))
+            if (File.Exists(Path.Combine(saveDataDirectoryPath, saveFileName)))
             {
                 return true;
             }
@@ -27,14 +27,14 @@ namespace YT
         // Delete character save files
         public void DeleteSaveFile()
         {
-            File.Delete(Path.Combine(saveDataDirectoryPath, SaveFileName));
+            File.Delete(Path.Combine(saveDataDirectoryPath, saveFileName));
         }
 
         // Used to create new save file upon starting new game
         public void CreateNewCharacterSaveFile(CharacterSaveData characterData)
         {
             // Make a path to save file 
-            string savePath = Path.Combine(saveDataDirectoryPath, SaveFileName);
+            string savePath = Path.Combine(saveDataDirectoryPath, saveFileName);
 
             try
             {
@@ -65,7 +65,7 @@ namespace YT
         {
             CharacterSaveData characterData = null;
 
-            string loadPath = Path.Combine(saveDataDirectoryPath, SaveFileName);
+            string loadPath = Path.Combine(saveDataDirectoryPath, saveFileName);
 
             if (File.Exists(loadPath))
             {
