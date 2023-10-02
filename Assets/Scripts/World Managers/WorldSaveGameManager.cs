@@ -9,7 +9,7 @@ namespace YT
     {
         public static WorldSaveGameManager instance;
 
-        [SerializeField] PlayerManager player;
+        public PlayerManager player;
 
         [Header("SAVE/LOAD")]
         [SerializeField] bool saveGame;
@@ -115,13 +115,37 @@ namespace YT
         }
 
         
-        public void CreateNewGame()
+        public void AttemptToCreateNewGame()
         {
-            // Create new file, with file name depending on which slot using
-            saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(currentCharacterSlotBeingUsed);
+            saveFileDataWriter = new SaveFileDataWriter();
+            saveFileDataWriter.saveDataDirectoryPath = Application.persistentDataPath;
 
-            currentCharacterData = new CharacterSaveData();
+            // Check to see if we can create a new save file (check for other exisiting files first)
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_01);
+            
 
+            if (!saveFileDataWriter.CheckToSeeIfFileExists())
+            {
+                // If profile slot not taken, make a new one using this slot
+                currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_01;
+                currentCharacterData = new CharacterSaveData();
+                StartCoroutine(LoadWorldScene());
+                return;
+            }
+
+            saveFileDataWriter.saveFileName = DecideCharacterFileNameBasedOnCharacterSlotBeingUsed(CharacterSlot.CharacterSlot_02);
+
+            if (!saveFileDataWriter.CheckToSeeIfFileExists())
+            {
+                // If profile slot not taken, make a new one using this slot
+                currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_02;
+                currentCharacterData = new CharacterSaveData();
+                StartCoroutine(LoadWorldScene());
+                return;
+            }
+
+            // If no free slots, notify player
+            TitleScreenManager.Instance.DisplayNoFreeCharacterSlotsPopUp();
         }
 
         public void LoadGame()
@@ -197,6 +221,8 @@ namespace YT
         public IEnumerator LoadWorldScene()
         {
             AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
+
+            player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
 
             yield return null;
         }
