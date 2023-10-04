@@ -115,6 +115,7 @@ namespace YT
             HandleCameraMovementInput();
             HandleDodgeInput();
             HandleSprintInput();
+            HandleJumpInput();
         }
 
         // Movement

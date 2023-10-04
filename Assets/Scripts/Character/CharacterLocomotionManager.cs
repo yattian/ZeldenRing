@@ -9,7 +9,7 @@ namespace YT {
         CharacterManager character;
 
         [Header("Ground Check & Jumping")]
-        [SerializeField] float gravityForce = -20f;
+        [SerializeField] protected float gravityForce = -40f;
         [SerializeField] LayerMask groundLayer;
         [SerializeField] float groundCheckSphereRadius = 0.3f;
         [SerializeField] protected Vector3 yVelocity; // The force at which our character is pulled up or down

@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace YT
 {
-    public class ResetActionFlag : StateMachineBehaviour
+    public class ResetIsJumping : StateMachineBehaviour
     {
         CharacterManager character;
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -15,13 +16,13 @@ namespace YT
                 character = animator.GetComponent<CharacterManager>();
             }
 
-            // This is called when action ends, and state returns to empty
-            character.isPerformingAction = false;
-            character.applyRootMotion = false;
-            character.canRotate = true;
-            character.canMove = true;
             character.isJumping = false;
         }
+        // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+        //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        //{
+        //    
+        //}
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
         //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
