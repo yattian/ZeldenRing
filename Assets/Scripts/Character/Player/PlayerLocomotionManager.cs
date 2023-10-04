@@ -25,6 +25,7 @@ namespace YT
         [Header("Dodge")]
         private Vector3 rollDirection;
         [SerializeField] float dodgeStaminaCost = 25;
+        [SerializeField] float jumpStaminaCost = 25;
 
         protected override void Awake()
         {
@@ -183,6 +184,39 @@ namespace YT
             }
 
             player.playerNetworkManager.currentStamina.Value -= dodgeStaminaCost;
+        }
+
+        public void AttemptToPerformJump()
+        {
+            // If performing a general action, not allowed a jump
+            if (player.isPerformingAction)
+                return;
+
+            // If out of stamina
+            if (player.playerNetworkManager.currentStamina.Value <= 0)
+                return;
+
+            // If already jumping, no double jump
+            if (player.isJumping)
+                return;
+
+            // If not grounded, no jump
+            if (player.isGrounded)
+                return;
+
+            // If two handing, play two handed jump animation, otherwise one handed (to do)
+
+            player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_01", false);
+
+            player.isJumping = true;
+
+            player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;
+        }
+
+        public void ApplyJumpingVelocity()
+        {
+            // Apply upward velocity depending on forces in our game
+
         }
     }
 }

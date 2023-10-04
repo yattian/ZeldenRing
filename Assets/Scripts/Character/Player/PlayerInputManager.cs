@@ -25,6 +25,7 @@ namespace YT
         [Header("Player Action Input")]
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
+        [SerializeField] bool jumpInput = false;
         
         private void Awake()
         {
@@ -70,6 +71,7 @@ namespace YT
                 playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
+                playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
 
                 // Hold input, actives sprint, sets bool to true
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -112,7 +114,7 @@ namespace YT
             HandlePlayerMovementInput();
             HandleCameraMovementInput();
             HandleDodgeInput();
-            HandleSprinting();
+            HandleSprintInput();
         }
 
         // Movement
@@ -162,7 +164,7 @@ namespace YT
             }
         }
 
-        private void HandleSprinting()
+        private void HandleSprintInput()
         {
             if (sprintInput)
             {
@@ -171,6 +173,19 @@ namespace YT
             else
             {
                 player.playerNetworkManager.isSprinting.Value = false;
+            }
+        }
+
+        private void HandleJumpInput()
+        {
+            if (jumpInput)
+            {
+                jumpInput = false;
+
+                // If we have UI window open, simply return without doing anything
+
+                // Attempt to perform jump
+                player.playerLocomotionManager.AttemptToPerformJump();
             }
         }
     }

@@ -14,9 +14,12 @@ namespace YT
 
         [Header("Flags")]
         public bool isPerformingAction = false;
+        public bool isJumping = false;
+        public bool isGrounded = true;
         public bool applyRootMotion = false;
         public bool canRotate = true;
         public bool canMove = true;
+        
 
         protected virtual void Awake()
         {
@@ -29,6 +32,7 @@ namespace YT
 
         protected virtual void Update()
         {
+            animator.SetBool("isGrounded", isGrounded);
             // If character is controlled by us, then assign network position to position of our transform
             if (IsOwner)
             {
