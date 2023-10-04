@@ -839,7 +839,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -8257928079569425312, guid: 0ad932253e8dc8841948afa5d1a0d051, type: 3}
+  - {fileID: 2100000, guid: 06d40dc2e1401784eb420a0d2d5d7235, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1298,8 +1298,11 @@ MonoBehaviour:
   sprintingSpeed: 8
   rotationSpeed: 15
   sprintingStaminaCost: 2
-  dodgeStaminaCost: 25
   jumpStaminaCost: 25
+  jumpHeight: 4
+  jumpForwardSpeed: 5
+  freeFallSpeed: 2
+  dodgeStaminaCost: 25
 --- !u!114 &2562419577362552070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1332,7 +1335,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.8
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08

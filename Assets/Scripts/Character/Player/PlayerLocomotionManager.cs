@@ -24,7 +24,7 @@ namespace YT
 
         [Header("Jump")]
         [SerializeField] float jumpStaminaCost = 25;
-        [SerializeField] float jumpHeight = 4;
+        [SerializeField] float jumpHeight = 2;
         [SerializeField] float jumpForwardSpeed = 5;
         [SerializeField] float freeFallSpeed = 2;
         private Vector3 jumpDirection;

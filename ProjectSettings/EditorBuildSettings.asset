@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scene_World_01.unity
     guid: ddf7c4ea6166d6945ac45cedfd721b67
+  - enabled: 0
+    path: Assets/PolygonHorrorMansion/Scenes/Scene_World_Horror.unity
+    guid: dda52f1b21df39c459a6b2eafa31df9d
   m_configObjects: {}

@@ -27,15 +27,6 @@ namespace YT
         // Delete character save files
         public void DeleteSaveFile()
         {
-            if (System.IO.File.Exists(Path.Combine(saveDataDirectoryPath, saveFileName)))
-            {
-                Debug.Log("Its there");         
-            }
-            else
-            {
-                Debug.Log("Its not there");
-            }
-            Debug.Log(Path.Combine(saveDataDirectoryPath, saveFileName));
             File.Delete(Path.Combine(saveDataDirectoryPath, saveFileName));
         }
 
