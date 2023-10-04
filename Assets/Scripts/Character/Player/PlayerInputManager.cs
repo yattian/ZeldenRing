@@ -25,7 +25,7 @@ namespace YT
         [Header("Player Action Input")]
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
-
+        
         private void Awake()
         {
             if (instance == null)

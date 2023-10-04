@@ -18,10 +18,15 @@ namespace YT
         [SerializeField] Button mainMenuNewGameButton;
         [SerializeField] Button loadMenuReturnButton;
         [SerializeField] Button mainMenuLoadGameButton;
+        [SerializeField] Button deleteCharacterPopUpConfirmButton;
 
         [Header("Pop Ups")]
         [SerializeField] GameObject noCharacterSlotsPopUp;
         [SerializeField] Button noCharacterSlotsOkayButton;
+        [SerializeField] GameObject deleteCharacterSlotPopUp;
+
+        [Header("Character Slots")]
+        public CharacterSlot currentSelectedSlot = CharacterSlot.NO_SLOT;
 
         private void Awake()
         {
@@ -63,6 +68,7 @@ namespace YT
         {
             // Close load menu
             titleScreenLoadMenu.SetActive(false);
+
             // Open main menu
             titleScreenMainMenu.SetActive(true);
 
@@ -80,6 +86,45 @@ namespace YT
         {
             noCharacterSlotsPopUp.SetActive(false);
             mainMenuNewGameButton.Select();
+        }
+
+        // Character Slots
+
+        public void SelectCharacterSlot(CharacterSlot characterSlot)
+        {
+            currentSelectedSlot = characterSlot;
+        }
+
+        public void SelectNoSlot()
+        {
+            currentSelectedSlot = CharacterSlot.NO_SLOT;
+        }
+
+        public void AttemptToDeleteCharacterSlot()
+        {
+            if (currentSelectedSlot != CharacterSlot.NO_SLOT)
+            {
+                deleteCharacterSlotPopUp.SetActive(true);
+                deleteCharacterPopUpConfirmButton.Select();
+            }     
+        }
+
+        public void DeleteCharacterSlot()
+        {
+            deleteCharacterSlotPopUp.SetActive(false);
+            WorldSaveGameManager.instance.DeleteGame(currentSelectedSlot);
+
+            // Disable and enable load menu to refresh
+            titleScreenLoadMenu.SetActive(false);
+            titleScreenLoadMenu.SetActive(true);
+
+            loadMenuReturnButton.Select();
+        }
+
+        public void CloseDeleteCharacterPopUp()
+        {
+            deleteCharacterSlotPopUp.SetActive(false);
+            loadMenuReturnButton.Select();
         }
     }
 }

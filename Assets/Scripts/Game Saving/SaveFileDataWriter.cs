@@ -27,6 +27,15 @@ namespace YT
         // Delete character save files
         public void DeleteSaveFile()
         {
+            if (System.IO.File.Exists(Path.Combine(saveDataDirectoryPath, saveFileName)))
+            {
+                Debug.Log("Its there");         
+            }
+            else
+            {
+                Debug.Log("Its not there");
+            }
+            Debug.Log(Path.Combine(saveDataDirectoryPath, saveFileName));
             File.Delete(Path.Combine(saveDataDirectoryPath, saveFileName));
         }
 
@@ -59,7 +68,7 @@ namespace YT
                 Debug.LogError("Error while trying to save character data, game not saved " + savePath + "\n" + ex);
             }
         }
-    
+
         // Used to load a save file
         public CharacterSaveData LoadSaveFile()
         {
@@ -88,11 +97,11 @@ namespace YT
                 {
                     Debug.LogError("Error while trying to load character data " + loadPath + "\n" + ex);
                 }
-                
+
             }
             return characterData;
         }
-    
+
     }
 
 }
