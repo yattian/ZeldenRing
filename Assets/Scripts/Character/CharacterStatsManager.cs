@@ -19,6 +19,21 @@ namespace YT {
             character = GetComponent<CharacterManager>();
         }
 
+        protected virtual void Start()
+        {
+
+        }
+
+        public int CalculateHealthBasedOnVitalityLevel(int vitality)
+        {
+            float health = 0;
+            // Create equation for how you want your stamina to be calculated
+
+            health = vitality * 15;
+
+            return Mathf.RoundToInt(health);
+        }
+
         public int CalculateStaminaBasedOnEnduranceLevel(int endurance)
         {
             float stamina = 0;

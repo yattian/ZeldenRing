@@ -128,7 +128,7 @@ namespace YT
                 //  IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
                 currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_01;
                 currentCharacterData = new CharacterSaveData();
-                StartCoroutine(LoadWorldScene());
+                NewGame();
                 return;
             }
 
@@ -140,7 +140,7 @@ namespace YT
                 //  IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
                 currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_02;
                 currentCharacterData = new CharacterSaveData();
-                StartCoroutine(LoadWorldScene());
+                NewGame();
                 return;
             }
 
@@ -152,7 +152,7 @@ namespace YT
                 //  IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
                 currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_03;
                 currentCharacterData = new CharacterSaveData();
-                StartCoroutine(LoadWorldScene());
+                NewGame();
                 return;
             }
 
@@ -164,7 +164,7 @@ namespace YT
                 //  IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
                 currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_04;
                 currentCharacterData = new CharacterSaveData();
-                StartCoroutine(LoadWorldScene());
+                NewGame();
                 return;
             }
 
@@ -176,7 +176,7 @@ namespace YT
                 //  IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
                 currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_05;
                 currentCharacterData = new CharacterSaveData();
-                StartCoroutine(LoadWorldScene());
+                NewGame();
                 return;
             }
 
@@ -188,7 +188,7 @@ namespace YT
                 //  IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
                 currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_06;
                 currentCharacterData = new CharacterSaveData();
-                StartCoroutine(LoadWorldScene());
+                NewGame();
                 return;
             }
 
@@ -200,7 +200,7 @@ namespace YT
                 //  IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
                 currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_07;
                 currentCharacterData = new CharacterSaveData();
-                StartCoroutine(LoadWorldScene());
+                NewGame();
                 return;
             }
 
@@ -212,7 +212,7 @@ namespace YT
                 //  IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
                 currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_08;
                 currentCharacterData = new CharacterSaveData();
-                StartCoroutine(LoadWorldScene());
+                NewGame();
                 return;
             }
 
@@ -224,7 +224,7 @@ namespace YT
                 //  IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
                 currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_09;
                 currentCharacterData = new CharacterSaveData();
-                StartCoroutine(LoadWorldScene());
+                NewGame();
                 return;
             }
 
@@ -236,7 +236,7 @@ namespace YT
                 //  IF THIS PROFILE SLOT IS NOT TAKEN, MAKE A NEW ONE USING THIS SLOT
                 currentCharacterSlotBeingUsed = CharacterSlot.CharacterSlot_10;
                 currentCharacterData = new CharacterSaveData();
-                StartCoroutine(LoadWorldScene());
+                NewGame();
                 return;
             }
 
@@ -244,6 +244,12 @@ namespace YT
             TitleScreenManager.Instance.DisplayNoFreeCharacterSlotsPopUp();
         }
 
+        private void NewGame()
+        {
+            // Saves the newly created character stats, and items when creation is added
+            SaveGame();
+            StartCoroutine(LoadWorldScene());
+        }
         public void LoadGame()
         {
             //  LOAD A PREVIOUS FILE, WITH A FILE NAME DEPENDING ON WHICH SLOT WE ARE USING
