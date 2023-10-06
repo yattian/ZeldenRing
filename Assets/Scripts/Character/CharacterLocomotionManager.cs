@@ -63,10 +63,10 @@ namespace YT {
 
 
         // Draws our ground sphere
-        protected void OnDrawGizmosSelected()
-        {
-            Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
-        }
+        //protected void OnDrawGizmosSelected()
+        //{
+        //    Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
+        //}
     }
 
 }

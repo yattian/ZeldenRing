@@ -26,4 +26,12 @@ namespace YT
         NO_SLOT
     }
 
+    public enum WeaponModelSlot
+    {
+        RightHand,
+        Lefthand
+        // Right Hips
+        // Left Hips
+        // Back
+    }
 }
