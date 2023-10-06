@@ -16,9 +16,9 @@ namespace YT
             staminaBar.gameObject.SetActive(false);
             staminaBar.gameObject.SetActive(true);
         }
-        public void SetNewHealthValue(float oldValue, float newValue)
+        public void SetNewHealthValue(int oldValue, int newValue)
         {
-            healthBar.SetStat(Mathf.RoundToInt(newValue));
+            healthBar.SetStat(newValue);
         }
 
         public void SetMaxHealthValue(int maxHealth)
@@ -26,7 +26,7 @@ namespace YT
             healthBar.SetMaxStat(maxHealth);
         }
 
-        public void SetNewStamniaValue(float oldValue, float newValue)
+        public void SetNewStaminaValue(float oldValue, float newValue)
         {
             staminaBar.SetStat(Mathf.RoundToInt(newValue));
         }

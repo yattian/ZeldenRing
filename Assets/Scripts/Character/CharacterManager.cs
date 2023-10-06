@@ -7,10 +7,15 @@ namespace YT
 {
     public class CharacterManager : NetworkBehaviour
     {
+        [Header("Status")]
+        public NetworkVariable<bool> isDead = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
         [HideInInspector] public CharacterController characterController;
         [HideInInspector] public Animator animator;
 
         [HideInInspector] public CharacterNetworkManager characterNetworkManager;
+        [HideInInspector] public CharacterEffectsManager characterEffectsManager;
+        [HideInInspector] public CharacterAnimatorManager characterAnimatorManager;
 
         [Header("Flags")]
         public bool isPerformingAction = false;
@@ -26,7 +31,10 @@ namespace YT
 
             characterController = GetComponent<CharacterController>();
             animator = GetComponent<Animator>();
+
             characterNetworkManager = GetComponent<CharacterNetworkManager>();
+            characterEffectsManager = GetComponent<CharacterEffectsManager>();
+            characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
         }
 
         protected virtual void Update()
@@ -57,6 +65,38 @@ namespace YT
         }
 
         protected virtual void LateUpdate()
+        {
+
+        }
+
+        public virtual IEnumerator ProcessDeathEvent(bool manuallySelectDeathAnimation = false)
+        {
+            if (IsOwner)
+            {
+                characterNetworkManager.currentHealth.Value = 0;
+                isDead.Value = true;
+
+                // Reset any flags here that need to be reset
+                // Nothing yet (eg attack animations)
+
+                // If not grounded, play aerial death animation
+
+                if (!manuallySelectDeathAnimation)
+                {
+                    characterAnimatorManager.PlayTargetActionAnimation("Death_01", true);
+                }
+            }
+
+            // Play some death SFX
+
+            yield return new WaitForSeconds(5);
+
+            // Award players with runes 
+
+            // Disable character
+        }
+
+        public virtual void ReviveCharacter()
         {
 
         }

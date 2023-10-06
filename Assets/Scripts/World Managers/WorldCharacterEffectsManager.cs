@@ -8,20 +8,23 @@ namespace YT
     {
         public static WorldCharacterEffectsManager instance;
 
+        [Header("Damage")]
+        public TakeDamageEffect takeDamageEffect;
+
         [SerializeField] List<InstantCharacterEffect> instantEffects;
 
         private void Awake()
         {
-            if (instance = null)
+            if (instance == null)
             {
                 instance = this;
-            }    
+            }
             else
             {
                 Destroy(gameObject);
             }
 
-            GenerateEffectIDs(); 
+            GenerateEffectIDs();
         }
 
         private void GenerateEffectIDs()

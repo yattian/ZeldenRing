@@ -247,9 +247,12 @@ namespace YT
         private void NewGame()
         {
             // Saves the newly created character stats, and items when creation is added
+            player.playerNetworkManager.vitality.Value = 15;
+            player.playerNetworkManager.endurance.Value = 10;
             SaveGame();
             StartCoroutine(LoadWorldScene());
         }
+
         public void LoadGame()
         {
             //  LOAD A PREVIOUS FILE, WITH A FILE NAME DEPENDING ON WHICH SLOT WE ARE USING
@@ -330,11 +333,11 @@ namespace YT
         public IEnumerator LoadWorldScene()
         {
             //  IF YOU JUST WANT 1 WORLD SCENE USE THIS
-            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
-
+            //AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
+            //Debug.Log("Loading game from build index " + currentCharacterData.sceneIndex);
             //  IF YOU WANT TO USE DIFFERENT SCENES FOR LEVELS IN YOUR PROJECT USE THIS
-            //AsyncOperation loadOperation = SceneManager.LoadSceneAsync(currentCharacterData.sceneIndex);
-
+            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(currentCharacterData.sceneIndex);
+            
             player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
 
             yield return null;

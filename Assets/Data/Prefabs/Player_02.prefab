@@ -1981,12 +1981,18 @@ MonoBehaviour:
     m_InternalValue: 0
   isSprinting:
     m_InternalValue: 0
-  endurance:
-    m_InternalValue: 10
+  currentHealth:
+    m_InternalValue: 0
+  maxHealth:
+    m_InternalValue: 0
   currentStamina:
     m_InternalValue: 0
   maxStamina:
     m_InternalValue: 0
+  vitality:
+    m_InternalValue: 1
+  endurance:
+    m_InternalValue: 1
   characterName:
     m_InternalValue:
       utf8LengthInBytes: 9
@@ -2068,9 +2074,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebb1ef049ff77094d92fc7b854bf5d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead:
+    m_InternalValue: 0
   characterController: {fileID: 0}
   animator: {fileID: 0}
   characterNetworkManager: {fileID: 0}
+  characterEffectsManager: {fileID: 0}
   isPerformingAction: 0
   isJumping: 0
   isGrounded: 1

@@ -8,9 +8,9 @@ namespace YT
     // SINCE WE WANT TO REFERENCE THIS DATA FOR EVERY SAVE FILE, THIS SCRIPT IS NOT A MONOBEHAVIOUR AND IS INSTEAD SERIALIZABLE
     public class CharacterSaveData
     {
-        // Think this was about episode 14? +-1 
-        //[Header("SCENE INDEX")]
-        //public int sceneIndex = 1;
+        // End of episode 12
+        [Header("SCENE INDEX")]
+        public int sceneIndex = 1;
 
         [Header("Character Name")]
         public string characterName = "Character";
@@ -25,7 +25,7 @@ namespace YT
         public float zPosition;
 
         [Header("Resources")]
-        public float currentHealth;
+        public int currentHealth;
         public float currentStamina;
         
 
