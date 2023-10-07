@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a4c12c0b2f97214f9304ddf57317f62, type: 3}
-  m_Name: Straight Sword 02
+  m_Name: Unarmed
   m_EditorClassIdentifier: 
-  itemName: Straight Sword
-  itemIcon: {fileID: 21300000, guid: a3bf44d05fa0a30499659cb9cfe0c8c6, type: 3}
-  itemDescription: A straight sword
+  itemName: 
+  itemIcon: {fileID: 0}
+  itemDescription: 
   itemID: 0
-  weaponModel: {fileID: 3398242658747945919, guid: f300db8137af0ac478f8850ecc692c75,
+  weaponModel: {fileID: 3407357925661629870, guid: 3d114126af25a314cb9a189a4f80ff5f,
     type: 3}
-  strengthREQ: 10
-  dexREQ: 10
+  strengthREQ: 0
+  dexREQ: 0
   intREQ: 0
   faithREQ: 0
-  physicalDamage: 100
+  physicalDamage: 10
   magicDamage: 0
   fireDamage: 0
   holyDamage: 0
   lightningDamage: 0
-  poiseDamage: 10
-  baseStaminaCost: 20
+  poiseDamage: 5
+  baseStaminaCost: 5

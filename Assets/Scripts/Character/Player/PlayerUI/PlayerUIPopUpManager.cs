@@ -21,7 +21,7 @@ namespace YT
             youDiedPopUpBackgroundText.characterSpacing = 0;
 
             // Stretch out the pop up
-            StartCoroutine(StretchPopUpTextOverTime(youDiedPopUpBackgroundText, 8, 19f));
+            StartCoroutine(StretchPopUpTextOverTime(youDiedPopUpBackgroundText, 8, 19f, 100f));
 
             // Fade in the pop up
             StartCoroutine(FadeInPopUpOverTime(youDiedPopUpCanvasGroup, 5));
@@ -30,7 +30,7 @@ namespace YT
             StartCoroutine(WaitThenFadeOutPopUpOverTime(youDiedPopUpCanvasGroup, 2, 5));
         }
 
-        private IEnumerator StretchPopUpTextOverTime(TextMeshProUGUI text, float duration, float stretchAmount)
+        /*private IEnumerator StretchPopUpTextOverTime(TextMeshProUGUI text, float duration, float stretchAmount)
         {
             if (duration > 0f)
             {
@@ -44,6 +44,34 @@ namespace YT
                     text.characterSpacing = Mathf.Lerp(text.characterSpacing, stretchAmount, duration * (Time.deltaTime / 20));
                     yield return null;
                 }
+            }
+        }*/
+        private IEnumerator StretchPopUpTextOverTime(TextMeshProUGUI text, float duration, float stretchAmount, float fontSizeChange)
+        {
+            if (duration > 0f)
+            {
+                float originalCharacterSpacing = text.characterSpacing;
+                float originalFontSize = text.fontSize;
+
+                float timer = 0;
+                yield return null;
+
+                while (timer < duration)
+                {
+                    timer += Time.deltaTime;
+
+                    // Interpolate character spacing
+                    text.characterSpacing = Mathf.Lerp(originalCharacterSpacing, stretchAmount, timer / duration);
+
+                    // Interpolate font size
+                    text.fontSize = Mathf.Lerp(originalFontSize, originalFontSize + fontSizeChange, timer / duration);
+
+                    yield return null;
+                }
+
+                // Reset character spacing and font size to their original values
+                text.characterSpacing = originalCharacterSpacing;
+                text.fontSize = originalFontSize;
             }
         }
 
