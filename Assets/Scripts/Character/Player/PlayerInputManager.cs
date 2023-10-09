@@ -26,6 +26,7 @@ namespace YT
         [SerializeField] bool dodgeInput = false;
         [SerializeField] bool sprintInput = false;
         [SerializeField] bool jumpInput = false;
+        [SerializeField] bool RB_Input = false;
         
         private void Awake()
         {
@@ -85,6 +86,7 @@ namespace YT
                 playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
                 playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
+                playerControls.PlayerActions.RB.performed += i => RB_Input = true;
 
                 // Hold input, actives sprint, sets bool to true
                 playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -129,6 +131,7 @@ namespace YT
             HandleDodgeInput();
             HandleSprintInput();
             HandleJumpInput();
+            HandleRBInput();
         }
 
         // Movement
@@ -200,6 +203,22 @@ namespace YT
 
                 // Attempt to perform jump
                 player.playerLocomotionManager.AttemptToPerformJump();
+            }
+        }
+
+        private void HandleRBInput()
+        {
+            if (RB_Input)
+            {
+                RB_Input = false;
+
+                // TODO: If we have a UI window open, return and do nothing
+
+                player.playerNetworkManager.SetCharacterActionHand(true);
+
+                // TODO: If we are two handing the weapon, use the two handed action
+
+                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
             }
         }
     }

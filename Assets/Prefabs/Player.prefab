@@ -2225,6 +2225,7 @@ GameObject:
   - component: {fileID: -1438374681269287503}
   - component: {fileID: 875338366457775942}
   - component: {fileID: 5275823864521987835}
+  - component: {fileID: 2678945267330807129}
   - component: {fileID: -3842994420671146141}
   - component: {fileID: -3729516376175318523}
   - component: {fileID: 333837479431983045}
@@ -2336,6 +2337,8 @@ MonoBehaviour:
     m_InternalValue: 0
   isSprinting:
     m_InternalValue: 0
+  isJumping:
+    m_InternalValue: 0
   currentHealth:
     m_InternalValue: 0
   maxHealth:
@@ -2417,9 +2420,15 @@ MonoBehaviour:
         byte0059: 0
         byte0060: 0
         byte0061: 0
+  currentWeaponBeingUsed:
+    m_InternalValue: 0
   currentRightHandWeaponID:
     m_InternalValue: 0
   currentLeftHandWeaponID:
+    m_InternalValue: 0
+  isUsingRightHand:
+    m_InternalValue: 0
+  isUsingLeftHand:
     m_InternalValue: 0
 --- !u!114 &5275823864521987835
 MonoBehaviour:
@@ -2441,7 +2450,6 @@ MonoBehaviour:
   characterEffectsManager: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
   isPerformingAction: 0
-  isJumping: 0
   isGrounded: 1
   applyRootMotion: 0
   canRotate: 1
@@ -2454,6 +2462,20 @@ MonoBehaviour:
   playerStatsManager: {fileID: 0}
   playerInventoryManager: {fileID: 0}
   playerEquipmentManager: {fileID: 0}
+  playerCombatManager: {fileID: 0}
+--- !u!114 &2678945267330807129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5971744198826873110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfbe13b157f423e42966ca93cc7b268d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeaponBeingUsed: {fileID: 0}
 --- !u!114 &-3842994420671146141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2519,7 +2541,7 @@ MonoBehaviour:
     type: 2}
   weaponsInRightHandSlots:
   - {fileID: 11400000, guid: 2b57e5a73ed215441b34f3236f38978e, type: 2}
-  - {fileID: 11400000, guid: c385bca9b27f47c4c8a64ec2558a873b, type: 2}
+  - {fileID: 11400000, guid: 2b57e5a73ed215441b34f3236f38978e, type: 2}
   - {fileID: 11400000, guid: 2b57e5a73ed215441b34f3236f38978e, type: 2}
   rightHandWeaponIndex: 0
   weaponsInLeftHandSlots:

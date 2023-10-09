@@ -42,6 +42,8 @@ namespace YT
         // Heavy attack stamina cost modifier etc
 
         // Item based actions (RB, RT, LB, LT)
+        [Header("Actions")]
+        public WeaponItemAction oh_RB_Action; // One hand right bumper action
 
         // Ash of war
 
