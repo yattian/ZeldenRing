@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 namespace YT
 {
@@ -19,12 +20,14 @@ namespace YT
 
         public void PerformWeaponBasedAction(WeaponItemAction weaponAction, WeaponItem weaponPerformingAction)
         {
-            // Perform the action
-            weaponAction.AttemptToPerformAction(player, weaponPerformingAction);
+            if (player.IsOwner)
+            {
+                // Perform the action
+                weaponAction.AttemptToPerformAction(player, weaponPerformingAction);
 
-            // Also perform the action on other clients (notify the server we have performed the action)
-
-
+                // Also perform the action on other clients (notify the server we have performed the action)
+                player.playerNetworkManager.NotifyTheServerOfWeaponActionServerRpc(NetworkManager.Singleton.LocalClientId, weaponAction.actionID, weaponPerformingAction.itemID);
+            }
         }
     }
 }
