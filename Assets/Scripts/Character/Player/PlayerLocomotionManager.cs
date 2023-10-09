@@ -113,7 +113,7 @@ namespace YT
 
         private void HandleJumpingMovement()
         {
-            if (player.isJumping)
+            if (player.playerNetworkManager.isJumping.Value)
             {
                 player.characterController.Move(jumpDirection * jumpForwardSpeed * Time.deltaTime);
             }
@@ -229,7 +229,7 @@ namespace YT
                 return;
 
             // If already jumping, no double jump
-            if (player.isJumping)
+            if (player.playerNetworkManager.isJumping.Value)
                 return;
 
             // If not grounded, no jump
@@ -240,7 +240,7 @@ namespace YT
 
             player.playerAnimatorManager.PlayTargetActionAnimation("Main_Jump_01", false);
 
-            player.isJumping = true;
+            player.playerNetworkManager.isJumping.Value = true;
 
             player.playerNetworkManager.currentStamina.Value -= jumpStaminaCost;
 
