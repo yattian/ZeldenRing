@@ -28,7 +28,7 @@ namespace YT
             // if (other.gameObject.layer == LayerMask.NameToLayer("Character"));
             // Done this in Unity, no need for above code
 
-            CharacterManager damageTarget = other.GetComponent<CharacterManager>();
+            CharacterManager damageTarget = other.GetComponentInParent<CharacterManager>();
 
             if (damageTarget != null)
             {
