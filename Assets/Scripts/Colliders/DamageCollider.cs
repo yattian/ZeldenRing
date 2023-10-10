@@ -7,7 +7,7 @@ namespace YT
     public class DamageCollider : MonoBehaviour
     {
         [Header("Collider")]
-        protected Collider damageCollider;
+        [SerializeField] protected Collider damageCollider;
 
         [Header("Damage")]
         public float physicalDamage = 0; // In the future, split into "Standard", "Strike", "Slash", "Pierce"
@@ -22,7 +22,12 @@ namespace YT
         [Header("Characters Damaged")]
         protected List<CharacterManager> charactersDamaged = new List<CharacterManager>();
 
-        private void OnTriggerEnter(Collider other)
+        protected virtual void Awake()
+        {
+            
+        }
+
+        protected virtual void OnTriggerEnter(Collider other)
         {
             // Check the object is a character
             // if (other.gameObject.layer == LayerMask.NameToLayer("Character"));

@@ -31,14 +31,15 @@ namespace YT
         // Offensive poise bonus when attacking
 
         // Weapon Modifiers
-        // Light attack modifiers
+        [Header("Attack Modifiers")]
+        public float light_Attack_01_Modifier = 1.1f;
         // Heavy attack modifiers
         // Critical damage modifier etc
 
-        [Header("Stamina Costs")]
+        [Header("Stamina Cost Modifiers")]
         public int baseStaminaCost = 20;
+        public float lightAttackStaminaCostMultiplier = 0.9f;
         // Running attack stamina cost modifier
-        // Light attack stamina cost modifier
         // Heavy attack stamina cost modifier etc
 
         // Item based actions (RB, RT, LB, LT)

@@ -52,7 +52,7 @@ namespace YT
             character.characterNetworkManager.NotifyTheServerOfActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
 
-        public virtual void PlayTargetAttackActionAnimation(
+        public virtual void PlayTargetAttackActionAnimation(AttackType attackType,
             string targetAnimation,
             bool isPerformingAction,
             bool applyRootMotion = true,
@@ -64,7 +64,7 @@ namespace YT
             // Update animation set to current weapons animations
             // Decide if our attack can be parried
             // Tell the network our "isattacking" flag (for counter damage etc)
-
+            character.characterCombatManager.currentAttackType = attackType;
             character.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(targetAnimation, 0.2f);
             character.isPerformingAction = isPerformingAction;

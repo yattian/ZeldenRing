@@ -34,4 +34,9 @@ namespace YT
         // Left Hips
         // Back
     }
+
+    public enum AttackType
+    {
+        LightAttack01
+    }
 }

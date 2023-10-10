@@ -128,6 +128,7 @@ namespace YT
                 SwitchRightWeapon();
             }
         }
+
         public void LoadRightWeapon()
         {
             if (player.playerInventoryManager.currentRightHandWeapon != null)
@@ -150,6 +151,7 @@ namespace YT
         {
 
         }
+
         public void LoadLeftWeapon()
         {
             if (player.playerInventoryManager.currentLeftHandWeapon != null)
@@ -164,6 +166,35 @@ namespace YT
                 leftWeaponManager.SetWeaponDamage(player, player.playerInventoryManager.currentLeftHandWeapon);
 
                 // Assign weapons damage, to its collider
+            }
+        }
+
+        // Damage colliders
+        public void OpenDamageCollider()
+        {
+            // Open right hand weapon damage collider
+            if (player.playerNetworkManager.isUsingRightHand.Value)
+            {
+                rightWeaponManager.meleeDamageCollider.EnableDamageCollider();
+            }
+            else if (player.playerNetworkManager.isUsingLeftHand.Value)
+            {
+                leftWeaponManager.meleeDamageCollider.EnableDamageCollider();
+            }
+
+            // Play whoosh SFX
+        }
+
+        public void CloseDamageCollider()
+        {
+            // Open right hand weapon damage collider
+            if (player.playerNetworkManager.isUsingRightHand.Value)
+            {
+                rightWeaponManager.meleeDamageCollider.DisableDamageCollider();
+            }
+            else if (player.playerNetworkManager.isUsingLeftHand.Value)
+            {
+                leftWeaponManager.meleeDamageCollider.DisableDamageCollider();
             }
         }
     }
