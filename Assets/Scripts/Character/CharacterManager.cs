@@ -17,6 +17,7 @@ namespace YT
         [HideInInspector] public CharacterEffectsManager characterEffectsManager;
         [HideInInspector] public CharacterAnimatorManager characterAnimatorManager;
         [HideInInspector] public CharacterCombatManager characterCombatManager;
+        [HideInInspector] public CharacterSoundFXManager characterSoundFXManager;
 
         [Header("Flags")]
         public bool isPerformingAction = false;
@@ -36,6 +37,7 @@ namespace YT
             characterEffectsManager = GetComponent<CharacterEffectsManager>();
             characterAnimatorManager = GetComponent<CharacterAnimatorManager>();
             characterCombatManager = GetComponent<CharacterCombatManager>();
+            characterSoundFXManager = GetComponent<CharacterSoundFXManager>();
         }
 
         protected virtual void Start()

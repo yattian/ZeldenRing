@@ -57,7 +57,9 @@ namespace YT
             // Play a damage animation
             // Check for build ups (poison, bleed etc)
             // Play damage sound fx
+            PlayDamageSFX(character);
             // Play damage vfx (blood)
+            PlayDamageVFX(character);
 
             // If character is AI, check for new target if character causing damage is present
         }
@@ -88,6 +90,25 @@ namespace YT
             character.characterNetworkManager.currentHealth.Value -= finalDamageDealt;
 
             // Calculate poise damage to determine if character will be stunned
+
+
+        }
+
+        private void PlayDamageVFX(CharacterManager character)
+        {
+            // If we have fire damage, play fire particles
+            // Lightning damage, lightning particles
+
+            character.characterEffectsManager.PlayBloodSplatterVFX(contactPoint);
+        }
+
+        private void PlayDamageSFX(CharacterManager character)
+        {
+            AudioClip physicalDamageSFX = WorldSoundFXManager.instance.ChooseRandomSFXFromArray(WorldSoundFXManager.instance.physicalDamageSFX);
+
+            character.characterSoundFXManager.PlaySoundFX(physicalDamageSFX);
+            // If fire damage is greater than 0, play burn SFX
+            // If lightning damage is greater than 0, play zap SFX etc
 
 
         }
