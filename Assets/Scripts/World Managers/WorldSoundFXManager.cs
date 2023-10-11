@@ -9,6 +9,9 @@ namespace YT
     {
         public static WorldSoundFXManager instance;
 
+        [Header("Whoosh Sounds")]
+        public AudioClip[] whooshSFX;
+
         [Header("Damage Sounds")]
         public AudioClip[] physicalDamageSFX;
 

@@ -67,6 +67,7 @@ namespace YT
             damageEffect.fireDamage = fireDamage;
             damageEffect.holyDamage = holyDamage;
             damageEffect.contactPoint = contactPoint;
+            damageEffect.angleHitFrom = Vector3.SignedAngle(characterCausingDamage.transform.forward, damageTarget.transform.forward, Vector3.up);
 
             switch (characterCausingDamage.characterCombatManager.currentAttackType)
             {

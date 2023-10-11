@@ -29,5 +29,11 @@ namespace YT
         {
             audioSource.PlayOneShot(WorldSoundFXManager.instance.rollSFX);
         }
+
+        public void PlayWhooshSoundFX()
+        {
+            AudioClip whooshSFX = WorldSoundFXManager.instance.ChooseRandomSFXFromArray(WorldSoundFXManager.instance.whooshSFX);
+            audioSource.PlayOneShot(whooshSFX);
+        }
     }
 }

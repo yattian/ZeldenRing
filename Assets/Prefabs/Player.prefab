@@ -1159,9 +1159,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.07
-  m_Height: 0.38
+  m_Height: 0.4
   m_Direction: 0
-  m_Center: {x: 0.21, y: -0.02, z: 0}
+  m_Center: {x: 0.2, y: -0.02, z: 0}
 --- !u!1 &3801783718481788570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1558,8 +1558,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.12
-  m_Height: 0.3
+  m_Radius: 0.13
+  m_Height: 0.33
   m_Direction: 2
   m_Center: {x: 0, y: 0.02, z: 0}
 --- !u!1 &4693634799288701256
@@ -1711,8 +1711,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13
-  m_Height: 0.36
+  m_Radius: 0.14
+  m_Height: 0.4
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4932655514086721710
@@ -1768,9 +1768,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.07
-  m_Height: 0.38
+  m_Height: 0.4
   m_Direction: 0
-  m_Center: {x: -0.21, y: 0.02, z: 0}
+  m_Center: {x: -0.2, y: 0.02, z: 0}
 --- !u!1 &5033707624873136743
 GameObject:
   m_ObjectHideFlags: 0
@@ -2208,8 +2208,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.08
-  m_Height: 0.59
+  m_Radius: 0.09
+  m_Height: 0.6
   m_Direction: 0
   m_Center: {x: 0.09, y: 0, z: 0}
 --- !u!1 &5971744198826873110
@@ -2449,6 +2449,8 @@ MonoBehaviour:
   characterNetworkManager: {fileID: 0}
   characterEffectsManager: {fileID: 0}
   characterAnimatorManager: {fileID: 0}
+  characterCombatManager: {fileID: 0}
+  characterSoundFXManager: {fileID: 0}
   isPerformingAction: 0
   isGrounded: 1
   applyRootMotion: 0
@@ -2475,6 +2477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfbe13b157f423e42966ca93cc7b268d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentAttackType: 0
   currentWeaponBeingUsed: {fileID: 0}
 --- !u!114 &-3842994420671146141
 MonoBehaviour:
@@ -2579,6 +2582,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2d37bd157a2c54db650020c2e61682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastDamageAnimationPlayed: 
+  hit_Forward_Medium_01: hit_Forward_Medium_01
+  hit_Forward_Medium_02: hit_Forward_Medium_02
+  hit_Backward_Medium_01: hit_Backward_Medium_01
+  hit_Backward_Medium_02: hit_Backward_Medium_02
+  hit_Left_Medium_01: hit_Left_Medium_01
+  hit_Left_Medium_02: hit_Left_Medium_02
+  hit_Right_Medium_01: hit_Right_Medium_01
+  hit_Right_Medium_02: hit_Right_Medium_02
+  forward_Medium_Damage: []
+  backward_Medium_Damage: []
+  left_Medium_Damage: []
+  right_Medium_Damage: []
 --- !u!114 &423652811020969228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2603,6 +2619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d666792591f584aa18f192129df149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bloodSplatterVFX: {fileID: 0}
   effectToTest: {fileID: 11400000, guid: a056b0cf65600ac4eb5a48110b415958, type: 2}
   processEffect: 0
 --- !u!143 &-5396196272249029003
@@ -2806,8 +2823,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.08
-  m_Height: 0.59
+  m_Radius: 0.09
+  m_Height: 0.6
   m_Direction: 0
   m_Center: {x: -0.09, y: 0, z: 0}
 --- !u!1 &6205727273763091101
@@ -3443,8 +3460,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.15
-  m_Height: 0.42
+  m_Radius: 0.17
+  m_Height: 0.45
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8213403103350603852
