@@ -49,7 +49,7 @@ namespace YT
             DontDestroyOnLoad(gameObject);
             SceneManager.activeSceneChanged += OnSceneChange;
             instance.enabled = false;
-            if(playerControls != null)
+            if (playerControls != null)
             {
                 playerControls.Disable();
             }
@@ -149,7 +149,7 @@ namespace YT
             // Is our current target dead? (Unlock)
             if (player.playerNetworkManager.isLockedOn.Value)
             {
-                if (player.playerCombatManager.currentTarget != null)
+                if (player.playerCombatManager.currentTarget == null)
                     return;
 
                 if (player.playerCombatManager.currentTarget.isDead.Value)
@@ -164,6 +164,8 @@ namespace YT
             if (lockOn_Input && player.playerNetworkManager.isLockedOn.Value)
             {
                 lockOn_Input = false;
+                PlayerCamera.instance.ClearLockOnTargets();
+                player.playerNetworkManager.isLockedOn.Value = false;
                 // Disable lock on
                 return;
             }
@@ -176,6 +178,13 @@ namespace YT
 
                 // Enable lock on
                 PlayerCamera.instance.HandleLocatingLockOnTargets();
+
+                if (PlayerCamera.instance.nearestLockOnTarget != null)
+                {
+                    player.playerCombatManager.SetTarget(PlayerCamera.instance.nearestLockOnTarget);
+                    // Set the target as our current target
+                    player.playerNetworkManager.isLockedOn.Value = true;
+                }
             }
         }
 

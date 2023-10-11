@@ -21,6 +21,9 @@ namespace YT
         public NetworkVariable<float> verticalMovement = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<float> moveAmount = new NetworkVariable<float>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
+        [Header("Target")]
+        public NetworkVariable<ulong> currentTargetNetworkObjectID = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
         [Header("Flags")]
         public NetworkVariable<bool> isLockedOn = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
         public NetworkVariable<bool> isSprinting = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -41,7 +44,7 @@ namespace YT
             character = GetComponent<CharacterManager>();
         }
 
-        public void CheckHP(int ooldValue, int newValue)
+        public void CheckHP(int oldValue, int newValue)
         {
             if (currentHealth.Value <= 0)
             {
@@ -55,6 +58,22 @@ namespace YT
                 {
                     currentHealth.Value = maxHealth.Value;
                 }
+            }
+        }
+
+        public void OnLockOnTargetIDChange(ulong oldID, ulong newID)
+        {
+            if (!IsOwner)
+            {
+                character.characterCombatManager.currentTarget = NetworkManager.Singleton.SpawnManager.SpawnedObjects[newID].gameObject.GetComponent<CharacterManager>();
+            }
+        }
+
+        public void OnIsLockedOnChanged(bool old, bool isLockedOn)
+        {
+            if (!isLockedOn)
+            {
+                character.characterCombatManager.currentTarget = null;
             }
         }
 
@@ -175,6 +194,8 @@ namespace YT
             damageEffect.poiseDamage = poiseDamage;
             damageEffect.angleHitFrom = angleHitFrom;
             damageEffect.contactPoint = new Vector3(contactPointX, contactPointY, contactPointZ);
+
+            damageEffect.characterCausingDamage = characterCausingDamage;
 
             damagedCharacter.characterEffectsManager.ProcessInstantEffect(damageEffect);
         }

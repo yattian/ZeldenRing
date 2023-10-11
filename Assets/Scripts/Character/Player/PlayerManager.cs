@@ -65,7 +65,7 @@ namespace YT
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
-            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallBack;
+            NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
 
             // If this is the player object spawned by this client
             if (IsOwner)
@@ -87,6 +87,10 @@ namespace YT
             // Stats
             playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHP;
 
+            // Lock on
+            playerNetworkManager.isLockedOn.OnValueChanged += playerNetworkManager.OnIsLockedOnChanged;
+            playerNetworkManager.currentTargetNetworkObjectID.OnValueChanged += playerNetworkManager.OnLockOnTargetIDChange;
+
             // Equipment
             playerNetworkManager.currentRightHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentRightHandWeaponIDChange;
             playerNetworkManager.currentLeftHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentLeftHandWeaponIDChange;
@@ -100,7 +104,7 @@ namespace YT
             }
         }
 
-        private void OnClientConnectedCallBack(ulong clientID)
+        private void OnClientConnectedCallback(ulong clientID)
         {
             // Keep a list of active players in the game 
             WorldGameSessionManager.instance.AddPlayerToActivePlayersList(this);
@@ -109,7 +113,7 @@ namespace YT
             // Only need to load other players gear to sync it if you join a game thats already been active without you being present
             if (!IsServer && IsOwner)
             {
-                foreach(var player in WorldGameSessionManager.instance.players)
+                foreach (var player in WorldGameSessionManager.instance.players)
                 {
                     if (player != this)
                     {
@@ -137,6 +141,7 @@ namespace YT
 
             if (IsOwner)
             {
+                isDead.Value = false;
                 playerNetworkManager.currentHealth.Value = playerNetworkManager.maxHealth.Value;
                 playerNetworkManager.currentStamina.Value = playerNetworkManager.maxStamina.Value;
                 // Restore focus points
@@ -196,6 +201,12 @@ namespace YT
             playerNetworkManager.OnCurrentLeftHandWeaponIDChange(0, playerNetworkManager.currentLeftHandWeaponID.Value);
 
             // Armor
+
+            // Lock on
+            if (playerNetworkManager.isLockedOn.Value)
+            {
+                playerNetworkManager.OnLockOnTargetIDChange(0, playerNetworkManager.currentTargetNetworkObjectID.Value);
+            }
         }
 
         // Debug delete later!

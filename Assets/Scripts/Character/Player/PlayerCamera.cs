@@ -33,7 +33,9 @@ namespace YT
         [SerializeField] float lockOnRadius = 20;
         [SerializeField] float minimumViewableAngle = -50;
         [SerializeField] float maximumViewableAngle = 50;
-        [SerializeField] float maximumLockOnDistance = 20;
+        private List<CharacterManager> availableTargets = new List<CharacterManager>();
+        public CharacterManager nearestLockOnTarget;
+        [SerializeField] float lockOnTargetFollowSpeed = 0.2f;
 
         private void Awake()
         {
@@ -43,7 +45,7 @@ namespace YT
             }
             else
             {
-                Destroy(instance);
+                Destroy(gameObject);
             }
         }
 
@@ -72,28 +74,51 @@ namespace YT
         private void HandleRotations()
         {
             // If locked, force rotation towards target
+            if (player.playerNetworkManager.isLockedOn.Value)
+            {
+                // This rotates the gameObject
+                Vector3 rotationDirection = player.playerCombatManager.currentTarget.characterCombatManager.lockOnTransform.position - transform.position;
+                rotationDirection.Normalize();
+                rotationDirection.y = 0;
+
+                Quaternion targetRotation = Quaternion.LookRotation(rotationDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, lockOnTargetFollowSpeed);
+
+                // This rotates the pivot object
+                rotationDirection = player.playerCombatManager.currentTarget.characterCombatManager.lockOnTransform.position - cameraPivotTransform.position;
+                rotationDirection.Normalize();
+
+                targetRotation = Quaternion.LookRotation(rotationDirection);
+                cameraPivotTransform.transform.rotation = Quaternion.Slerp(cameraPivotTransform.rotation, targetRotation, lockOnTargetFollowSpeed);
+
+                // Save our rotation values to our look angles,  so when we unlock it doesn't snap too far away
+                leftAndRightLookAngle = transform.eulerAngles.y;
+                upAndDownLookAngle = transform.eulerAngles.x;
+            }
             // Else rotate regularly
+            else
+            {
+                // Rotate left and right based on horizontal movement on right joystick or mouse
+                leftAndRightLookAngle += (PlayerInputManager.instance.cameraHorizontal_Input * leftAndRightRotationSpeed) * Time.deltaTime;
+                // Rotate up and down based on vertical movement
+                upAndDownLookAngle -= (PlayerInputManager.instance.cameraVertical_Input * upAndDownRotationSpeed) * Time.deltaTime;
+                // Clamp up and down look angle between min and max value
+                upAndDownLookAngle = Mathf.Clamp(upAndDownLookAngle, minimumPivot, maximumPivot);
 
-            // Rotate left and right based on horizontal movement on right joystick or mouse
-            leftAndRightLookAngle += (PlayerInputManager.instance.cameraHorizontal_Input * leftAndRightRotationSpeed) * Time.deltaTime;
-            // Rotate up and down based on vertical movement
-            upAndDownLookAngle -= (PlayerInputManager.instance.cameraVertical_Input * upAndDownRotationSpeed) * Time.deltaTime;
-            // Clamp up and down look angle between min and max value
-            upAndDownLookAngle = Mathf.Clamp(upAndDownLookAngle, minimumPivot, maximumPivot);
+                Vector3 cameraRotation = Vector3.zero;
+                Quaternion targetRotation;
 
-            Vector3 cameraRotation = Vector3.zero;
-            Quaternion targetRotation;
+                // Rotate gameObject left and right
+                cameraRotation.y = leftAndRightLookAngle;
+                targetRotation = Quaternion.Euler(cameraRotation);
+                transform.rotation = targetRotation;
 
-            // Rotate gameObject left and right
-            cameraRotation.y = leftAndRightLookAngle;
-            targetRotation = Quaternion.Euler(cameraRotation);
-            transform.rotation = targetRotation;
-
-            // Rotate pivot gameObject up and down
-            cameraRotation = Vector3.zero;
-            cameraRotation.x = upAndDownLookAngle;
-            targetRotation = Quaternion.Euler(cameraRotation);
-            cameraPivotTransform.localRotation = targetRotation;
+                // Rotate pivot gameObject up and down
+                cameraRotation = Vector3.zero;
+                cameraRotation.x = upAndDownLookAngle;
+                targetRotation = Quaternion.Euler(cameraRotation);
+                cameraPivotTransform.localRotation = targetRotation;
+            }
         }
 
         private void HandleCollisions()
@@ -127,9 +152,9 @@ namespace YT
 
         public void HandleLocatingLockOnTargets()
         {
-            float shortDistance = Mathf.Infinity; // Will be used to determine the target closet to us
-            float shortDistanceOfRightTarget = Mathf.Infinity; // Will be used to determine shortest distance on one axis to the right of current target (closet target to the right of current target, +)
-            float shortDistanceOfLeftTarget = -Mathf.Infinity; // Will be used to determine shortest distance on one axis to the left of current target (-)
+            float shortestDistance = Mathf.Infinity; // Will be used to determine the target closet to us
+            float shortestDistanceOfRightTarget = Mathf.Infinity; // Will be used to determine shortest distance on one axis to the right of current target (closet target to the right of current target, +)
+            float shortestDistanceOfLeftTarget = -Mathf.Infinity; // Will be used to determine shortest distance on one axis to the left of current target (-)
 
             // To do use a layermask
             Collider[] colliders = Physics.OverlapSphere(player.transform.position, lockOnRadius, WorldUtilityManager.Instance.GetCharacterLayers());
@@ -153,10 +178,7 @@ namespace YT
                     if (lockOnTarget.transform.root == player.transform.root)
                         continue;
 
-                    // If target is too far away, check the next potential target
-                    if (distanceFromTarget > maximumLockOnDistance)
-                        continue;
-
+                    // Lastly, if the target is outside field of view or blocked by enviro, check next potential target
                     if (viewableAngle > minimumViewableAngle && viewableAngle < maximumViewableAngle)
                     {
                         RaycastHit hit;
@@ -171,11 +193,39 @@ namespace YT
                         }
                         else
                         {
-                            Debug.Log("WE MADE IT");
+                            // Otherwise, add them to potential targets list
+                            availableTargets.Add(lockOnTarget);
                         }
                     }
                 }
             }
+
+            // We know sort through our potential targets to see which one we lock onto first
+            for (int k = 0; k < availableTargets.Count; k++)
+            {
+                if (availableTargets[k] != null)
+                {
+                    float distanceFromTarget = Vector3.Distance(player.transform.position, availableTargets[k].transform.position);
+                    Vector3 lockTargetsDirection = availableTargets[k].transform.position - player.transform.position;
+
+                    if (distanceFromTarget < shortestDistance)
+                    {
+                        shortestDistance = distanceFromTarget;
+                        nearestLockOnTarget = availableTargets[k];
+                    }
+                }
+                else
+                {
+                    ClearLockOnTargets();
+                    player.playerNetworkManager.isLockedOn.Value = false;
+                }
+            }
+        }
+
+        public void ClearLockOnTargets()
+        {
+            nearestLockOnTarget = null;
+            availableTargets.Clear();
         }
     }
 }

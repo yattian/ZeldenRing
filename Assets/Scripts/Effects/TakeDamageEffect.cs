@@ -121,6 +121,10 @@ namespace YT
         {
             if (!character.IsOwner)
                 return;
+
+            if (character.isDead.Value)
+                return;
+
             // TODO: Calculate if poise is broken
             poiseIsBroken = true;
 
