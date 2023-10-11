@@ -12,20 +12,23 @@ namespace YT
         PlayerControls playerControls;
 
         [Header("Camera Movement Input")]
-        [SerializeField] Vector2 cameraInput;
-        public float cameraHorizontalInput;
-        public float cameraVerticalInput;
+        [SerializeField] Vector2 camera_Input;
+        public float cameraHorizontal_Input;
+        public float cameraVertical_Input;
+
+        [Header("Lock on Input")]
+        [SerializeField] bool lockOn_Input;
 
         [Header("Player Movement Input")]
-        [SerializeField] Vector2 movementInput;
-        public float horizontalInput;
-        public float verticalInput;
+        [SerializeField] Vector2 movement_Input;
+        public float horizontal_Input;
+        public float vertical_Input;
         public float moveAmount;
 
         [Header("Player Action Input")]
-        [SerializeField] bool dodgeInput = false;
-        [SerializeField] bool sprintInput = false;
-        [SerializeField] bool jumpInput = false;
+        [SerializeField] bool dodge_Input = false;
+        [SerializeField] bool sprint_Input = false;
+        [SerializeField] bool jump_Input = false;
         [SerializeField] bool RB_Input = false;
         
         private void Awake()
@@ -82,16 +85,19 @@ namespace YT
             {
                 playerControls = new PlayerControls();
 
-                playerControls.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
-                playerControls.PlayerCamera.Movement.performed += i => cameraInput = i.ReadValue<Vector2>();
-                playerControls.PlayerActions.Dodge.performed += i => dodgeInput = true;
-                playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
+                playerControls.PlayerMovement.Movement.performed += i => movement_Input = i.ReadValue<Vector2>();
+                playerControls.PlayerCamera.Movement.performed += i => camera_Input = i.ReadValue<Vector2>();
+                playerControls.PlayerActions.Dodge.performed += i => dodge_Input = true;
+                playerControls.PlayerActions.Jump.performed += i => jump_Input = true;
                 playerControls.PlayerActions.RB.performed += i => RB_Input = true;
 
+                // Lock on
+                playerControls.PlayerActions.LockOn.performed += i => lockOn_Input = true;
+
                 // Hold input, actives sprint, sets bool to true
-                playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
+                playerControls.PlayerActions.Sprint.performed += i => sprint_Input = true;
                 // Release input, sets bool to false
-                playerControls.PlayerActions.Sprint.canceled += i => sprintInput = false;
+                playerControls.PlayerActions.Sprint.canceled += i => sprint_Input = false;
             }
 
             playerControls.Enable();
@@ -126,6 +132,8 @@ namespace YT
 
         private void HandleAllInputs()
         {
+
+            HandleLockOnInput();
             HandlePlayerMovementInput();
             HandleCameraMovementInput();
             HandleDodgeInput();
@@ -134,15 +142,52 @@ namespace YT
             HandleRBInput();
         }
 
+        // Lock on
+
+        private void HandleLockOnInput()
+        {
+            // Is our current target dead? (Unlock)
+            if (player.playerNetworkManager.isLockedOn.Value)
+            {
+                if (player.playerCombatManager.currentTarget != null)
+                    return;
+
+                if (player.playerCombatManager.currentTarget.isDead.Value)
+                {
+                    player.playerNetworkManager.isLockedOn.Value = false;
+                }
+
+                // Attempt to find new target
+            }
+
+            // Are we already locked on? (Unlock)
+            if (lockOn_Input && player.playerNetworkManager.isLockedOn.Value)
+            {
+                lockOn_Input = false;
+                // Disable lock on
+                return;
+            }
+
+            if (lockOn_Input && !player.playerNetworkManager.isLockedOn.Value)
+            {
+                lockOn_Input = false;
+
+                // If we are aiming using ranged weapon return (do not allow lock whilst aiming)
+
+                // Enable lock on
+                PlayerCamera.instance.HandleLocatingLockOnTargets();
+            }
+        }
+
         // Movement
 
         private void HandlePlayerMovementInput()
         {
-            verticalInput = movementInput.y;
-            horizontalInput = movementInput.x;
+            vertical_Input = movement_Input.y;
+            horizontal_Input = movement_Input.x;
 
             // Returning absolute number
-            moveAmount = Mathf.Clamp01(Mathf.Abs(verticalInput) + Mathf.Abs(horizontalInput));
+            moveAmount = Mathf.Clamp01(Mathf.Abs(vertical_Input) + Mathf.Abs(horizontal_Input));
 
             // Optional clamping
             if (moveAmount <= 0.5 && moveAmount > 0)
@@ -163,17 +208,17 @@ namespace YT
 
         private void HandleCameraMovementInput()
         {
-            cameraVerticalInput = cameraInput.y;
-            cameraHorizontalInput = cameraInput.x;
+            cameraVertical_Input = camera_Input.y;
+            cameraHorizontal_Input = camera_Input.x;
         }
 
         // Actions
 
         private void HandleDodgeInput()
         {
-            if (dodgeInput)
+            if (dodge_Input)
             {
-                dodgeInput = false;
+                dodge_Input = false;
 
                 // Future note: Return if menu or ui window is open
                 player.playerLocomotionManager.AttemptToPerformDodge();
@@ -183,7 +228,7 @@ namespace YT
 
         private void HandleSprintInput()
         {
-            if (sprintInput)
+            if (sprint_Input)
             {
                 player.playerLocomotionManager.HandleSprinting();
             }
@@ -195,9 +240,9 @@ namespace YT
 
         private void HandleJumpInput()
         {
-            if (jumpInput)
+            if (jump_Input)
             {
-                jumpInput = false;
+                jump_Input = false;
 
                 // If we have UI window open, simply return without doing anything
 

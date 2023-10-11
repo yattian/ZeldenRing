@@ -29,6 +29,12 @@ namespace YT
         private float cameraZPosition; // Value used for camera position
         private float targetCameraZPosition; // Value used for camera position
 
+        [Header("Lock On")]
+        [SerializeField] float lockOnRadius = 20;
+        [SerializeField] float minimumViewableAngle = -50;
+        [SerializeField] float maximumViewableAngle = 50;
+        [SerializeField] float maximumLockOnDistance = 20;
+
         private void Awake()
         {
             if (instance == null)
@@ -69,9 +75,9 @@ namespace YT
             // Else rotate regularly
 
             // Rotate left and right based on horizontal movement on right joystick or mouse
-            leftAndRightLookAngle += (PlayerInputManager.instance.cameraHorizontalInput * leftAndRightRotationSpeed) * Time.deltaTime;
+            leftAndRightLookAngle += (PlayerInputManager.instance.cameraHorizontal_Input * leftAndRightRotationSpeed) * Time.deltaTime;
             // Rotate up and down based on vertical movement
-            upAndDownLookAngle -= (PlayerInputManager.instance.cameraVerticalInput * upAndDownRotationSpeed) * Time.deltaTime;
+            upAndDownLookAngle -= (PlayerInputManager.instance.cameraVertical_Input * upAndDownRotationSpeed) * Time.deltaTime;
             // Clamp up and down look angle between min and max value
             upAndDownLookAngle = Mathf.Clamp(upAndDownLookAngle, minimumPivot, maximumPivot);
 
@@ -117,6 +123,59 @@ namespace YT
             // Then apply final position using a lerp over a time of 0.2f
             cameraObjectPosition.z = Mathf.Lerp(cameraObject.transform.localPosition.z, targetCameraZPosition, 0.2f);
             cameraObject.transform.localPosition = cameraObjectPosition;
+        }
+
+        public void HandleLocatingLockOnTargets()
+        {
+            float shortDistance = Mathf.Infinity; // Will be used to determine the target closet to us
+            float shortDistanceOfRightTarget = Mathf.Infinity; // Will be used to determine shortest distance on one axis to the right of current target (closet target to the right of current target, +)
+            float shortDistanceOfLeftTarget = -Mathf.Infinity; // Will be used to determine shortest distance on one axis to the left of current target (-)
+
+            // To do use a layermask
+            Collider[] colliders = Physics.OverlapSphere(player.transform.position, lockOnRadius, WorldUtilityManager.Instance.GetCharacterLayers());
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                CharacterManager lockOnTarget = colliders[i].GetComponent<CharacterManager>();
+
+                if (lockOnTarget != null)
+                {
+                    // Check if they are within our field of view
+                    Vector3 lockOnTargetsDirection = lockOnTarget.transform.position - player.transform.position;
+                    float distanceFromTarget = Vector3.Distance(player.transform.position, lockOnTarget.transform.position);
+                    float viewableAngle = Vector3.Angle(lockOnTargetsDirection, cameraObject.transform.forward);
+
+                    // If target is dead, check next potential target
+                    if (lockOnTarget.isDead.Value)
+                        continue;
+
+                    // If target is us, skip
+                    if (lockOnTarget.transform.root == player.transform.root)
+                        continue;
+
+                    // If target is too far away, check the next potential target
+                    if (distanceFromTarget > maximumLockOnDistance)
+                        continue;
+
+                    if (viewableAngle > minimumViewableAngle && viewableAngle < maximumViewableAngle)
+                    {
+                        RaycastHit hit;
+
+                        // TODO add layer mask for enviro layers only
+                        if (Physics.Linecast(player.playerCombatManager.lockOnTransform.position, 
+                            lockOnTarget.characterCombatManager.lockOnTransform.position, out hit, 
+                            WorldUtilityManager.Instance.GetEnviroLayers()))
+                        {
+                            // We hit something, we cannot see our lock on target
+                            continue;
+                        }
+                        else
+                        {
+                            Debug.Log("WE MADE IT");
+                        }
+                    }
+                }
+            }
         }
     }
 }

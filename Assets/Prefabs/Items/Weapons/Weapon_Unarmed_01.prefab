@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e233f88349525d54f8d4e6f3ae77c07d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeDamageCollider: {fileID: 0}
+  meleeDamageCollider: {fileID: 888720433082966199}
 --- !u!1 &8204248303852208753
 GameObject:
   m_ObjectHideFlags: 0
