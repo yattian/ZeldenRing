@@ -49,7 +49,7 @@ namespace YT
                     break;
             }
 
-            Debug.Log("Stamina drained: " + staminaDeducted);
+            // Debug.Log("Stamina drained: " + staminaDeducted);
             player.playerNetworkManager.currentStamina.Value -= Mathf.RoundToInt(staminaDeducted);
         }
     }

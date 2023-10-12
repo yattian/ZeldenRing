@@ -11,6 +11,7 @@ namespace YT
         [Header("DEBUG MENU")]
         [SerializeField] bool respawnCharacter = false;
         [SerializeField] bool switchRightWeapon = false;
+        [SerializeField] bool switchLeftWeapon = false;
 
         [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
         [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
@@ -222,6 +223,12 @@ namespace YT
             {
                 switchRightWeapon = false;
                 playerEquipmentManager.SwitchRightWeapon();
+            }
+
+            if (switchLeftWeapon)
+            {
+                switchLeftWeapon = false;
+                playerEquipmentManager.SwitchLeftWeapon();
             }
         }
     }

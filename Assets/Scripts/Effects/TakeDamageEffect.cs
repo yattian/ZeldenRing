@@ -93,6 +93,7 @@ namespace YT
                 finalDamageDealt = 1;
             }
 
+            Debug.Log("Damage dealt " + finalDamageDealt);
             character.characterNetworkManager.currentHealth.Value -= finalDamageDealt;
 
             // Calculate poise damage to determine if character will be stunned

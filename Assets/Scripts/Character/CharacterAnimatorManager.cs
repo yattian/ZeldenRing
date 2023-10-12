@@ -99,7 +99,7 @@ namespace YT
             bool canRotate = false, 
             bool canMove = false)
         {
-            Debug.Log("Playing animation: " + targetAnimation);
+            // Debug.Log("Playing animation: " + targetAnimation);
             character.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(targetAnimation, 0.2f);
 
