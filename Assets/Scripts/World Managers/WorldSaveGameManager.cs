@@ -339,7 +339,6 @@ namespace YT
             AsyncOperation loadOperation = SceneManager.LoadSceneAsync(currentCharacterData.sceneIndex);
             
             player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
-
             yield return null;
         }
 

@@ -9,6 +9,9 @@ namespace YT
     {
         public static WorldSoundFXManager instance;
 
+        [Header("Background Music")]
+        public AudioClip backgroundSFX;
+
         [Header("Whoosh Sounds")]
         public AudioClip[] whooshSFX;
 

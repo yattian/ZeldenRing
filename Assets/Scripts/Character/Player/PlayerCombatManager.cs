@@ -20,6 +20,9 @@ namespace YT
 
         public void PerformWeaponBasedAction(WeaponItemAction weaponAction, WeaponItem weaponPerformingAction)
         {
+            if (player.isDead.Value)
+                return;
+
             if (player.IsOwner)
             {
                 // Perform the action

@@ -11,6 +11,7 @@ namespace YT
         protected virtual void Awake()
         {
             audioSource = GetComponent<AudioSource>();
+            audioSource.PlayOneShot(WorldSoundFXManager.instance.backgroundSFX);
         }
 
         public void PlaySoundFX(AudioClip soundFX, float volume = 1, bool randomizePitch = true, float pitchRandom = 0.1f)
