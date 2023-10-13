@@ -58,9 +58,15 @@ namespace YT
                 moveAmount = player.characterNetworkManager.moveAmount.Value;
 
                 // If not locked, pass move amount
-                player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
-
-                // If locked, pass horz and vert
+                if (!player.playerNetworkManager.isLockedOn.Value || player.playerNetworkManager.isSprinting.Value)
+                {
+                    player.playerAnimatorManager.UpdateAnimatorMovementParameters(0, moveAmount, player.playerNetworkManager.isSprinting.Value);
+                }
+                // If we are locked on pass the horizontal movement as well
+                else
+                {
+                    player.playerAnimatorManager.UpdateAnimatorMovementParameters(horizontalMovement, verticalMovement, player.playerNetworkManager.isSprinting.Value);
+                }
             }
 
         }
@@ -126,7 +132,7 @@ namespace YT
                 Vector3 freeFallDirection;
 
                 freeFallDirection = PlayerCamera.instance.transform.forward * PlayerInputManager.instance.vertical_Input;
-                freeFallDirection += PlayerCamera.instance.transform.right * PlayerInputManager.instance.horizontal_Input;
+                freeFallDirection = freeFallDirection + PlayerCamera.instance.transform.right * PlayerInputManager.instance.horizontal_Input;
                 freeFallDirection.y = 0;
 
                 player.characterController.Move(freeFallDirection * freeFallSpeed * Time.deltaTime);
@@ -136,23 +142,61 @@ namespace YT
 
         private void HandleRotation()
         {
+            if (player.isDead.Value)
+                return;
+
             if (!player.canRotate)
                 return;
 
-            targetRotationDirection = Vector3.zero;
-            targetRotationDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
-            targetRotationDirection = targetRotationDirection + PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
-            targetRotationDirection.Normalize();
-            targetRotationDirection.y = 0;
-
-            if (targetRotationDirection == Vector3.zero)
+            if (player.playerNetworkManager.isLockedOn.Value)
             {
-                targetRotationDirection = transform.forward;
-            }
+                if (player.playerNetworkManager.isSprinting.Value || player.playerLocomotionManager.isRolling)
+                {
+                    Vector3 targetDirection = Vector3.zero;
+                    targetDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
+                    targetDirection += PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
+                    targetDirection.Normalize();
+                    targetDirection.y = 0;
 
-            Quaternion newRotation = Quaternion.LookRotation(targetRotationDirection);
-            Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
-            transform.rotation = targetRotation;
+                    if (targetDirection == Vector3.zero)
+                        targetDirection = transform.forward;
+
+                    Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+                    Quaternion finalRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                    transform.rotation = finalRotation;
+                }
+                else
+                {
+                    if (player.playerCombatManager.currentTarget == null)
+                        return;
+
+                    Vector3 targetDirection;
+                    targetDirection = player.playerCombatManager.currentTarget.transform.position - transform.position;
+                    targetDirection.y = 0;
+                    targetDirection.Normalize();
+
+                    Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+                    Quaternion finalRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                    transform.rotation = finalRotation;
+                }
+            }
+            else
+            {
+                targetRotationDirection = Vector3.zero;
+                targetRotationDirection = PlayerCamera.instance.cameraObject.transform.forward * verticalMovement;
+                targetRotationDirection = targetRotationDirection + PlayerCamera.instance.cameraObject.transform.right * horizontalMovement;
+                targetRotationDirection.Normalize();
+                targetRotationDirection.y = 0;
+
+                if (targetRotationDirection == Vector3.zero)
+                {
+                    targetRotationDirection = transform.forward;
+                }
+
+                Quaternion newRotation = Quaternion.LookRotation(targetRotationDirection);
+                Quaternion targetRotation = Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
+                transform.rotation = targetRotation;
+            }
         }
 
         public void HandleSprinting()
@@ -200,13 +244,14 @@ namespace YT
                 rollDirection = PlayerCamera.instance.cameraObject.transform.forward * PlayerInputManager.instance.vertical_Input;
                 rollDirection += PlayerCamera.instance.cameraObject.transform.right * PlayerInputManager.instance.horizontal_Input;
                 rollDirection.y = 0;
-                // rollDirection.Normalize();
+                rollDirection.Normalize();
 
                 Quaternion playerRotation = Quaternion.LookRotation(rollDirection);
                 player.transform.rotation = playerRotation;
 
                 // Perform roll animation
                 player.playerAnimatorManager.PlayTargetActionAnimation("Roll_Forward_01", true, true);
+                player.playerLocomotionManager.isRolling = true;
             }
             // If stationary, then backstep
             else
