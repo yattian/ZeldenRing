@@ -35,7 +35,6 @@ namespace YT
 
             audioSource = GetComponent<AudioSource>();
             audioSource.clip = backgroundSFX;
-
             audioSource.loop = true;
 
             audioSource.Play();

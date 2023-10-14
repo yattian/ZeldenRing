@@ -5581,6 +5581,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: World Item Database
       objectReference: {fileID: 0}
+    - target: {fileID: 8404887659709040258, guid: bd6ea8c00477e824db2e42d9640c8bb9,
+        type: 3}
+      propertyPath: weapons.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404887659709040258, guid: bd6ea8c00477e824db2e42d9640c8bb9,
+        type: 3}
+      propertyPath: weapons.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 80a0f3c0fc59b8f4096069bc429ffdfc,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
