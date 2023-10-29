@@ -33,7 +33,8 @@ namespace YT
         // Weapon Modifiers
         [Header("Attack Modifiers")]
         public float light_Attack_01_Modifier = 1.1f;
-        // Heavy attack modifiers
+        public float heavy_Attack_01_Modifier = 1.4f;
+        public float charge_Attack_01_Modifier = 2.0f;
         // Critical damage modifier etc
 
         [Header("Stamina Cost Modifiers")]
@@ -45,6 +46,7 @@ namespace YT
         // Item based actions (RB, RT, LB, LT)
         [Header("Actions")]
         public WeaponItemAction oh_RB_Action; // One hand right bumper action
+        public WeaponItemAction oh_RT_Action; // One hand right trigger action
 
         // Ash of war
 

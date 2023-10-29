@@ -66,6 +66,7 @@ namespace YT
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
+
             NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnectedCallback;
 
             // If this is the player object spawned by this client
@@ -97,12 +98,50 @@ namespace YT
             playerNetworkManager.currentLeftHandWeaponID.OnValueChanged += playerNetworkManager.OnCurrentLeftHandWeaponIDChange;
             playerNetworkManager.currentWeaponBeingUsed.OnValueChanged += playerNetworkManager.OnCurrentWeaponBeingUsedIDChange;
 
+            // Flags
+            playerNetworkManager.isChargingAttack.OnValueChanged += playerNetworkManager.OnIsChargingAttackChanged;
+
             // Upon connecting, if we are the owner of this character, but not the server, reload our character data to this newly instantiated character
             // We dont run this if we are the server, because since they are the host they are already loaded in and don't need to reload their data
             if (IsOwner && !IsServer)
             {
                 LoadGameDataFromCurrentCharacterData(ref WorldSaveGameManager.instance.currentCharacterData);
             }
+        }
+
+        public override void OnNetworkDespawn()
+        {
+            base.OnNetworkDespawn();
+
+            NetworkManager.Singleton.OnClientConnectedCallback -= OnClientConnectedCallback;
+
+            // If this is the player object spawned by this client
+            if (IsOwner)
+            {
+                // Update total amount of health or stamina when the stat linked to these change
+                playerNetworkManager.vitality.OnValueChanged -= playerNetworkManager.SetNewMaxHealthValue;
+                playerNetworkManager.endurance.OnValueChanged -= playerNetworkManager.SetNewMaxStaminaValue;
+
+                // Updates UI stats bar when a stat changes (health/stamina etc)
+                playerNetworkManager.currentHealth.OnValueChanged -= PlayerUIManager.instance.playerUIHudManager.SetNewHealthValue;
+                playerNetworkManager.currentStamina.OnValueChanged -= PlayerUIManager.instance.playerUIHudManager.SetNewStaminaValue;
+                playerNetworkManager.currentStamina.OnValueChanged -= playerStatsManager.ResetStaminaRegenTimer;
+            }
+
+            // Stats
+            playerNetworkManager.currentHealth.OnValueChanged -= playerNetworkManager.CheckHP;
+
+            // Lock on
+            playerNetworkManager.isLockedOn.OnValueChanged -= playerNetworkManager.OnIsLockedOnChanged;
+            playerNetworkManager.currentTargetNetworkObjectID.OnValueChanged -= playerNetworkManager.OnLockOnTargetIDChange;
+
+            // Equipment
+            playerNetworkManager.currentRightHandWeaponID.OnValueChanged -= playerNetworkManager.OnCurrentRightHandWeaponIDChange;
+            playerNetworkManager.currentLeftHandWeaponID.OnValueChanged -= playerNetworkManager.OnCurrentLeftHandWeaponIDChange;
+            playerNetworkManager.currentWeaponBeingUsed.OnValueChanged -= playerNetworkManager.OnCurrentWeaponBeingUsedIDChange;
+
+            // Flags
+            playerNetworkManager.isChargingAttack.OnValueChanged -= playerNetworkManager.OnIsChargingAttackChanged;
         }
 
         private void OnClientConnectedCallback(ulong clientID)

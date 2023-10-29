@@ -32,8 +32,14 @@ namespace YT
         [SerializeField] bool dodge_Input = false;
         [SerializeField] bool sprint_Input = false;
         [SerializeField] bool jump_Input = false;
+
+        [Header("Bumper Input")]
         [SerializeField] bool RB_Input = false;
-        
+
+        [Header("Trigger Input")]
+        [SerializeField] bool RT_Input = false;
+        [SerializeField] bool Hold_RT_Input = false;
+
         private void Awake()
         {
             if (instance == null)
@@ -92,7 +98,14 @@ namespace YT
                 playerControls.PlayerCamera.Movement.performed += i => camera_Input = i.ReadValue<Vector2>();
                 playerControls.PlayerActions.Dodge.performed += i => dodge_Input = true;
                 playerControls.PlayerActions.Jump.performed += i => jump_Input = true;
+
+                // Bumpers
                 playerControls.PlayerActions.RB.performed += i => RB_Input = true;
+                
+                // Triggers
+                playerControls.PlayerActions.RT.performed += i => RT_Input = true;
+                playerControls.PlayerActions.HoldRT.performed += i => Hold_RT_Input = true;
+                playerControls.PlayerActions.HoldRT.canceled += i => Hold_RT_Input = false;
 
                 // Lock on
                 playerControls.PlayerActions.LockOn.performed += i => lockOn_Input = true;
@@ -146,6 +159,8 @@ namespace YT
             HandleSprintInput();
             HandleJumpInput();
             HandleRBInput();
+            HandleRTInput();
+            HandleChargeRTInput();
         }
 
         // Lock on
@@ -327,6 +342,34 @@ namespace YT
                 // TODO: If we are two handing the weapon, use the two handed action
 
                 player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RB_Action, player.playerInventoryManager.currentRightHandWeapon);
+            }
+        }
+
+        private void HandleRTInput()
+        {
+            if (RT_Input)
+            {
+                RT_Input = false;
+
+                // TODO: If we have a UI window open, return and do nothing
+
+                player.playerNetworkManager.SetCharacterActionHand(true);
+
+                // TODO: If we are two handing the weapon, use the two handed action
+
+                player.playerCombatManager.PerformWeaponBasedAction(player.playerInventoryManager.currentRightHandWeapon.oh_RT_Action, player.playerInventoryManager.currentRightHandWeapon);
+            }
+        }
+
+        private void HandleChargeRTInput()
+        {
+            // Only check for charge if we are in an action that requires it
+            if (player.isPerformingAction)
+            {
+                if (player.playerNetworkManager.isUsingRightHand.Value)
+                {
+                    player.playerNetworkManager.isChargingAttack.Value = Hold_RT_Input;
+                }
             }
         }
     }

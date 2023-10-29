@@ -9,9 +9,9 @@ namespace YT
     {
         public static WorldSoundFXManager instance;
 
-        [Header("Background Music")]
-        public AudioClip backgroundSFX;
-        private AudioSource audioSource;
+        //[Header("Background Music")]
+        //public AudioClip backgroundSFX;
+        //private AudioSource audioSource;
 
         [Header("Whoosh Sounds")]
         public AudioClip[] whooshSFX;
@@ -33,11 +33,11 @@ namespace YT
                 Destroy(gameObject);
             }
 
-            audioSource = GetComponent<AudioSource>();
-            audioSource.clip = backgroundSFX;
-            audioSource.loop = true;
+            //audioSource = GetComponent<AudioSource>();
+            //audioSource.clip = backgroundSFX;
+            //audioSource.loop = true;
 
-            audioSource.Play();
+            //audioSource.Play();
         }
 
         private void Start()
