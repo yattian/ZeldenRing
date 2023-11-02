@@ -10,8 +10,8 @@ namespace YT
     {
         [Header("DEBUG MENU")]
         [SerializeField] bool respawnCharacter = false;
-        [SerializeField] bool switchRightWeapon = false;
-        [SerializeField] bool switchLeftWeapon = false;
+        //[SerializeField] bool switchRightWeapon = false;
+        //[SerializeField] bool switchLeftWeapon = false;
 
         [HideInInspector] public PlayerAnimatorManager playerAnimatorManager;
         [HideInInspector] public PlayerLocomotionManager playerLocomotionManager;
@@ -50,7 +50,7 @@ namespace YT
             // Regen stamina
             playerStatsManager.RegenerateStamina();
 
-            DebugMenu();
+            //DebugMenu();
         }
 
         protected override void LateUpdate()
@@ -250,7 +250,7 @@ namespace YT
         }
 
         // Debug delete later!
-        private void DebugMenu()
+        /*private void DebugMenu()
         {
             if (respawnCharacter)
             {
@@ -269,6 +269,6 @@ namespace YT
                 switchLeftWeapon = false;
                 playerEquipmentManager.SwitchLeftWeapon();
             }
-        }
+        }*/
     }
 }

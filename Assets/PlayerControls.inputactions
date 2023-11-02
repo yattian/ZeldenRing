@@ -101,7 +101,7 @@
                     "id": "dddf783f-14b4-4208-a0b4-0acb4be629f8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Tap(duration=1)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -135,6 +135,24 @@
                     "name": "Lock On",
                     "type": "Button",
                     "id": "3c71722a-c697-4cfe-a58d-853b423713c8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Switch Right Weapon",
+                    "type": "Button",
+                    "id": "53d30d99-00ac-45a9-b7c4-e0e1412c3adc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Switch Left Weapon",
+                    "type": "Button",
+                    "id": "616eecbc-975d-420a-abf1-df2a4ed5052f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -256,6 +274,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Hold RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76b74762-7619-401a-b248-ff07caf2c066",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Right Weapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e5bee212-7db2-450b-a2ab-e6ac10052c27",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Switch Left Weapon",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
