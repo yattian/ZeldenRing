@@ -167,6 +167,7 @@ namespace YT
             // Decide if our attack can be parried
             // Tell the network our "isattacking" flag (for counter damage etc)
             character.characterCombatManager.currentAttackType = attackType;
+            character.characterCombatManager.lastATtackAnimationPerformed = targetAnimation;
             character.applyRootMotion = applyRootMotion;
             character.animator.CrossFade(targetAnimation, 0.2f);
             character.isPerformingAction = isPerformingAction;
@@ -175,6 +176,16 @@ namespace YT
 
             // Tell server we played animation, and to play animation for all
             character.characterNetworkManager.NotifyTheServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
+        }
+
+        public virtual void EnableCanDoCombo()
+        {
+
+        }
+
+        public virtual void DisableCanDoCombo()
+        {
+
         }
     }
 }

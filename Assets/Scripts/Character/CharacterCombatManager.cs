@@ -9,6 +9,9 @@ namespace YT
     {
         CharacterManager character;
 
+        [Header("Last Attack Animation Performed")]
+        public string lastATtackAnimationPerformed;
+
         [Header("Attack Target")]
         public CharacterManager currentTarget;
 

@@ -8,6 +8,8 @@ namespace YT
     public class LightAttackWeaponItemAction : WeaponItemAction
     {
         [SerializeField] string light_Attack_01 = "Main_Light_Attack_01"; // Main = main hand, right hand
+        [SerializeField] string light_Attack_02 = "Main_Light_Attack_02"; // Main = main hand, right hand
+
         public override void AttemptToPerformAction(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
             base.AttemptToPerformAction(playerPerformingAction, weaponPerformingAction);
@@ -27,14 +29,25 @@ namespace YT
 
         private void PerformLightAttack(PlayerManager playerPerformingAction, WeaponItem weaponPerformingAction)
         {
-            if (playerPerformingAction.playerNetworkManager.isUsingRightHand.Value)
+            // If attacking and can combo then perform the combo attack
+            if (playerPerformingAction.playerCombatManager.canComboWithMainHandWeapon && playerPerformingAction.isPerformingAction)
+            {
+                playerPerformingAction.playerCombatManager.canComboWithMainHandWeapon = false;
+
+                // Perform attack based on the previous attack we just played
+                if (playerPerformingAction.characterCombatManager.lastATtackAnimationPerformed == light_Attack_01)
+                {
+                    playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.LightAttack02, light_Attack_02, true);
+                }
+                else
+                {
+                    playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.LightAttack01, light_Attack_01, true);
+                }
+            }
+            // Otherwise, if we are not already attacking, just perform a regular action
+            else if (!playerPerformingAction.isPerformingAction)
             {
                 playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.LightAttack01, light_Attack_01, true);
-            }
-
-            if (playerPerformingAction.playerNetworkManager.isUsingLeftHand.Value)
-            {
-
             }
         }
     }

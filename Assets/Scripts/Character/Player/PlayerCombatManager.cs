@@ -11,6 +11,10 @@ namespace YT
 
         public WeaponItem currentWeaponBeingUsed;
 
+        [Header("Flags")]
+        public bool canComboWithMainHandWeapon = false;
+        //public bool canComboWithOffHandWeapon = false;
+
         protected override void Awake()
         {
             base.Awake();
@@ -65,5 +69,7 @@ namespace YT
                 PlayerCamera.instance.SetLockCameraHeight();
             }
         }
+
+
     }
 }

@@ -21,6 +21,7 @@ namespace YT
             character.canRotate = true;
             character.canMove = true;
             character.characterLocomotionManager.isRolling = false;
+            character.characterAnimatorManager.DisableCanDoCombo();
 
             if (character.IsOwner)
             {
