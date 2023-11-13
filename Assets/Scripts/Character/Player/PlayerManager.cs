@@ -9,7 +9,7 @@ namespace YT
     public class PlayerManager : CharacterManager
     {
         [Header("DEBUG MENU")]
-        [SerializeField] bool respawnCharacter = false;
+        // [SerializeField] bool respawnCharacter = false;
         //[SerializeField] bool switchRightWeapon = false;
         //[SerializeField] bool switchLeftWeapon = false;
 

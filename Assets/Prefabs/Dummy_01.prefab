@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 7965854322634070112}
   - component: {fileID: 2321205315314145374}
   - component: {fileID: 1423132930837327827}
-  - component: {fileID: 6774931718088886710}
+  - component: {fileID: -5215597093061914178}
   - component: {fileID: 5636931370693889940}
   - component: {fileID: 3468689659964655573}
   - component: {fileID: 3989448704924581029}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 1914596024543705627}
   - component: {fileID: 4658404877596354167}
   m_Layer: 6
-  m_Name: Dummy
+  m_Name: Dummy_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,8 +71,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64977074471437024}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.720594, y: -0.00000011920929, z: 2.4171665}
+  m_LocalRotation: {x: -0, y: 0.95141417, z: -0, w: -0.30791432}
+  m_LocalPosition: {x: 11.91, y: -2.883889, z: 18.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -88,7 +88,7 @@ Transform:
   - {fileID: 3670475034581861824}
   - {fileID: 6106986844700150981}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 215.867, z: 0}
 --- !u!95 &4783882447867388947
 Animator:
   serializedVersion: 5
@@ -312,6 +312,8 @@ MonoBehaviour:
     m_InternalValue: 0
   isJumping:
     m_InternalValue: 0
+  isChargingAttack:
+    m_InternalValue: 0
   currentHealth:
     m_InternalValue: 0
   maxHealth:
@@ -324,7 +326,7 @@ MonoBehaviour:
     m_InternalValue: 1
   endurance:
     m_InternalValue: 1
---- !u!114 &6774931718088886710
+--- !u!114 &-5215597093061914178
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -333,7 +335,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 64977074471437024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d1c859da7241be4fb426d5a83796719, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d50794559524304f8820ec98de14434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isDead:
@@ -363,6 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec8e4eaaba495a48b029e4b3707e3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastATtackAnimationPerformed: 
   currentTarget: {fileID: 0}
   currentAttackType: 0
   lockOnTransform: {fileID: 4601475093873602019}
