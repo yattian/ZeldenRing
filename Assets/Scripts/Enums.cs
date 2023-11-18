@@ -23,6 +23,12 @@ public enum CharacterSlot
     NO_SLOT
 }
 
+public enum CharacterGroup
+{
+    Team01,
+    Team02
+}
+
 public enum WeaponModelSlot
 {
     RightHand,

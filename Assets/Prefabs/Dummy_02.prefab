@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 2321205315314145374}
   - component: {fileID: 1423132930837327827}
   - component: {fileID: -5215597093061914178}
-  - component: {fileID: 5636931370693889940}
+  - component: {fileID: -8444883795766558434}
   - component: {fileID: 3468689659964655573}
   - component: {fileID: 3989448704924581029}
   - component: {fileID: 6968302949210467440}
@@ -348,12 +348,15 @@ MonoBehaviour:
   characterCombatManager: {fileID: 0}
   characterSoundFXManager: {fileID: 0}
   characterLocomotionManager: {fileID: 0}
+  characterGroup: 1
   isPerformingAction: 0
   isGrounded: 1
   applyRootMotion: 0
   canRotate: 1
   canMove: 1
---- !u!114 &5636931370693889940
+  aiCharacterCombatManager: {fileID: 0}
+  currentState: {fileID: 11400000, guid: 7193b971a2cdaf24e97b33ccfe991e09, type: 2}
+--- !u!114 &-8444883795766558434
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -362,13 +365,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 64977074471437024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fec8e4eaaba495a48b029e4b3707e3e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1571529bde844514bbd9f5a58bb4946b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lastATtackAnimationPerformed: 
   currentTarget: {fileID: 0}
   currentAttackType: 0
   lockOnTransform: {fileID: 4601475093873602019}
+  detectionRadius: 15
+  minimumDetectionAngle: -35
+  maximumDetectionAngle: 35
 --- !u!114 &3468689659964655573
 MonoBehaviour:
   m_ObjectHideFlags: 0
