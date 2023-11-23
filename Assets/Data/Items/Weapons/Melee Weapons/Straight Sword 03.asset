@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Straight Sword 03
   m_EditorClassIdentifier: 
   itemName: Straight Sword
-  itemIcon: {fileID: 21300000, guid: a3bf44d05fa0a30499659cb9cfe0c8c6, type: 3}
+  itemIcon: {fileID: 21300000, guid: d2cf7b38beb3346459eadd0fdf718572, type: 3}
   itemDescription: Another straight sword
   itemID: 3
   weaponModel: {fileID: 7766639925103635164, guid: 1b5031ba0c66fa74e8c5573bbc1108d9,
@@ -29,6 +29,11 @@ MonoBehaviour:
   lightningDamage: 0
   poiseDamage: 50
   light_Attack_01_Modifier: 1.1
+  light_Attack_02_Modifier: 1.2
+  heavy_Attack_01_Modifier: 1.5
+  heavy_Attack_02_Modifier: 1.6
+  charge_Attack_01_Modifier: 2
+  charge_Attack_02_Modifier: 2.2
   baseStaminaCost: 20
   lightAttackStaminaCostMultiplier: 0.9
   oh_RB_Action: {fileID: 11400000, guid: 3aa155ba991f9bf429b0e743c24c0432, type: 2}
