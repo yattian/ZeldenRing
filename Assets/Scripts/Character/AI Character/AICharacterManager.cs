@@ -1,21 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace YT
 {
     public class AICharacterManager : CharacterManager
     {
-        public AICharacterCombatManager aiCharacterCombatManager;
+        [HideInInspector] public AICharacterNetworkManager aiCharacterNetworkManager;
+        [HideInInspector] public AICharacterCombatManager aiCharacterCombatManager;
+        [HideInInspector] public AICharacterLocmotionManager aiCharacterLocmotionManager;
+
+        [Header("Navmesh Agent")]
+        public NavMeshAgent navMeshAgent;
 
         [Header("Current State")]
         [SerializeField] AIState currentState;
+
+        [Header("States")]
+        public IdleState idle;
+        public PursueTargetState pursueTarget;
+        // Combat stance
+        // Attack 
 
         protected override void Awake()
         {
             base.Awake();
 
+            aiCharacterNetworkManager = GetComponent<AICharacterNetworkManager>();
             aiCharacterCombatManager = GetComponent<AICharacterCombatManager>();
+            aiCharacterLocmotionManager = GetComponent<AICharacterLocmotionManager>();
+
+            navMeshAgent = GetComponentInChildren<NavMeshAgent>();
+
+            // Use a copy of the scriptable objects, so the originals are not modified
+            idle = Instantiate(idle);
+            pursueTarget = Instantiate(pursueTarget);
+
+            currentState = idle;
         }
 
         protected override void FixedUpdate()
@@ -32,6 +54,29 @@ namespace YT
             if (nextState != null)
             {
                 currentState = nextState;
+            }
+
+            // The position/rotation should be reset only after the state machine has processed it's tick
+            navMeshAgent.transform.localPosition = Vector3.zero;
+            navMeshAgent.transform.localRotation = Quaternion.identity;
+
+            if (navMeshAgent.enabled)
+            {
+                Vector3 agentDestination = navMeshAgent.destination;
+                float remainingDistance = Vector3.Distance(agentDestination, transform.position);
+
+                if (remainingDistance > navMeshAgent.stoppingDistance)
+                {
+                    aiCharacterNetworkManager.isMoving.Value = true;
+                }
+                else
+                {
+                    aiCharacterNetworkManager.isMoving.Value = false;
+                }
+            }
+            else
+            {
+                aiCharacterNetworkManager.isMoving.Value = false;
             }
         }
     }

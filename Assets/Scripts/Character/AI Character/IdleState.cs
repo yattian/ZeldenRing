@@ -11,15 +11,12 @@ namespace YT
         {
             if (aiCharacter.characterCombatManager.currentTarget != null)
             {
-                Debug.Log("We have a target!");
-
-                return this;
+                return SwitchState(aiCharacter, aiCharacter.pursueTarget);
             }
             else
             {
                 // Return this state, to continually search for a target
                 aiCharacter.aiCharacterCombatManager.FindATargetViaLineOFSight(aiCharacter);
-                Debug.Log("Searching for a target.");
                 return this;
             }
         }
