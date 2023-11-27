@@ -54,7 +54,7 @@ namespace YT
                 Destroy(gameObject);
             }
 
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void Start()

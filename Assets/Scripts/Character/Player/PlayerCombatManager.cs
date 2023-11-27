@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
+
 namespace YT
 {
     public class PlayerCombatManager : CharacterCombatManager
@@ -69,7 +70,5 @@ namespace YT
                 PlayerCamera.instance.SetLockCameraHeight();
             }
         }
-
-
     }
 }

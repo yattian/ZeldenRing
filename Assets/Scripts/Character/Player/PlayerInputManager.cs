@@ -34,6 +34,7 @@ namespace YT
         [SerializeField] bool jump_Input = false;
         [SerializeField] bool switch_Right_Weapon_Input = false;
         [SerializeField] bool switch_Left_Weapon_Input = false;
+        [SerializeField] bool interact_Input = false;
 
         [Header("Bumper Input")]
         [SerializeField] bool RB_Input = false;
@@ -104,6 +105,7 @@ namespace YT
                 playerControls.PlayerActions.Jump.performed += i => jump_Input = true;
                 playerControls.PlayerActions.SwitchRightWeapon.performed += i => switch_Right_Weapon_Input = true;
                 playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switch_Left_Weapon_Input = true;
+                playerControls.PlayerActions.Interact.performed += i => interact_Input = true;
 
                 // Bumpers
                 playerControls.PlayerActions.RB.performed += i => RB_Input = true;
@@ -169,6 +171,7 @@ namespace YT
             HandleChargeRTInput();
             HandleSwitchRightWeaponInput();
             HandleSwitchLeftWeaponInput();
+            HandleInteractionInput();
         }
 
         // Lock on
@@ -405,6 +408,15 @@ namespace YT
             {
                 switch_Left_Weapon_Input = false;
                 player.playerEquipmentManager.SwitchLeftWeapon();
+            }
+        }
+
+        private void HandleInteractionInput()
+        {
+            if (interact_Input)
+            {
+                interact_Input = false;
+                player.playerInteractorManager.PerformInteract();
             }
         }
     }
