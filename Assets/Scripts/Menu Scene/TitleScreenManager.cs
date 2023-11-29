@@ -28,6 +28,8 @@ namespace YT
         [Header("Character Slots")]
         public CharacterSlot currentSelectedSlot = CharacterSlot.NO_SLOT;
 
+        //public WorldSoundFXManager soundFXManager;
+
         private void Awake()
         {
             if (Instance == null)
@@ -45,12 +47,13 @@ namespace YT
             NetworkManager.Singleton.StartHost();
             //NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("192.168.4.51");
             //NetworkManager.Singleton.StartClient();
+            PlayUIClickSound();
         }
 
         public void StartNewGame()
         {
             WorldSaveGameManager.instance.AttemptToCreateNewGame();
-
+            PlayUIClickSound();
         }
 
         public void OpenLoadGameMenu()
@@ -62,6 +65,7 @@ namespace YT
 
             // Select return button first
             loadMenuReturnButton.Select();
+            PlayUIClickSound();
         }
 
         public void CloseLoadGameMenu()
@@ -74,6 +78,7 @@ namespace YT
 
             // Select return button first
             mainMenuLoadGameButton.Select();
+            PlayUIClickSound();
         }
 
         public void DisplayNoFreeCharacterSlotsPopUp()
@@ -119,6 +124,7 @@ namespace YT
             titleScreenLoadMenu.SetActive(true);
 
             loadMenuReturnButton.Select();
+            PlayUIClickSound();
         }
 
         public void CloseDeleteCharacterPopUp()
@@ -126,5 +132,37 @@ namespace YT
             deleteCharacterSlotPopUp.SetActive(false);
             loadMenuReturnButton.Select();
         }
+
+        private void PlayUIClickSound()
+        {
+            // Check if the soundFXManager reference is assigned
+            if (WorldSoundFXManager.instance != null)
+            {
+                // Access the AudioClip from the WorldSoundFXManager
+                AudioClip clickSound = WorldSoundFXManager.instance.mainMenuUIClick;
+
+                // Check if the AudioClip exists and is not null
+                if (clickSound != null)
+                {
+                    // Create an AudioSource component dynamically
+                    AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+
+                    // Play the UI click sound
+                    audioSource.PlayOneShot(clickSound);
+
+                    // Optional: Destroy the AudioSource component after playing the sound
+                    Destroy(audioSource, clickSound.length);
+                }
+                else
+                {
+                    Debug.LogWarning("UI Click Sound is not assigned in the WorldSoundFXManager.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("WorldSoundFXManager reference is not assigned.");
+            }
+        }
+
     }
 }

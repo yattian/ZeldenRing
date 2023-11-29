@@ -14,6 +14,7 @@ namespace YT
 
         [HideInInspector] public PlayerUIHudManager playerUIHudManager;
         [HideInInspector] public PlayerUIPopUpManager playerUIPopUpManager;
+        [HideInInspector] public PlayerUIDialogueManager playerUIDialogueManager;
 
         private void Awake()
         {
@@ -28,6 +29,7 @@ namespace YT
 
             playerUIHudManager = GetComponentInChildren<PlayerUIHudManager>();
             playerUIPopUpManager = GetComponentInChildren<PlayerUIPopUpManager>();
+            playerUIDialogueManager = GetComponentInChildren<PlayerUIDialogueManager>();
         }
 
         private void Start()

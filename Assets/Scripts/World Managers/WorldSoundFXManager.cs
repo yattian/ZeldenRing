@@ -22,6 +22,9 @@ namespace YT
         [Header("Action Sounds")]
         public AudioClip rollSFX;
 
+        [Header("UI Sounds")]
+        public AudioClip mainMenuUIClick;
+
         private void Awake()
         {
             if (instance == null)

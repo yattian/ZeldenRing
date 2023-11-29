@@ -170379,7 +170379,7 @@ PrefabInstance:
     - target: {fileID: 8022295840905108479, guid: e8ebfb11149b2104497e1b8e521e6863,
         type: 3}
       propertyPath: aiCharacters.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8022295840905108479, guid: e8ebfb11149b2104497e1b8e521e6863,
         type: 3}

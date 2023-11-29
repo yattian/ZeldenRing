@@ -7,6 +7,8 @@ namespace YT
 {
     public class PlayerInputManager : MonoBehaviour
     {
+        [SerializeField] PlayerUIDialogueManager dialogueManager;
+
         public static PlayerInputManager instance;
         public PlayerManager player;
         PlayerControls playerControls;
@@ -43,6 +45,9 @@ namespace YT
         [SerializeField] bool RT_Input = false;
         [SerializeField] bool Hold_RT_Input = false;
 
+        [Header("Dialogue Input")]
+        public bool isInDialogue = false;
+
         private void Awake()
         {
             if (instance == null)
@@ -65,6 +70,13 @@ namespace YT
             {
                 playerControls.Disable();
             }
+
+            /*dialogueManager = FindObjectOfType<PlayerUIDialogueManager>();
+
+            if (dialogueManager == null)
+            {
+                Debug.LogError("PlayerUIDialogueManager component not found in the scene!");
+            }*/
         }
 
         private void OnSceneChange(Scene oldScene, Scene newScene)
@@ -102,7 +114,24 @@ namespace YT
 
                 // Actions
                 playerControls.PlayerActions.Dodge.performed += i => dodge_Input = true;
-                playerControls.PlayerActions.Jump.performed += i => jump_Input = true;
+                playerControls.PlayerActions.Jump.performed += i =>
+                {
+                    if (!isInDialogue)
+                    {
+                        jump_Input = true;
+                    }
+                    else
+                    {
+                        if (dialogueManager != null)
+                        {
+                            dialogueManager.SkipDialogue(); // Call SkipDialogue from PlayerUIDialogueManager
+                        }
+                        else
+                        {
+                            Debug.LogWarning("PlayerUIDialogueManager reference is null!");
+                        }
+                    }
+                };
                 playerControls.PlayerActions.SwitchRightWeapon.performed += i => switch_Right_Weapon_Input = true;
                 playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switch_Left_Weapon_Input = true;
                 playerControls.PlayerActions.Interact.performed += i => interact_Input = true;
