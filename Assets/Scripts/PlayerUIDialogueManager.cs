@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace YT
 {
@@ -9,6 +10,8 @@ namespace YT
     {
         [SerializeField] GameObject dialoguePopUpGameObject;
         [SerializeField] TextMeshProUGUI dialoguePopUpText;
+        [SerializeField] Image dialogueImage;
+
         private string[] lines = { "Default first", "Default second" };
         public float textSpeed;
 
@@ -30,14 +33,15 @@ namespace YT
 
         }
 
-        public void StartDialogue(string[] dialogueLines)
+        public void StartDialogue(string[] dialogueLines, Sprite speakerImage)
         {
             PlayerInputManager.instance.isInDialogue = true;
             dialoguePopUpGameObject.SetActive(true);
-            Debug.Log(Random.Range(0, 100));
+            //Debug.Log(Random.Range(0, 100));
             dialoguePopUpText.text = string.Empty;
             index = 0;
             lines = dialogueLines;
+            dialogueImage.sprite = speakerImage;
             StartCoroutine(TypeLine());
         }
 

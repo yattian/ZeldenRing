@@ -11,6 +11,8 @@ namespace YT
 
         public PlayerManager player;
 
+        [SerializeField] TitleScreenRetainButtonSelection buttonSelectionScript;
+
         [Header("SAVE/LOAD")]
         [SerializeField] bool saveGame;
         [SerializeField] bool loadGame;
@@ -251,6 +253,7 @@ namespace YT
             player.playerNetworkManager.endurance.Value = 10;
             SaveGame();
             StartCoroutine(LoadWorldScene());
+            DisableButtonSelection();
         }
 
         public void LoadGame()
@@ -265,6 +268,7 @@ namespace YT
             currentCharacterData = saveFileDataWriter.LoadSaveFile();
 
             StartCoroutine(LoadWorldScene());
+            DisableButtonSelection();
         }
 
         public void SaveGame()
@@ -345,6 +349,12 @@ namespace YT
         public int GetWorldSceneIndex()
         {
             return worldSceneIndex;
+        }
+
+        public void DisableButtonSelection()
+        {
+            buttonSelectionScript.enabled = false;
+            Debug.Log("Button selection script disabled");
         }
     }
 }

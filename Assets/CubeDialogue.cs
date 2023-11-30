@@ -13,7 +13,7 @@ namespace YT
         {
             if (cubeDialogueData != null)
             {
-                PlayerUIManager.instance.playerUIDialogueManager.StartDialogue(cubeDialogueData.dialogueLines);
+                PlayerUIManager.instance.playerUIDialogueManager.StartDialogue(cubeDialogueData.dialogueLines, cubeDialogueData.dialogueImage);
             }
             else
             {

@@ -15,3 +15,4 @@ MonoBehaviour:
   dialogueLines:
   - This is the second first loren ipsum
   - This is the second second loren ipsum
+  dialogueImage: {fileID: 21300000, guid: d346c45da4bf19047a6c89b880f9e715, type: 3}

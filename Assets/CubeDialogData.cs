@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace YT
 {
@@ -9,5 +10,6 @@ namespace YT
     {
         [TextArea(3, 10)]
         public string[] dialogueLines;
+        public Sprite dialogueImage;
     }
 }
