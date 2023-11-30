@@ -7,11 +7,18 @@ namespace YT
 {
     public class CubeDialogue : MonoBehaviour, IInteractable
     {
-        // This function gets called when the cube is interacted with
+        [SerializeField] private CubeDialogueData cubeDialogueData; // Reference to CubeDialogueData for this cube
+
         public void Interact()
         {
-            // Start the dialogue
-            PlayerUIManager.instance.playerUIDialogueManager.StartDialogue();
+            if (cubeDialogueData != null)
+            {
+                PlayerUIManager.instance.playerUIDialogueManager.StartDialogue(cubeDialogueData.dialogueLines);
+            }
+            else
+            {
+                Debug.LogWarning("CubeDialogueData not assigned to cube: " + gameObject.name);
+            }
         }
     }
 

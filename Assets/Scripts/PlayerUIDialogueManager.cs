@@ -9,7 +9,7 @@ namespace YT
     {
         [SerializeField] GameObject dialoguePopUpGameObject;
         [SerializeField] TextMeshProUGUI dialoguePopUpText;
-        private string[] lines = { "First dialogue", "Second dialogue" };
+        private string[] lines = { "Default first", "Default second" };
         public float textSpeed;
 
         private int index;
@@ -30,13 +30,14 @@ namespace YT
 
         }
 
-        public void StartDialogue()
+        public void StartDialogue(string[] dialogueLines)
         {
             PlayerInputManager.instance.isInDialogue = true;
             dialoguePopUpGameObject.SetActive(true);
             Debug.Log(Random.Range(0, 100));
             dialoguePopUpText.text = string.Empty;
             index = 0;
+            lines = dialogueLines;
             StartCoroutine(TypeLine());
         }
 

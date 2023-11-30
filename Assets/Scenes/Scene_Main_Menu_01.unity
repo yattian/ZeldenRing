@@ -6334,7 +6334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialoguePopUpGameObject: {fileID: 5477924429550667399}
   dialoguePopUpText: {fileID: 5477924429550667398}
-  textSpeed: 0.5
+  textSpeed: 0.05
 --- !u!114 &6123691130026841328
 MonoBehaviour:
   m_ObjectHideFlags: 0
