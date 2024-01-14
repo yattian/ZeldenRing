@@ -2371,7 +2371,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
+  GlobalObjectIdHash: 334108614
+  InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -2531,10 +2532,6 @@ MonoBehaviour:
   characterLocomotionManager: {fileID: 0}
   characterGroup: 0
   isPerformingAction: 0
-  isGrounded: 1
-  applyRootMotion: 0
-  canRotate: 1
-  canMove: 1
   playerAnimatorManager: {fileID: 0}
   playerLocomotionManager: {fileID: 0}
   playerNetworkManager: {fileID: 0}
@@ -2596,6 +2593,9 @@ MonoBehaviour:
   groundedYVelocity: -20
   fallStartYVelocity: -5
   isRolling: 0
+  canRotate: 1
+  canMove: 1
+  isGrounded: 1
   verticalMovement: 0
   horizontalMovement: 0
   moveAmount: 0
@@ -2665,6 +2665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2d37bd157a2c54db650020c2e61682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  applyRootMotion: 0
   lastDamageAnimationPlayed: 
   hit_Forward_Medium_01: hit_Forward_Medium_01
   hit_Forward_Medium_02: hit_Forward_Medium_02
@@ -2690,6 +2691,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9340d5a93024ed0458ebdd02e95d692b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageGrunts:
+  - {fileID: 8300000, guid: 6be650ac213d26a4cb6814c21422b3d7, type: 3}
+  - {fileID: 8300000, guid: 97acb63b5c146af42bc67c8ef67dc9ce, type: 3}
+  - {fileID: 8300000, guid: d2e36b4491903474c941144214329504, type: 3}
+  - {fileID: 8300000, guid: 7eeba320cd019144aa01e929a42338c9, type: 3}
+  - {fileID: 8300000, guid: e6d00863ac16c79449af403dc76c5ec0, type: 3}
+  - {fileID: 8300000, guid: 34664e92047cf384c92bf68b7b9dd321, type: 3}
+  - {fileID: 8300000, guid: 64fa533beace0154ea3b3d27a1ce906c, type: 3}
+  - {fileID: 8300000, guid: c779e93fc649eeb449ae9bccb3b66d2d, type: 3}
+  - {fileID: 8300000, guid: 8e99630627ca4fd4587b17b69c3e3c00, type: 3}
+  - {fileID: 8300000, guid: e524e3e99142e7e4b8229226e2814a26, type: 3}
+  - {fileID: 8300000, guid: aa0be2dc10659d34a98b832d5dde4c6b, type: 3}
 --- !u!114 &4273504025662229056
 MonoBehaviour:
   m_ObjectHideFlags: 0

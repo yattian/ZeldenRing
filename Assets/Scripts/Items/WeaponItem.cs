@@ -54,5 +54,8 @@ namespace YT
         // Ash of war
 
         // Blocking sounds
+        [Header("Whooshes")]
+        public AudioClip[] whooshes;
+
     }
 }

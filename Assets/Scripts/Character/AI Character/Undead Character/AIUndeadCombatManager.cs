@@ -29,6 +29,7 @@ namespace YT
 
         public void OpenRightHandDamageCollider()
         {
+            aiCharacter.characterSoundFXManager.PlayAttackGrunt();
             rightHandDamageCollider.EnableDamageCollider();
         }
 
@@ -39,6 +40,7 @@ namespace YT
 
         public void OpenLeftHandDamageCollider()
         {
+            aiCharacter.characterSoundFXManager.PlayAttackGrunt();
             leftHandDamageCollider.EnableDamageCollider();
         }
 

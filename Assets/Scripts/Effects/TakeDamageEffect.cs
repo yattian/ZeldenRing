@@ -114,6 +114,7 @@ namespace YT
             AudioClip physicalDamageSFX = WorldSoundFXManager.instance.ChooseRandomSFXFromArray(WorldSoundFXManager.instance.physicalDamageSFX);
 
             character.characterSoundFXManager.PlaySoundFX(physicalDamageSFX);
+            character.characterSoundFXManager.PlayDamageGrunt();
             // If fire damage is greater than 0, play burn SFX
             // If lightning damage is greater than 0, play zap SFX etc
         }

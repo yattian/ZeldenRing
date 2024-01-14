@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 77142920
+  GlobalObjectIdHash: 2911088960
   InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -354,10 +354,6 @@ MonoBehaviour:
   characterLocomotionManager: {fileID: 0}
   characterGroup: 1
   isPerformingAction: 0
-  isGrounded: 1
-  applyRootMotion: 0
-  canRotate: 1
-  canMove: 1
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterLocmotionManager: {fileID: 0}
@@ -431,6 +427,9 @@ MonoBehaviour:
   groundedYVelocity: -20
   fallStartYVelocity: -5
   isRolling: 0
+  canRotate: 1
+  canMove: 1
+  isGrounded: 1
 --- !u!114 &6968302949210467440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,6 +479,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86ccf16097e90942bcec4da2e21f982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageGrunts:
+  - {fileID: 8300000, guid: 3f3c0ee2e2a6e4bb7a97fcf30b866b78, type: 3}
+  - {fileID: 8300000, guid: b1a28f919a9474741be9464cbe4a3267, type: 3}
+  - {fileID: 8300000, guid: 78a51b7fc84d24502abb2a536d615958, type: 3}
+  attackGrunts:
+  - {fileID: 8300000, guid: 2414bf75d56b14cd28136d3073dcbfcf, type: 3}
+  - {fileID: 8300000, guid: 465afab32ed2c45c697a60b4787e0cf9, type: 3}
+  - {fileID: 8300000, guid: bb45bbfed8ef24f0bba929b923ca21e0, type: 3}
+  - {fileID: 8300000, guid: fe56cad1db58f4d4cb9ab128a414ad01, type: 3}
+  - {fileID: 8300000, guid: 4211882e36c974db08325dd144f44d86, type: 3}
 --- !u!114 &-6635543032786712563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,6 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05eaa94109e3b4b4aaf88861eb610cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  applyRootMotion: 0
   lastDamageAnimationPlayed: 
   hit_Forward_Medium_01: hit_Forward_Medium_01
   hit_Forward_Medium_02: hit_Forward_Medium_02

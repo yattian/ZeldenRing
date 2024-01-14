@@ -8,6 +8,12 @@ namespace YT
     {
         private AudioSource audioSource;
 
+        [Header("Damage Grunts")]
+        [SerializeField] protected AudioClip[] damageGrunts;
+
+        [Header("Attack Grunts")]
+        [SerializeField] protected AudioClip[] attackGrunts;
+
         protected virtual void Awake()
         {
             audioSource = GetComponent<AudioSource>();
@@ -35,10 +41,21 @@ namespace YT
             audioSource.PlayOneShot(WorldSoundFXManager.instance.enterWorldSFX);
         }
 
+        public virtual void PlayDamageGrunt()
+        {
+            PlaySoundFX(WorldSoundFXManager.instance.ChooseRandomSFXFromArray(damageGrunts));
+        }
+
+        public virtual void PlayAttackGrunt()
+        {
+            PlaySoundFX(WorldSoundFXManager.instance.ChooseRandomSFXFromArray(attackGrunts));
+        }
+        /*
         public void PlayWhooshSoundFX()
         {
             AudioClip whooshSFX = WorldSoundFXManager.instance.ChooseRandomSFXFromArray(WorldSoundFXManager.instance.whooshSFX);
             audioSource.PlayOneShot(whooshSFX);
         }
+        */
     }
 }
