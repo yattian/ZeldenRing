@@ -20,7 +20,7 @@ namespace YT
             // Host
             if (aiCharacter.IsOwner)
             {
-                if (!aiCharacter.isGrounded)
+                if (!aiCharacter.characterLocomotionManager.isGrounded)
                     return;
 
                 Vector3 velocity = aiCharacter.animator.deltaPosition;
@@ -31,7 +31,7 @@ namespace YT
             // Client
             else
             {
-                if (!aiCharacter.isGrounded)
+                if (!aiCharacter.characterLocomotionManager.isGrounded)
                     return;
 
                 Vector3 velocity = aiCharacter.animator.deltaPosition;

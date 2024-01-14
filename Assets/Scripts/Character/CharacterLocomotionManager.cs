@@ -20,6 +20,9 @@ namespace YT {
 
         [Header("Flags")]
         public bool isRolling = false;
+        public bool canRotate = true;
+        public bool canMove = true;
+        public bool isGrounded = true;
 
         protected virtual void Awake()
         {
@@ -30,7 +33,7 @@ namespace YT {
         {
             HandleGroundCheck();
 
-            if (character.isGrounded)
+            if (character.characterLocomotionManager.isGrounded)
             {
                 // If we are not attempting to jump or move upwards
                 if (yVelocity.y < 0)
@@ -61,15 +64,24 @@ namespace YT {
 
         protected void HandleGroundCheck()
         {
-            character.isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRadius, groundLayer);
+            character.characterLocomotionManager.isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRadius, groundLayer);
         }
-
 
         // Draws our ground sphere
         //protected void OnDrawGizmosSelected()
         //{
         //    Gizmos.DrawSphere(character.transform.position, groundCheckSphereRadius);
         //}
+
+        public void EnableCanRotate()
+        {
+            canRotate = true;
+        }
+
+        public void DisableCanRotate()
+        {
+            canRotate = false;
+        }
     }
 
 }

@@ -91,7 +91,7 @@ namespace YT
         {
             GetMovementValues();
 
-            if (!player.canMove)
+            if (!canMove)
                 return;
 
             // Our movement direction is based on camera perspective and inputs
@@ -127,7 +127,7 @@ namespace YT
 
         private void HandleFreeFallMovement()
         {
-            if (!player.isGrounded)
+            if (!isGrounded)
             {
                 Vector3 freeFallDirection;
 
@@ -145,7 +145,7 @@ namespace YT
             if (player.isDead.Value)
                 return;
 
-            if (!player.canRotate)
+            if (!canRotate)
                 return;
 
             if (player.playerNetworkManager.isLockedOn.Value)
@@ -278,7 +278,7 @@ namespace YT
                 return;
 
             // If not grounded, no jump
-            if (!player.isGrounded)
+            if (!isGrounded)
                 return;
 
             // If two handing, play two handed jump animation, otherwise one handed (to do)

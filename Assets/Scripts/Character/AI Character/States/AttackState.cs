@@ -27,6 +27,7 @@ namespace YT
                 return SwitchState(aiCharacter, aiCharacter.idle);
 
             // Rotate towards the target whilst attacking
+            aiCharacter.aiCharacterCombatManager.RotateTowardsTargetWhilstAttacking(aiCharacter);
 
             // Set movement values to 0
             aiCharacter.characterAnimatorManager.UpdateAnimatorMovementParameters(0, 0, false);
@@ -42,13 +43,13 @@ namespace YT
                 }
             }
 
+            if (aiCharacter.isPerformingAction)
+                return this;
+
             if (!hasPerformedAttack)
             {
                 // If we are still recovering from an action, wait before performing another
                 if (aiCharacter.aiCharacterCombatManager.actionRecoveryTimer > 0)
-                    return this;
-
-                if (aiCharacter.isPerformingAction)
                     return this;
 
                 PerformAttack(aiCharacter);

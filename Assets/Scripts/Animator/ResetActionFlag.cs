@@ -17,9 +17,9 @@ namespace YT
 
             // This is called when action ends, and state returns to empty
             character.isPerformingAction = false;
-            character.applyRootMotion = false;
-            character.canRotate = true;
-            character.canMove = true;
+            character.characterAnimatorManager.applyRootMotion = false;
+            character.characterLocomotionManager.canRotate = true;
+            character.characterLocomotionManager.canMove = true;
             character.characterLocomotionManager.isRolling = false;
             character.characterAnimatorManager.DisableCanDoCombo();
 

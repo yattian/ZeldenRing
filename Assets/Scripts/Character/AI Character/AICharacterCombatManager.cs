@@ -22,6 +22,13 @@ namespace YT
         [Header("Attack Rotation Speed")]
         public float attackRotationSpeed = 25;
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            lockOnTransform = GetComponentInChildren<LockOnTransform>().transform;
+        }
+
         public void FindATargetViaLineOFSight(AICharacterManager aiCharacter)
         {
             if (currentTarget != null)
@@ -125,15 +132,19 @@ namespace YT
 
         public void RotateTowardsTargetWhilstAttacking(AICharacterManager aiCharacter)
         {
-            if (currentTarget = null)
+            Debug.Log("1");
+            if (currentTarget == null)
                 return;
 
-            if (!aiCharacter.canRotate)
+            Debug.Log("2");
+            if (!aiCharacter.characterLocomotionManager.canRotate)
                 return;
 
+            Debug.Log("3");
             if (!aiCharacter.isPerformingAction)
                 return;
 
+            Debug.Log("4");
             Vector3 targetDirection = currentTarget.transform.position - aiCharacter.transform.position;
             targetDirection.y = 0;
             targetDirection.Normalize();
