@@ -28,6 +28,11 @@ namespace YT
         public void PlayRollSoundFX()
         {
             audioSource.PlayOneShot(WorldSoundFXManager.instance.rollSFX);
+        } 
+
+        public void PlayEnterWorldSoundFX()
+        {
+            audioSource.PlayOneShot(WorldSoundFXManager.instance.enterWorldSFX);
         }
 
         public void PlayWhooshSoundFX()

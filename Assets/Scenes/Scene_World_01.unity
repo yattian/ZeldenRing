@@ -170326,6 +170326,17 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4eaaa3032586832468e97a6452e498a4, type: 2}
+    - target: {fileID: 3385221500539884096, guid: 06db2d80c5833ef4999276814ed8b714,
+        type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3385221500539884096, guid: 06db2d80c5833ef4999276814ed8b714,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 423652811020969228, guid: ab8b02195ac2c1a41aec2b6e4ec7750c,
+        type: 3}
     - target: {fileID: 6288627987400800845, guid: 06db2d80c5833ef4999276814ed8b714,
         type: 3}
       propertyPath: m_LocalRotation.w

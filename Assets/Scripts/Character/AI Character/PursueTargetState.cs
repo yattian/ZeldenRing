@@ -22,6 +22,11 @@ namespace YT
             if (!aiCharacter.navMeshAgent.enabled)
                 aiCharacter.navMeshAgent.enabled = true;
 
+            // If our target goes outside of FOV, pivot to face them
+            if (aiCharacter.aiCharacterCombatManager.viewableAngle < aiCharacter.aiCharacterCombatManager.minimumFOV ||
+                aiCharacter.aiCharacterCombatManager.viewableAngle > aiCharacter.aiCharacterCombatManager.maxiumumFOV)
+                aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);
+
             aiCharacter.aiCharacterLocmotionManager.RotateTowardsAgent(aiCharacter);
 
             // If we are within combat range of a target, switch state to combat stance state

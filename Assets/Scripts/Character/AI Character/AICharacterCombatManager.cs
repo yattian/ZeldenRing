@@ -6,10 +6,14 @@ namespace YT
 {
     public class AICharacterCombatManager : CharacterCombatManager
     {
+        [Header("Target Information")]
+        public float viewableAngle;
+        public Vector3 targetsDirection;
+
         [Header("Detection")]
         [SerializeField] float detectionRadius = 15;
-        [SerializeField] float minimumDetectionAngle = -35;
-        [SerializeField] float maximumDetectionAngle = 35;
+        public float minimumFOV = -35;
+        public float maxiumumFOV = 35;
 
         public void FindATargetViaLineOFSight(AICharacterManager aiCharacter)
         {
@@ -36,9 +40,9 @@ namespace YT
                 {
                     // If a potential target is found, it has to be infront of us
                     Vector3 targetDirection = targetCharacter.transform.position - aiCharacter.transform.position;
-                    float viewableAngle = Vector3.Angle(targetDirection, aiCharacter.transform.forward);
+                    float angleOfPotentialtarget = Vector3.Angle(targetDirection, aiCharacter.transform.forward);
 
-                    if (viewableAngle > minimumDetectionAngle && viewableAngle < maximumDetectionAngle)
+                    if (angleOfPotentialtarget > minimumFOV && angleOfPotentialtarget < maxiumumFOV)
                     {
                         // Lastly check for environmental blocks
                         if (Physics.Linecast(
@@ -47,15 +51,60 @@ namespace YT
                             WorldUtilityManager.Instance.GetEnviroLayers()))
                         {
                             Debug.DrawLine(aiCharacter.characterCombatManager.lockOnTransform.position, targetCharacter.characterCombatManager.lockOnTransform.position);
-                            Debug.Log("Blocked");
                         }
                         else
                         {
+                            targetsDirection = targetCharacter.transform.position - transform.position;
+                            viewableAngle = WorldUtilityManager.Instance.GetAngleOfTarget(transform, targetsDirection);
                             aiCharacter.characterCombatManager.SetTarget(targetCharacter);
+                            PivotTowardsTarget(aiCharacter);
                         }
                     }
                 }
             }
+        }
+        public void PivotTowardsTarget(AICharacterManager aiCharacter)
+        {
+            // Play pivot animation depending on viewable angle of target
+            if (aiCharacter.isPerformingAction)
+                return;
+
+            if (viewableAngle >= 20 && viewableAngle <= 60)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_45", true);
+            } 
+            else if (viewableAngle <= -20 && viewableAngle >= -60)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_45", true);
+            }
+            else if (viewableAngle >= 61 && viewableAngle <= 110)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_90", true);
+            }
+            else if (viewableAngle <= -61 && viewableAngle >= -110)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_90", true);
+            }
+            else if (viewableAngle >= 111 && viewableAngle <= 145)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_135", true);
+            }
+            else if (viewableAngle <= -111 && viewableAngle >= -145)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_135", true);
+            }
+            else if (viewableAngle >= 146 && viewableAngle <= 180)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_180", true);
+            }
+            else if (viewableAngle <= -146 && viewableAngle >= -180)
+            {
+                aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_180", true);
+            }
+
+
+
+
         }
     }
 }

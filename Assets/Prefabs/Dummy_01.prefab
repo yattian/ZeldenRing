@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 832161169070880044}
   - component: {fileID: 6752238314826755986}
   - component: {fileID: 1914596024543705627}
-  - component: {fileID: 4658404877596354167}
+  - component: {fileID: -6635543032786712563}
   m_Layer: 6
   m_Name: Dummy_01
   m_TagString: Untagged
@@ -71,8 +71,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64977074471437024}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.95141417, z: -0, w: -0.30791432}
-  m_LocalPosition: {x: 11.91, y: -2.883889, z: 18.28}
+  m_LocalRotation: {x: -0, y: -0.238153, z: -0, w: -0.9712277}
+  m_LocalPosition: {x: 5.405268, y: -2.9054556, z: 15.037077}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -89,7 +89,7 @@ Transform:
   - {fileID: 6106986844700150981}
   - {fileID: 8419805565009312457}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 215.867, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 387.555, z: 0}
 --- !u!95 &4783882447867388947
 Animator:
   serializedVersion: 5
@@ -100,7 +100,7 @@ Animator:
   m_GameObject: {fileID: 64977074471437024}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 02a36d44959694d4aadf7eca0133556d, type: 3}
-  m_Controller: {fileID: 9100000, guid: 55dc3584d18163346bbaffa28c2a04be, type: 2}
+  m_Controller: {fileID: 9100000, guid: 001c20b20958b2049aceed4a44858ce9, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -380,9 +380,11 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   currentAttackType: 0
   lockOnTransform: {fileID: 4601475093873602019}
+  viewableAngle: 0
+  targetsDirection: {x: 0, y: 0, z: 0}
   detectionRadius: 15
-  minimumDetectionAngle: -35
-  maximumDetectionAngle: 35
+  minimumFOV: -35
+  maxiumumFOV: 35
 --- !u!114 &3468689659964655573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,7 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86ccf16097e90942bcec4da2e21f982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4658404877596354167
+--- !u!114 &-6635543032786712563
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -476,7 +478,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 64977074471437024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7d20e2126f5c8e4c87f847383ee8359, type: 3}
+  m_Script: {fileID: 11500000, guid: 05eaa94109e3b4b4aaf88861eb610cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lastDamageAnimationPlayed: 

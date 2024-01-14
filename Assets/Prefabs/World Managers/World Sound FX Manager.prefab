@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8822da6bd95f96847a880fe33e877ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enterWorldSFX: {fileID: 8300000, guid: eae4de5723e7a9047b3cfa03b676da99, type: 3}
   whooshSFX:
   - {fileID: 8300000, guid: c266e86e5ec11e344bf66dede26cbc46, type: 3}
   - {fileID: 8300000, guid: 90fb91c5d9f18df4183363d36d921429, type: 3}
@@ -51,3 +52,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7cbd6cd765888ff418d01d98bd1ce9c2, type: 3}
   - {fileID: 8300000, guid: 3df9bbbc130ccb344af5f3fc793a630f, type: 3}
   rollSFX: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
+  mainMenuUIClick: {fileID: 8300000, guid: b7c9a3ee56fbd3e4986aa8b3ec2740be, type: 3}
