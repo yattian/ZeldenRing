@@ -26,7 +26,7 @@ namespace YT
         protected bool hasRolledForComboChance = false; // If we already have rolled for the change during this state
 
         [Header("Engagement Distance")]
-        [SerializeField] protected float maximumEngagementDistance = 5; // The distance we have to be away from target before we enter pursue target state
+        [SerializeField] public float maximumEngagementDistance = 5; // The distance we have to be away from target before we enter pursue target state
 
         public override AIState Tick(AICharacterManager aiCharacter)
         {
@@ -43,7 +43,7 @@ namespace YT
                     aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);
             }
 
-            // Rotate to face our target
+            aiCharacter.aiCharacterCombatManager.RotateTowardsAgent(aiCharacter);
 
             // If target is no longer present, switch back to idle
             if (aiCharacter.aiCharacterCombatManager.currentTarget == null)
@@ -56,10 +56,9 @@ namespace YT
             }
             else
             {
-                // Check recovery timer
-                // Pass attack to attack state
+                aiCharacter.attack.currentAttack = chosenAttack;
                 // Roll for combo chance
-                // Switch state 
+                return SwitchState(aiCharacter, aiCharacter.attack);
             }
 
             // If we are outside combat engagement distance, switch to pursue target state
@@ -76,8 +75,8 @@ namespace YT
         protected virtual void GetNewAttack(AICharacterManager aiCharacter)
         {
             potentialAttacks = new List<AICharacterAttackAction>();
-            
-            foreach(var potentialAttack in potentialAttacks)
+
+            foreach(var potentialAttack in aiCharacterAttacks)
             {
                 // If we are too close for this attack, move to next attack
                 if (potentialAttack.minimumAttackAngle > aiCharacter.aiCharacterCombatManager.distanceFromTarget)
@@ -99,7 +98,6 @@ namespace YT
             }
 
             if (potentialAttacks.Count <= 0)
-                Debug.Log("Missing potential attacks");
                 return;
 
             var totalWeight = 0;
@@ -121,6 +119,7 @@ namespace YT
                     chosenAttack = attack;
                     previousAttack = chosenAttack;
                     hasAttack = true;
+                    return;
                 }
             }
 

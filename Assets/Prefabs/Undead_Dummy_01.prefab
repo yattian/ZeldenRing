@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 1914596024543705627}
   - component: {fileID: -6635543032786712563}
   m_Layer: 6
-  m_Name: Dummy_01
+  m_Name: Undead_Dummy_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,7 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
+  GlobalObjectIdHash: 2911088960
+  InScenePlacedSourceGlobalObjectIdHash: 0
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -364,6 +365,8 @@ MonoBehaviour:
   currentState: {fileID: 11400000, guid: 7193b971a2cdaf24e97b33ccfe991e09, type: 2}
   idle: {fileID: 11400000, guid: 7193b971a2cdaf24e97b33ccfe991e09, type: 2}
   pursueTarget: {fileID: 11400000, guid: 054672673e9ccb245972e67c4fd42575, type: 2}
+  combatStance: {fileID: 11400000, guid: 669dc154a836a1340a23e9a3bd87b39d, type: 2}
+  attack: {fileID: 11400000, guid: 39e3de18d4b0a2c4ba8dccdb67c06872, type: 2}
 --- !u!114 &3830115878918483208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,11 +383,14 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   currentAttackType: 0
   lockOnTransform: {fileID: 4601475093873602019}
+  actionRecoveryTimer: 0
+  distanceFromTarget: 0
   viewableAngle: 0
   targetsDirection: {x: 0, y: 0, z: 0}
   detectionRadius: 15
   minimumFOV: -35
   maxiumumFOV: 35
+  attackRotationSpeed: 25
 --- !u!114 &3468689659964655573
 MonoBehaviour:
   m_ObjectHideFlags: 0

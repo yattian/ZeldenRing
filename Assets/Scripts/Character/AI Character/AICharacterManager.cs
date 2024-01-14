@@ -20,8 +20,9 @@ namespace YT
         [Header("States")]
         public IdleState idle;
         public PursueTargetState pursueTarget;
-        // Combat stance
-        // Attack 
+        public CombatStanceState combatStance;
+        public AttackState attack;
+
 
         protected override void Awake()
         {
@@ -38,6 +39,13 @@ namespace YT
             pursueTarget = Instantiate(pursueTarget);
 
             currentState = idle;
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+
+            aiCharacterCombatManager.HandleActionRecovery(this);
         }
 
         protected override void FixedUpdate()

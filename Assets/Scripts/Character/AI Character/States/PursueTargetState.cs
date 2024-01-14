@@ -30,6 +30,8 @@ namespace YT
             aiCharacter.aiCharacterLocmotionManager.RotateTowardsAgent(aiCharacter);
 
             // If we are within combat range of a target, switch state to combat stance state
+            if (aiCharacter.aiCharacterCombatManager.distanceFromTarget <= aiCharacter.navMeshAgent.stoppingDistance)
+                return SwitchState(aiCharacter, aiCharacter.combatStance);
 
             // If the target is not reachable, and they are far away, return home
 
