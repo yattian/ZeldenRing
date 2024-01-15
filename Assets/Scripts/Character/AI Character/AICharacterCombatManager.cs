@@ -135,19 +135,15 @@ namespace YT
 
         public void RotateTowardsTargetWhilstAttacking(AICharacterManager aiCharacter)
         {
-            Debug.Log("1");
             if (currentTarget == null)
                 return;
 
-            Debug.Log("2");
             if (!aiCharacter.characterLocomotionManager.canRotate)
                 return;
 
-            Debug.Log("3");
             if (!aiCharacter.isPerformingAction)
                 return;
 
-            Debug.Log("4");
             Vector3 targetDirection = currentTarget.transform.position - aiCharacter.transform.position;
             targetDirection.y = 0;
             targetDirection.Normalize();
