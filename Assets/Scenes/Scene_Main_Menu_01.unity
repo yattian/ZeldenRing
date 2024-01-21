@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4866,25 +4866,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910482911}
   m_CullTransparentMesh: 1
---- !u!1 &1956804878 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1623006035164616997, guid: 50fbdafc05086ed489c3e6be2aff83c0,
-    type: 3}
-  m_PrefabInstance: {fileID: 1801783245720302755}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1956804882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956804878}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3791abdb9e023454e8145ab483b71ff0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  players: []
 --- !u!1 &2039749417
 GameObject:
   m_ObjectHideFlags: 0
@@ -5401,39 +5382,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8286162794190120483, guid: 50fbdafc05086ed489c3e6be2aff83c0,
         type: 3}
-      propertyPath: NetworkConfig.PlayerPrefab
-      value: 
-      objectReference: {fileID: 5971744198826873110, guid: ab8b02195ac2c1a41aec2b6e4ec7750c,
-        type: 3}
-    - target: {fileID: 8286162794190120483, guid: 50fbdafc05086ed489c3e6be2aff83c0,
-        type: 3}
-      propertyPath: NetworkConfig.Prefabs.NetworkPrefabsLists.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8286162794190120483, guid: 50fbdafc05086ed489c3e6be2aff83c0,
-        type: 3}
       propertyPath: NetworkConfig.Prefabs.NetworkPrefabsLists.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 314055ee88a27bc4d9e41f82dc077965,
+      objectReference: {fileID: 11400000, guid: badbe3bd02d65bd428b357696eb4f5f7,
         type: 2}
-    - target: {fileID: 8767239532973041675, guid: 50fbdafc05086ed489c3e6be2aff83c0,
-        type: 3}
-      propertyPath: ConnectionData.Address
-      value: 127.0.0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8767239532973041675, guid: 50fbdafc05086ed489c3e6be2aff83c0,
-        type: 3}
-      propertyPath: ConnectionData.ServerListenAddress
-      value: 127.0.0.1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1623006035164616997, guid: 50fbdafc05086ed489c3e6be2aff83c0,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1956804882}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50fbdafc05086ed489c3e6be2aff83c0, type: 3}
 --- !u!1001 &3292346147076325753
 PrefabInstance:

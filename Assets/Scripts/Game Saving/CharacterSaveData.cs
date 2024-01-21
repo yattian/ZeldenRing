@@ -32,5 +32,15 @@ namespace YT
         [Header("Stats")]
         public int vitality;
         public int endurance;
+
+        [Header("Bosses")]
+        public SerializableDictionary<int, bool> bossesAwakened; // int boss ID, bool status if awakened
+        public SerializableDictionary<int, bool> bossesDefeated; // int boss ID, bool status if awakened
+
+        public CharacterSaveData()
+        {
+            bossesAwakened = new SerializableDictionary<int, bool>();
+            bossesDefeated = new SerializableDictionary<int, bool>();
+        }
     }
 }

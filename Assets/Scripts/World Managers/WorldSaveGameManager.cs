@@ -354,7 +354,7 @@ namespace YT
         public void DisableButtonSelection()
         {
             buttonSelectionScript.enabled = false;
-            Debug.Log("Button selection script disabled");
+            //Debug.Log("Button selection script disabled");
         }
     }
 }
