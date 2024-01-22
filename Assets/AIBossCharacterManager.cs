@@ -16,6 +16,22 @@ namespace YT
 
         public int bossID = 0;
         [SerializeField] bool hasBeenDefeated = false;
+        [SerializeField] bool hasBeenAwakened = false;
+        [SerializeField] List<FogWallInteractable> fogWalls;
+
+        [Header("Debug")]
+        [SerializeField] bool wakeBossUp = false;
+
+        protected override void Update()
+        {
+            base.Update();
+
+            if (wakeBossUp)
+            {
+                wakeBossUp = false;
+                WakeBoss();
+            }
+        }
 
         public override void OnNetworkSpawn()
         {
@@ -34,12 +50,46 @@ namespace YT
                 else
                 {
                     hasBeenDefeated = WorldSaveGameManager.instance.currentCharacterData.bossesDefeated[bossID];
+                    hasBeenAwakened = WorldSaveGameManager.instance.currentCharacterData.bossesAwakened[bossID];
 
-                    if (hasBeenDefeated)
+
+                }
+
+                // Locate fog walls
+                StartCoroutine(GetFogWallsFromWorldObjectManager());
+
+                // If awake, enable
+                if (hasBeenAwakened)
+                {
+                    for (int i = 0; i < fogWalls.Count; i++)
                     {
-                        aiCharacterNetworkManager.isActive.Value = false;
+                        fogWalls[i].isActive.Value = true;
                     }
                 }
+
+                // If defeated, disable fog walls
+                if (hasBeenDefeated)
+                {
+                    for (int i = 0; i < fogWalls.Count; i++)
+                    {
+                        fogWalls[i].isActive.Value = false;
+                    }
+                    aiCharacterNetworkManager.isActive.Value = false;
+                }
+            }
+        }
+
+        private IEnumerator GetFogWallsFromWorldObjectManager()
+        {
+            while (WorldObjectManager.instance.fogWalls.Count == 0)
+                yield return new WaitForEndOfFrame();
+
+            fogWalls = new List<FogWallInteractable>();
+
+            foreach (var fogWall in WorldObjectManager.instance.fogWalls)
+            {
+                if (fogWall.fogWallID == bossID)
+                    fogWalls.Add(fogWall);
             }
         }
 
@@ -87,6 +137,26 @@ namespace YT
             // Award players with runes 
 
             // Disable character
+        }
+
+        public void WakeBoss()
+        {
+            hasBeenAwakened = true;
+            if (!WorldSaveGameManager.instance.currentCharacterData.bossesAwakened.ContainsKey(bossID))
+            {
+                 WorldSaveGameManager.instance.currentCharacterData.bossesAwakened.Add(bossID, true);
+            }
+            // Otherwise, load the data that already exists on this boss
+            else
+            {
+                WorldSaveGameManager.instance.currentCharacterData.bossesAwakened.Remove(bossID);
+                WorldSaveGameManager.instance.currentCharacterData.bossesAwakened.Add(bossID, true);
+            }
+
+            for (int i = 0; i < fogWalls.Count; i++)
+            {
+                fogWalls[i].isActive.Value = true;
+            }
         }
     }
 }
