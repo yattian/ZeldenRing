@@ -6484,6 +6484,21 @@ PrefabInstance:
       propertyPath: mainMenuUIClick
       value: 
       objectReference: {fileID: 8300000, guid: b7c9a3ee56fbd3e4986aa8b3ec2740be, type: 3}
+    - target: {fileID: 7304773008695634388, guid: 7f8f1001c254e574e90828994f608dce,
+        type: 3}
+      propertyPath: physicalDamageSFX.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7304773008695634388, guid: 7f8f1001c254e574e90828994f608dce,
+        type: 3}
+      propertyPath: physicalDamageSFX.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7cbd6cd765888ff418d01d98bd1ce9c2, type: 3}
+    - target: {fileID: 7304773008695634388, guid: 7f8f1001c254e574e90828994f608dce,
+        type: 3}
+      propertyPath: physicalDamageSFX.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3df9bbbc130ccb344af5f3fc793a630f, type: 3}
     - target: {fileID: 8591744008553030939, guid: 7f8f1001c254e574e90828994f608dce,
         type: 3}
       propertyPath: m_Name

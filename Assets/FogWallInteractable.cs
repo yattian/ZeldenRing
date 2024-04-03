@@ -30,7 +30,7 @@ namespace YT
             base.OnNetworkDespawn();
 
             isActive.OnValueChanged -= OnIsActiveChanged;
-            WorldObjectManager.instance.RemoveFogWallToList(this);
+            WorldObjectManager.instance.RemoveFogWallFromList(this);
         }
 
         private void OnIsActiveChanged(bool oldStatus, bool newStatus)

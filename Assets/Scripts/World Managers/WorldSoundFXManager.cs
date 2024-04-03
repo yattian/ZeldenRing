@@ -54,5 +54,21 @@ namespace YT
 
             return array[index];
         }
+
+        /*
+        public AudioClip ChooseRandomFootStepSoundBasedOnGround(GameObject steppedOnObject, CharacterManager character)
+        {
+            if (steppedOnObject.tag == "Untagged")
+            {
+                return ChooseRandomSFXFromArray(character.characterSoundFXManager.footStepsDirt);
+            }
+            else if (steppedOnObject.tag == "Stone")
+            {
+                return ChooseRandomSFXFromArray(character.characterSoundFXManager.footStepsDirt);
+            }
+
+            return null;
+        }
+        */
     }
 }

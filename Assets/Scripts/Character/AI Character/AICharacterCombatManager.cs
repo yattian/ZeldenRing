@@ -11,6 +11,9 @@ namespace YT
         [Header("Action Recovery")]
         public float actionRecoveryTimer = 0;
 
+        [Header("Pivot")]
+        public bool enablePivot = true;
+
         [Header("Target Information")]
         public float distanceFromTarget;
         public float viewableAngle;
@@ -32,7 +35,7 @@ namespace YT
             lockOnTransform = GetComponentInChildren<LockOnTransform>().transform;
         }
 
-        public void FindATargetViaLineOFSight(AICharacterManager aiCharacter)
+        public virtual void FindATargetViaLineOFSight(AICharacterManager aiCharacter)
         {
             if (currentTarget != null)
                 return;
@@ -74,14 +77,16 @@ namespace YT
                             targetsDirection = targetCharacter.transform.position - transform.position;
                             viewableAngle = WorldUtilityManager.Instance.GetAngleOfTarget(transform, targetsDirection);
                             aiCharacter.characterCombatManager.SetTarget(targetCharacter);
-                            PivotTowardsTarget(aiCharacter);
+
+                            if (enablePivot)
+                                PivotTowardsTarget(aiCharacter);
                         }
                     }
                 }
             }
         }
 
-        public void PivotTowardsTarget(AICharacterManager aiCharacter)
+        public virtual void PivotTowardsTarget(AICharacterManager aiCharacter)
         {
             // Play pivot animation depending on viewable angle of target
             if (aiCharacter.isPerformingAction)
@@ -103,15 +108,15 @@ namespace YT
             {
                 aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_90", true);
             }
-            else if (viewableAngle >= 111 && viewableAngle <= 145)
+            if (viewableAngle >= 110 && viewableAngle <= 145)
             {
                 aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_135", true);
             }
-            else if (viewableAngle <= -111 && viewableAngle >= -145)
+            else if (viewableAngle <= -110 && viewableAngle >= -145)
             {
                 aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_135", true);
             }
-            else if (viewableAngle >= 146 && viewableAngle <= 180)
+            if (viewableAngle >= 146 && viewableAngle <= 180)
             {
                 aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Right_180", true);
             }
@@ -119,10 +124,6 @@ namespace YT
             {
                 aiCharacter.characterAnimatorManager.PlayTargetActionAnimation("Turn_Left_180", true);
             }
-
-
-
-
         }
 
         public void RotateTowardsAgent(AICharacterManager aiCharacter)

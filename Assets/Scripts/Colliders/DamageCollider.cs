@@ -43,8 +43,6 @@ namespace YT
 
                 // Check if target is blocking
 
-                // Check if target is invulnerable
-
                 // Damage
                 DamageTarget(damageTarget);
             }

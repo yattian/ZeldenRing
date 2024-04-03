@@ -8,8 +8,8 @@ namespace YT
     public class NetworkObjectSpawner : MonoBehaviour
     {
         [Header("Object")]
-        [SerializeField] GameObject networkGameObject;
-        [SerializeField] GameObject instantiateGameObject;
+        [SerializeField] protected GameObject networkGameObject;
+        [SerializeField] protected GameObject instantiateGameObject;
 
         private void Awake()
         {
@@ -22,7 +22,7 @@ namespace YT
             gameObject.SetActive(false);
         }
 
-        public void AttemptToSpawnCharacter()
+        public virtual void AttemptToSpawnObject()
         {
             if (networkGameObject != null)
             {

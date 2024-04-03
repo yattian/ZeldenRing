@@ -47,7 +47,6 @@ GameObject:
   - component: {fileID: 7965854322634070112}
   - component: {fileID: 2321205315314145374}
   - component: {fileID: 2498108037604784540}
-  - component: {fileID: -5215597093061914178}
   - component: {fileID: 3561960784219758128}
   - component: {fileID: 3468689659964655573}
   - component: {fileID: -7262694780366559560}
@@ -56,6 +55,7 @@ GameObject:
   - component: {fileID: 6752238314826755986}
   - component: {fileID: 1914596024543705627}
   - component: {fileID: -6635543032786712563}
+  - component: {fileID: 3128952333938487703}
   m_Layer: 6
   m_Name: Undead_Dummy_01
   m_TagString: Untagged
@@ -71,7 +71,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 64977074471437024}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.238153, z: -0, w: -0.9712277}
+  m_LocalRotation: {x: -0, y: -0.2381517, z: 0, w: -0.971228}
   m_LocalPosition: {x: 5.405268, y: -2.9054556, z: 15.037077}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 2911088960
-  InScenePlacedSourceGlobalObjectIdHash: 0
+  InScenePlacedSourceGlobalObjectIdHash: 2911088960
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -293,6 +293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c6ec44ac1827f4fb248e71bd57bc1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive:
+    m_InternalValue: 1
   networkPosition:
     m_InternalValue: {x: 0, y: 0, z: 0}
   networkRotation:
@@ -309,6 +311,8 @@ MonoBehaviour:
   moveAmount:
     m_InternalValue: 0
   currentTargetNetworkObjectID:
+    m_InternalValue: 0
+  isInvulnerable:
     m_InternalValue: 0
   isLockedOn:
     m_InternalValue: 0
@@ -330,39 +334,6 @@ MonoBehaviour:
     m_InternalValue: 1
   endurance:
     m_InternalValue: 1
---- !u!114 &-5215597093061914178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 64977074471437024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d50794559524304f8820ec98de14434, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDead:
-    m_InternalValue: 0
-  characterController: {fileID: 0}
-  animator: {fileID: 0}
-  characterNetworkManager: {fileID: 0}
-  characterEffectsManager: {fileID: 0}
-  characterAnimatorManager: {fileID: 0}
-  characterCombatManager: {fileID: 0}
-  characterSoundFXManager: {fileID: 0}
-  characterLocomotionManager: {fileID: 0}
-  characterGroup: 1
-  isPerformingAction: 0
-  aiCharacterNetworkManager: {fileID: 0}
-  aiCharacterCombatManager: {fileID: 0}
-  aiCharacterLocmotionManager: {fileID: 0}
-  navMeshAgent: {fileID: 0}
-  currentState: {fileID: 11400000, guid: 7193b971a2cdaf24e97b33ccfe991e09, type: 2}
-  idle: {fileID: 11400000, guid: 7193b971a2cdaf24e97b33ccfe991e09, type: 2}
-  pursueTarget: {fileID: 11400000, guid: 054672673e9ccb245972e67c4fd42575, type: 2}
-  combatStance: {fileID: 11400000, guid: 669dc154a836a1340a23e9a3bd87b39d, type: 2}
-  attack: {fileID: 11400000, guid: 39e3de18d4b0a2c4ba8dccdb67c06872, type: 2}
 --- !u!114 &3561960784219758128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +351,7 @@ MonoBehaviour:
   currentAttackType: 0
   lockOnTransform: {fileID: 0}
   actionRecoveryTimer: 0
+  enablePivot: 1
   distanceFromTarget: 0
   viewableAngle: 0
   targetsDirection: {x: 0, y: 0, z: 0}
@@ -515,6 +487,39 @@ MonoBehaviour:
   backward_Medium_Damage: []
   left_Medium_Damage: []
   right_Medium_Damage: []
+--- !u!114 &3128952333938487703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64977074471437024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a870a36836cb59c4293df381b4210ea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDead:
+    m_InternalValue: 0
+  characterController: {fileID: 0}
+  animator: {fileID: 0}
+  characterNetworkManager: {fileID: 0}
+  characterEffectsManager: {fileID: 0}
+  characterAnimatorManager: {fileID: 0}
+  characterCombatManager: {fileID: 0}
+  characterSoundFXManager: {fileID: 0}
+  characterLocomotionManager: {fileID: 0}
+  characterGroup: 1
+  isPerformingAction: 0
+  aiCharacterNetworkManager: {fileID: 0}
+  aiCharacterCombatManager: {fileID: 0}
+  aiCharacterLocmotionManager: {fileID: 0}
+  navMeshAgent: {fileID: 0}
+  currentState: {fileID: 0}
+  idle: {fileID: 11400000, guid: 7193b971a2cdaf24e97b33ccfe991e09, type: 2}
+  pursueTarget: {fileID: 11400000, guid: 054672673e9ccb245972e67c4fd42575, type: 2}
+  combatStance: {fileID: 11400000, guid: 669dc154a836a1340a23e9a3bd87b39d, type: 2}
+  attack: {fileID: 11400000, guid: 39e3de18d4b0a2c4ba8dccdb67c06872, type: 2}
 --- !u!1 &137134094309035843
 GameObject:
   m_ObjectHideFlags: 0

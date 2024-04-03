@@ -15,9 +15,9 @@ namespace YT
 
         [Header("Attacks")]
         public List<AICharacterAttackAction> aiCharacterAttacks; // A list of all possible attacks this character can do
-        protected List<AICharacterAttackAction> potentialAttacks; // A list that is created during the state, all attacks possible in this situation (based on angle, distance etc)
-        private AICharacterAttackAction chosenAttack;
-        private AICharacterAttackAction previousAttack;
+        [SerializeField] protected List<AICharacterAttackAction> potentialAttacks; // A list that is created during the state, all attacks possible in this situation (based on angle, distance etc)
+        [SerializeField] private AICharacterAttackAction chosenAttack;
+        [SerializeField] private AICharacterAttackAction previousAttack;
         private bool hasAttack = false;
 
         [Header("Combo")]
@@ -36,13 +36,16 @@ namespace YT
             if (!aiCharacter.navMeshAgent.enabled)
                 aiCharacter.navMeshAgent.enabled = true;
 
-            // If you want AI character to face and turn towards its target when its outside it's FOV include this
-            if (!aiCharacter.aiCharacterNetworkManager.isMoving.Value)
+            if (aiCharacter.aiCharacterCombatManager.enablePivot)
             {
-                if (aiCharacter.aiCharacterCombatManager.viewableAngle < -30 || aiCharacter.aiCharacterCombatManager.viewableAngle > 30)
-                    aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);
+                // If you want AI character to face and turn towards its target when its outside it's FOV include this
+                if (!aiCharacter.aiCharacterNetworkManager.isMoving.Value)
+                {
+                    if (aiCharacter.aiCharacterCombatManager.viewableAngle < -30 || aiCharacter.aiCharacterCombatManager.viewableAngle > 30)
+                        aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);
+                }
             }
-
+            
             aiCharacter.aiCharacterCombatManager.RotateTowardsAgent(aiCharacter);
 
             // If target is no longer present, switch back to idle
@@ -76,7 +79,7 @@ namespace YT
         {
             potentialAttacks = new List<AICharacterAttackAction>();
 
-            foreach(var potentialAttack in aiCharacterAttacks)
+            foreach (var potentialAttack in aiCharacterAttacks)
             {
                 // If we are too close for this attack, move to next attack
                 if (potentialAttack.minimumAttackAngle > aiCharacter.aiCharacterCombatManager.distanceFromTarget)

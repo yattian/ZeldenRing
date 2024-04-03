@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using UnityEngine;
 
 namespace YT
@@ -43,17 +45,24 @@ namespace YT
 
         public override void ProcessEffect(CharacterManager character)
         {
+            if (character.characterNetworkManager.isInvulnerable.Value)
+                return;
+
             base.ProcessEffect(character);
 
             // If dead, no damage effects
             if (character.isDead.Value)
                 return;
 
-            // Check for vulnerability
+            // Discord help, delete later when fixed - FIXED IN EP 46
+            // https://discordapp.com/channels/388072935807778836/690242548211515459/1224308709619011654 
+            /*
+            if (characterCausingDamage != null)
+                if (!WorldUtilityManager.Instance.CanIDamageThisTarget(characterCausingDamage.characterGroup, character.characterGroup))
+                    return;
+            */
 
-            // Calculate damage
             CalculateDamage(character);
-
             // Check which direction damage came from
             PlayDirectionalBasedDamageAnimation(character);
 
@@ -112,9 +121,9 @@ namespace YT
         private void PlayDamageSFX(CharacterManager character)
         {
             AudioClip physicalDamageSFX = WorldSoundFXManager.instance.ChooseRandomSFXFromArray(WorldSoundFXManager.instance.physicalDamageSFX);
-
+            Debug.Log(physicalDamageSFX);
             character.characterSoundFXManager.PlaySoundFX(physicalDamageSFX);
-            character.characterSoundFXManager.PlayDamageGrunt();
+            character.characterSoundFXManager.PlayDamageGruntSoundFX();
             // If fire damage is greater than 0, play burn SFX
             // If lightning damage is greater than 0, play zap SFX etc
         }

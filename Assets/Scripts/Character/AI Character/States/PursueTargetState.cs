@@ -8,6 +8,7 @@ namespace YT
     [CreateAssetMenu(menuName = "A.I/States/Pursue Target")]
     public class PursueTargetState : AIState
     {
+
         public override AIState Tick(AICharacterManager aiCharacter)
         {
             // Check if we are performing an action (if so do nothing until action is complete)
@@ -23,9 +24,12 @@ namespace YT
                 aiCharacter.navMeshAgent.enabled = true;
 
             // If our target goes outside of FOV, pivot to face them
-            if (aiCharacter.aiCharacterCombatManager.viewableAngle < aiCharacter.aiCharacterCombatManager.minimumFOV ||
-                aiCharacter.aiCharacterCombatManager.viewableAngle > aiCharacter.aiCharacterCombatManager.maxiumumFOV)
-                aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);
+            if (aiCharacter.aiCharacterCombatManager.enablePivot)
+            {
+                if (aiCharacter.aiCharacterCombatManager.viewableAngle < aiCharacter.aiCharacterCombatManager.minimumFOV ||
+                    aiCharacter.aiCharacterCombatManager.viewableAngle > aiCharacter.aiCharacterCombatManager.maxiumumFOV)
+                    aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);
+            }
 
             aiCharacter.aiCharacterLocmotionManager.RotateTowardsAgent(aiCharacter);
 

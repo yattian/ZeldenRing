@@ -39,7 +39,7 @@ namespace YT
             if (NetworkManager.Singleton.IsServer)
             {
                 networkObjectSpawners.Add(networkObjectSpawner);
-                networkObjectSpawner.AttemptToSpawnCharacter();
+                networkObjectSpawner.AttemptToSpawnObject();
             }
         }
 
@@ -51,7 +51,7 @@ namespace YT
             }
         }
 
-        public void RemoveFogWallToList(FogWallInteractable fogWall)
+        public void RemoveFogWallFromList(FogWallInteractable fogWall)
         {
             if (fogWalls.Contains(fogWall))
             {
