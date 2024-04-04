@@ -9,6 +9,10 @@ namespace YT
     {
         public static WorldSoundFXManager instance;
 
+        [Header("Boss Track")]
+        [SerializeField] AudioSource bossIntroPlayer;
+        [SerializeField] AudioSource bossLoopPlayer;
+
         [Header("Background Music")]
         public AudioClip enterWorldSFX;
         //private AudioSource audioSource;
@@ -48,6 +52,19 @@ namespace YT
             DontDestroyOnLoad(gameObject);
         }
 
+        public void PlayBossTrack(AudioClip introClip, AudioClip loopTrack)
+        {
+            bossIntroPlayer.volume = 1;
+            bossIntroPlayer.clip = introClip;
+            bossIntroPlayer.loop = false;
+            bossIntroPlayer.Play();
+
+            bossLoopPlayer.volume = 1;
+            bossLoopPlayer.clip = loopTrack;
+            bossLoopPlayer.loop = true;
+            bossLoopPlayer.PlayDelayed(bossIntroPlayer.clip.length);
+        }
+
         public AudioClip ChooseRandomSFXFromArray(AudioClip[] array)
         {
             int index = Random.Range(0, array.Length);
@@ -70,5 +87,26 @@ namespace YT
             return null;
         }
         */
+
+        public void StopBossMusic()
+        {
+            StartCoroutine(FadeOutBossMusicThenStop());
+        }
+
+        private IEnumerator FadeOutBossMusicThenStop()
+        {
+            bossIntroPlayer.Stop();
+
+            while (bossLoopPlayer.volume > 0)
+            {
+                bossLoopPlayer.volume -= Time.deltaTime;
+                bossIntroPlayer.volume -= Time.deltaTime;
+
+                yield return null;
+            }
+
+            bossIntroPlayer.Stop();
+            bossLoopPlayer.Stop();
+        }
     }
 }

@@ -121,7 +121,7 @@ namespace YT
         private void PlayDamageSFX(CharacterManager character)
         {
             AudioClip physicalDamageSFX = WorldSoundFXManager.instance.ChooseRandomSFXFromArray(WorldSoundFXManager.instance.physicalDamageSFX);
-            Debug.Log(physicalDamageSFX);
+            // Debug.Log(physicalDamageSFX);
             character.characterSoundFXManager.PlaySoundFX(physicalDamageSFX);
             character.characterSoundFXManager.PlayDamageGruntSoundFX();
             // If fire damage is greater than 0, play burn SFX

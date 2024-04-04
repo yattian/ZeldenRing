@@ -9,7 +9,7 @@ namespace YT
     {
         [Header("Character")]
         [SerializeField] GameObject characterGameObject;
-        [SerializeField] GameObject instantiateGameObject;
+        [SerializeField] GameObject instantiatedGameObject;
 
         private void Awake()
         {
@@ -26,10 +26,11 @@ namespace YT
         {
             if (characterGameObject != null)
             {
-                instantiateGameObject = Instantiate(characterGameObject);
-                instantiateGameObject.transform.position = transform.position;
-                instantiateGameObject.transform.rotation = transform.rotation;
-                instantiateGameObject.GetComponent<NetworkObject>().Spawn();
+                instantiatedGameObject = Instantiate(characterGameObject);
+                instantiatedGameObject.transform.position = transform.position;
+                instantiatedGameObject.transform.rotation = transform.rotation;
+                instantiatedGameObject.GetComponent<NetworkObject>().Spawn();
+                WorldAIManager.instance.AddCharacterToSpawnedCharactersList(instantiatedGameObject.GetComponent<AICharacterManager>());
             }
         }
     }

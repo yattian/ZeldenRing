@@ -1472,7 +1472,7 @@ GameObject:
   - component: {fileID: 504634369256403598}
   - component: {fileID: 6463013816700074325}
   - component: {fileID: 7190680554134326376}
-  - component: {fileID: 7672902697544155026}
+  - component: {fileID: -5694492908561582786}
   - component: {fileID: 8346655148878220220}
   - component: {fileID: 2079625085993946649}
   - component: {fileID: 231473824612028244}
@@ -1485,7 +1485,6 @@ GameObject:
   - component: {fileID: 2786993317698805364}
   - component: {fileID: 3001276120804463474}
   - component: {fileID: 29228758623311728}
-  - component: {fileID: -8910755786559570650}
   m_Layer: 6
   m_Name: Durk_Dummy_01
   m_TagString: Untagged
@@ -1544,7 +1543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3531652191
+  GlobalObjectIdHash: 4206090949
   InScenePlacedSourceGlobalObjectIdHash: 4206090949
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -1553,7 +1552,7 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &7672902697544155026
+--- !u!114 &-5694492908561582786
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1562,7 +1561,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3674213674681036220}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8c6ec44ac1827f4fb248e71bd57bc1b, type: 3}
+  m_Script: {fileID: 11500000, guid: 26215fe369393464880f98293892897d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isActive:
@@ -1595,13 +1594,13 @@ MonoBehaviour:
   isChargingAttack:
     m_InternalValue: 0
   currentHealth:
-    m_InternalValue: 0
+    m_InternalValue: 650
   maxHealth:
-    m_InternalValue: 0
+    m_InternalValue: 650
   currentStamina:
-    m_InternalValue: 0
+    m_InternalValue: 500
   maxStamina:
-    m_InternalValue: 0
+    m_InternalValue: 500
   vitality:
     m_InternalValue: 1
   endurance:
@@ -1689,6 +1688,7 @@ MonoBehaviour:
   characterLocomotionManager: {fileID: 0}
   characterGroup: 1
   isPerformingAction: 0
+  characterName: Durk, Guardian of the Prototype Realms
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterCombatManager: {fileID: 0}
   aiCharacterLocmotionManager: {fileID: 0}
@@ -1699,10 +1699,22 @@ MonoBehaviour:
   combatStance: {fileID: 11400000, guid: 904f9affdcc54bc4a86bf354b14fc5a6, type: 2}
   attack: {fileID: 11400000, guid: 4c4bf9eedb4bb7445bcc3e3cd692de20, type: 2}
   bossID: 0
-  hasBeenDefeated: 0
-  hasBeenAwakened: 0
+  bossIntroClip: {fileID: 8300000, guid: b85023dc14074f64aa6b91ef7bd10af6, type: 3}
+  bossBattleLoopClip: {fileID: 8300000, guid: fb2ea8bd9963ee6409fdee80130221a6, type: 3}
+  bossFightIsActive:
+    m_InternalValue: 0
+  hasBeenAwakened:
+    m_InternalValue: 0
+  hasBeenDefeated:
+    m_InternalValue: 0
   fogWalls: []
-  wakeBossUp: 0
+  sleepAnimation: Sleep_01
+  awakenAnimation: Awaken_01
+  minimumHealthPercentageToShift: 50
+  phaseShiftAnimation: Phase_Change_01
+  phase02CombatStanceState: {fileID: 11400000, guid: 498174580b0ecc845b86f0a433de8d94,
+    type: 2}
+  sleepState: {fileID: 11400000, guid: 4bddb8bb163620341a21554cd3d634fd, type: 2}
   durkSoundFXManager: {fileID: 0}
   durkCombatManager: {fileID: 0}
 --- !u!114 &5349085695056991105
@@ -1965,21 +1977,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-8910755786559570650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3674213674681036220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d86ccf16097e90942bcec4da2e21f982, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageGrunts: []
-  attackGrunts: []
-  footSteps: []
 --- !u!1 &3715969123575955247
 GameObject:
   m_ObjectHideFlags: 0

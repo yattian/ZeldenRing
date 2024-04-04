@@ -7,6 +7,9 @@ namespace YT
 {
     public class AICharacterManager : CharacterManager
     {
+        [Header("Character Name")]
+        public string characterName = "";
+
         [HideInInspector] public AICharacterNetworkManager aiCharacterNetworkManager;
         [HideInInspector] public AICharacterCombatManager aiCharacterCombatManager;
         [HideInInspector] public AICharacterLocmotionManager aiCharacterLocmotionManager;
@@ -15,7 +18,7 @@ namespace YT
         public NavMeshAgent navMeshAgent;
 
         [Header("Current State")]
-        [SerializeField] AIState currentState;
+        [SerializeField] protected AIState currentState;
 
         [Header("States")]
         public IdleState idle;
@@ -33,12 +36,29 @@ namespace YT
             aiCharacterLocmotionManager = GetComponent<AICharacterLocmotionManager>();
 
             navMeshAgent = GetComponentInChildren<NavMeshAgent>();
+        }
 
-            // Use a copy of the scriptable objects, so the originals are not modified
-            idle = Instantiate(idle);
-            pursueTarget = Instantiate(pursueTarget);
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
 
-            currentState = idle;
+            if (IsOwner)
+            {
+                idle = Instantiate(idle);
+                pursueTarget = Instantiate(pursueTarget);
+                combatStance = Instantiate(combatStance);
+                attack = Instantiate(attack);
+                currentState = idle;
+            }
+
+            aiCharacterNetworkManager.currentHealth.OnValueChanged += aiCharacterNetworkManager.CheckHP;
+        }
+
+        public override void OnNetworkDespawn()
+        {
+            base.OnNetworkDespawn();
+
+            aiCharacterNetworkManager.currentHealth.OnValueChanged -= aiCharacterNetworkManager.CheckHP;
         }
 
         protected override void Update()

@@ -10,16 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1eaaca3d94be31b48b3a5bd42427a6b6, type: 3}
-  m_Name: Durk Combat Stance State
+  m_Name: Durk Phase 02 Combat Stance State
   m_EditorClassIdentifier: 
   aiCharacterAttacks:
-  - {fileID: 11400000, guid: 252b4af54f3f9804aacea06f2cd9ff14, type: 2}
-  - {fileID: 11400000, guid: 8d71a64ec6e976a48b0340ce19b2af75, type: 2}
-  - {fileID: 11400000, guid: 2a47d445b8bfc4c4397c114552297401, type: 2}
-  potentialAttacks:
-  - {fileID: 11400000, guid: 252b4af54f3f9804aacea06f2cd9ff14, type: 2}
-  - {fileID: 11400000, guid: 8d71a64ec6e976a48b0340ce19b2af75, type: 2}
-  - {fileID: 11400000, guid: 2a47d445b8bfc4c4397c114552297401, type: 2}
+  - {fileID: 11400000, guid: eb9414f265cc9384aa2a173b54ec1e9e, type: 2}
+  - {fileID: 11400000, guid: 9c5d5109c34a4724c92564b560e01f4c, type: 2}
+  - {fileID: 11400000, guid: 4c40cf9a005c1d54cb7e7ba125cfd2b7, type: 2}
+  potentialAttacks: []
   chosenAttack: {fileID: 0}
   previousAttack: {fileID: 0}
   canPerformCombo: 0

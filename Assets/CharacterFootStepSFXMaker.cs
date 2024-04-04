@@ -14,18 +14,11 @@ namespace YT
         private bool hasTouchedGround = false;
         private bool hasPlayedFootStepSFX = false;
         [SerializeField] float distanceToGround = 10f;
-        private static int defaultLayerIndex = 0;
-        LayerMask layerMask = (1 << defaultLayerIndex) | (1 << 1);
 
         private void Awake()
         {
             audioSource = GetComponent<AudioSource>();
             character = GetComponentInParent<CharacterManager>();
-        }
-
-        private void Start()
-        {
-            Debug.Log("Layer mask value: " + WorldUtilityManager.Instance.GetEnviroLayers());
         }
 
         private void FixedUpdate()
@@ -42,11 +35,9 @@ namespace YT
                 return;
 
             RaycastHit hit;
-            Vector3 direction = character.transform.TransformDirection(Vector3.down).normalized;
-            Debug.DrawRay(transform.position, direction * distanceToGround, Color.red, 2f);
-            if (Physics.Raycast(transform.position, character.transform.TransformDirection(Vector3.down), out hit, distanceToGround, layerMask))
+
+            if (Physics.Raycast(transform.position, character.transform.TransformDirection(Vector3.down), out hit, distanceToGround, WorldUtilityManager.Instance.GetEnviroLayers()))
             {
-                Debug.Log("hasTouchedGround");
                 hasTouchedGround = true;
 
                 if (!hasPlayedFootStepSFX)
@@ -54,7 +45,6 @@ namespace YT
             }
             else
             {
-                Debug.Log("hasNotTouchedGround");
                 hasTouchedGround = false;
                 hasPlayedFootStepSFX = false;
                 steppedOnObject = null;
@@ -62,7 +52,6 @@ namespace YT
 
             if (hasTouchedGround && !hasPlayedFootStepSFX)
             {
-                Debug.Log("Boom");
                 hasPlayedFootStepSFX = true;
                 PlayFootStepSoundFX();
             }
