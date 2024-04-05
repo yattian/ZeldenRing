@@ -114,9 +114,27 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Que RB",
+                    "type": "Button",
+                    "id": "c14ac73d-8c25-4fce-9324-cae88c6113e1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "RT",
                     "type": "Button",
                     "id": "886e82d6-3bb1-4882-a917-3e4cb94c0d41",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Que RT",
+                    "type": "Button",
+                    "id": "a7bf49ec-17f9-4daf-884f-38b1c7832956",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -316,6 +334,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9879d9bc-4ae1-4442-b76b-fe521848d481",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Que RB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a1da153e-6f7f-472d-96db-aee09aa60326",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Que RT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

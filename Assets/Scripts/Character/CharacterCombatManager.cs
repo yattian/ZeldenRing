@@ -10,7 +10,7 @@ namespace YT
         protected CharacterManager character;
 
         [Header("Last Attack Animation Performed")]
-        public string lastATtackAnimationPerformed;
+        public string lastAttackAnimationPerformed;
 
         [Header("Attack Target")]
         public CharacterManager currentTarget;

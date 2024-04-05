@@ -131,7 +131,7 @@ namespace YT
 
         private void HandleFreeFallMovement()
         {
-            if (!isGrounded)
+            if (!player.characterLocomotionManager.isGrounded)
             {
                 Vector3 freeFallDirection;
 
@@ -149,7 +149,7 @@ namespace YT
             if (player.isDead.Value)
                 return;
 
-            if (!canRotate)
+            if (!player.characterLocomotionManager.canRotate)
                 return;
 
             if (player.playerNetworkManager.isLockedOn.Value)
@@ -282,7 +282,7 @@ namespace YT
                 return;
 
             // If not grounded, no jump
-            if (!isGrounded)
+            if (!player.characterLocomotionManager.isGrounded)
                 return;
 
             // If two handing, play two handed jump animation, otherwise one handed (to do)

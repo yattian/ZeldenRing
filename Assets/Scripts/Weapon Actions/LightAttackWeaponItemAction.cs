@@ -66,7 +66,7 @@ namespace YT
                 playerPerformingAction.playerCombatManager.canComboWithMainHandWeapon = false;
 
                 // Perform attack based on the previous attack we just played
-                if (playerPerformingAction.characterCombatManager.lastATtackAnimationPerformed == light_Attack_01)
+                if (playerPerformingAction.characterCombatManager.lastAttackAnimationPerformed == light_Attack_01)
                 {
                     playerPerformingAction.playerAnimatorManager.PlayTargetAttackActionAnimation(AttackType.LightAttack02, light_Attack_02, true);
                 }

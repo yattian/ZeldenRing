@@ -45,6 +45,13 @@ namespace YT
         [SerializeField] bool RT_Input = false;
         [SerializeField] bool Hold_RT_Input = false;
 
+        [Header("Qued Inputs")]
+        [SerializeField] private bool input_Que_Is_Active = false;
+        [SerializeField] float default_Que_Input_Time = 0.35f;
+        [SerializeField] float que_Input_Timer = 0;
+        [SerializeField] bool que_RB_Input = false;
+        [SerializeField] bool que_RT_Input = false;
+
         [Header("Dialogue Input")]
         public bool isInDialogue = false;
 
@@ -153,6 +160,10 @@ namespace YT
                 playerControls.PlayerActions.Sprint.performed += i => sprint_Input = true;
                 // Release input, sets bool to false
                 playerControls.PlayerActions.Sprint.canceled += i => sprint_Input = false;
+
+                // Qued inputs
+                playerControls.PlayerActions.QueRB.performed += i => QueInput(ref que_RB_Input);
+                playerControls.PlayerActions.QueRT.performed += i => QueInput(ref que_RT_Input);
             }
 
             playerControls.Enable();
@@ -201,6 +212,7 @@ namespace YT
             HandleSwitchRightWeaponInput();
             HandleSwitchLeftWeaponInput();
             HandleInteractionInput();
+            HandleQuedInputs();
         }
 
         // Lock on
@@ -446,6 +458,58 @@ namespace YT
             {
                 interact_Input = false;
                 player.playerInteractorManager.PerformInteract();
+            }
+        }
+
+        private void QueInput(ref bool quedInput) // Passing a reference means we pass a specific bool, and not that value of that bool
+        {
+            // Reset all qued inputs so only one can que at a time
+            que_RB_Input = false;
+            que_RT_Input = false;
+            //que_LB_Input = false;
+            //que_LT_Input = false;
+
+            // Check for UI window being open, if it's open return
+
+            if (player.isPerformingAction || player.playerNetworkManager.isJumping.Value)
+            {
+                quedInput = true;
+                que_Input_Timer = default_Que_Input_Time;
+                input_Que_Is_Active = true;
+            }
+        } 
+
+        private void ProcessQuedInput()
+        {
+            if (player.isDead.Value)
+                return;
+
+            if (que_RB_Input)
+                RB_Input = true;
+
+            if (que_RT_Input)
+                RT_Input = true;
+        }
+
+        private void HandleQuedInputs()
+        {
+            if (input_Que_Is_Active)
+            {
+                // While the timer is above 0, keep attempting to press the input
+                if (que_Input_Timer > 0)
+                {
+                    que_Input_Timer -= Time.deltaTime;
+                    ProcessQuedInput();
+                }
+                else
+                {
+                    // Reset all qued inputs
+                    que_RB_Input = false;
+                    que_RT_Input = false;
+
+                    input_Que_Is_Active = false;
+                    que_Input_Timer = 0;
+                }
             }
         }
     }

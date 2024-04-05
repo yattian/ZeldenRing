@@ -13,7 +13,7 @@ namespace YT
         
         // Tweak Camera Performance
         [Header("Camera Settings")]
-        private float cameraSmoothSpeed = 1; // Bigger the number, longer for camera to reach its position
+        [SerializeField] private float cameraSmoothSpeed = 0.2f; // Bigger the number, longer for camera to reach its position
         [SerializeField] float leftAndRightRotationSpeed = 220;
         [SerializeField] float upAndDownRotationSpeed = 220;
         [SerializeField] float minimumPivot = -30; // Lowest angle to look down
@@ -75,7 +75,7 @@ namespace YT
 
         private void HandleFollowTarget()
         {
-            Vector3 targetCameraPosition = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraVelocity, cameraSmoothSpeed * Time.deltaTime);
+            Vector3 targetCameraPosition = Vector3.SmoothDamp(transform.position, player.transform.position, ref cameraVelocity, cameraSmoothSpeed);
             transform.position = targetCameraPosition;
         }
 

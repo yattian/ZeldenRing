@@ -64,7 +64,7 @@ namespace YT {
 
         protected void HandleGroundCheck()
         {
-            character.characterLocomotionManager.isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRadius, groundLayer);
+            isGrounded = Physics.CheckSphere(character.transform.position, groundCheckSphereRadius, groundLayer);
         }
 
         // Draws our ground sphere
