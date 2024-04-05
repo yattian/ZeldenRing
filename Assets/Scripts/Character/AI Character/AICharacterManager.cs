@@ -12,7 +12,7 @@ namespace YT
 
         [HideInInspector] public AICharacterNetworkManager aiCharacterNetworkManager;
         [HideInInspector] public AICharacterCombatManager aiCharacterCombatManager;
-        [HideInInspector] public AICharacterLocmotionManager aiCharacterLocmotionManager;
+        [HideInInspector] public AICharacterLocmotionManager aiCharacterLocomotionManager;
 
         [Header("Navmesh Agent")]
         public NavMeshAgent navMeshAgent;
@@ -33,7 +33,7 @@ namespace YT
 
             aiCharacterNetworkManager = GetComponent<AICharacterNetworkManager>();
             aiCharacterCombatManager = GetComponent<AICharacterCombatManager>();
-            aiCharacterLocmotionManager = GetComponent<AICharacterLocmotionManager>();
+            aiCharacterLocomotionManager = GetComponent<AICharacterLocmotionManager>();
 
             navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         }
@@ -59,6 +59,22 @@ namespace YT
             base.OnNetworkDespawn();
 
             aiCharacterNetworkManager.currentHealth.OnValueChanged -= aiCharacterNetworkManager.CheckHP;
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+
+            if (characterUIManager.hasFloatingHPBar)
+                characterNetworkManager.currentHealth.OnValueChanged += characterUIManager.OnHPChanged;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            if (characterUIManager.hasFloatingHPBar)
+                characterNetworkManager.currentHealth.OnValueChanged -= characterUIManager.OnHPChanged;
         }
 
         protected override void Update()

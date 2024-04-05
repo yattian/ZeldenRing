@@ -31,7 +31,7 @@ namespace YT
                     aiCharacter.aiCharacterCombatManager.PivotTowardsTarget(aiCharacter);
             }
 
-            aiCharacter.aiCharacterLocmotionManager.RotateTowardsAgent(aiCharacter);
+            aiCharacter.aiCharacterLocomotionManager.RotateTowardsAgent(aiCharacter);
 
             // If we are within combat range of a target, switch state to combat stance state
             if (aiCharacter.aiCharacterCombatManager.distanceFromTarget <= aiCharacter.navMeshAgent.stoppingDistance)

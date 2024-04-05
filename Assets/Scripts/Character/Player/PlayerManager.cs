@@ -65,6 +65,16 @@ namespace YT
             PlayerCamera.instance.HandleAllCameraActions();
         }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+        }
+
         public override void OnNetworkSpawn()
         {
             base.OnNetworkSpawn();
@@ -87,6 +97,11 @@ namespace YT
                 playerNetworkManager.currentStamina.OnValueChanged += PlayerUIManager.instance.playerUIHudManager.SetNewStaminaValue;
                 playerNetworkManager.currentStamina.OnValueChanged += playerStatsManager.ResetStaminaRegenTimer;
             }
+
+            // Only update floating HP bar if this character is not the local players character
+            // Don't want to see your own floating HP bar lol
+            if (!IsOwner)
+                characterNetworkManager.currentHealth.OnValueChanged += characterUIManager.OnHPChanged;
 
             // Stats
             playerNetworkManager.currentHealth.OnValueChanged += playerNetworkManager.CheckHP;
@@ -129,6 +144,9 @@ namespace YT
                 playerNetworkManager.currentStamina.OnValueChanged -= PlayerUIManager.instance.playerUIHudManager.SetNewStaminaValue;
                 playerNetworkManager.currentStamina.OnValueChanged -= playerStatsManager.ResetStaminaRegenTimer;
             }
+
+            if (!IsOwner)
+                characterNetworkManager.currentHealth.OnValueChanged -= characterUIManager.OnHPChanged;
 
             // Stats
             playerNetworkManager.currentHealth.OnValueChanged -= playerNetworkManager.CheckHP;

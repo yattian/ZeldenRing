@@ -7,8 +7,8 @@ namespace YT
 {
     public class UI_StatBar : MonoBehaviour
     {
-        private Slider slider;
-        private RectTransform rectTransform;
+        protected Slider slider;
+        protected RectTransform rectTransform;
 
         // Variable to scale bar size depending on stat (Higher stat = longer bar across screen)
         [Header("Bar Options")]
@@ -21,6 +21,11 @@ namespace YT
         {
             slider = GetComponent<Slider>();
             rectTransform = GetComponent<RectTransform>();
+        }
+
+        protected virtual void Start()
+        {
+
         }
 
         public virtual void SetStat(int newValue)
