@@ -89,9 +89,13 @@ namespace YT
         
         private void HandleGroundedMovement()
         {
-            GetMovementValues();
 
-            if (!canMove)
+            if (player.characterLocomotionManager.canMove || player.playerLocomotionManager.canRotate)
+            {
+                GetMovementValues();
+            }
+
+            if (!player.characterLocomotionManager.canMove)
                 return;
 
             // Our movement direction is based on camera perspective and inputs

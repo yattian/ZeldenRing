@@ -21,6 +21,10 @@ namespace YT
         [Header("Lock On Transform")]
         public Transform lockOnTransform;
 
+        [Header("Attack Flags")]
+        public bool canPerformRollingAttack = false;
+        public bool canPerformBackstepAttack = false;
+
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();
@@ -53,6 +57,36 @@ namespace YT
         {
             if (character.IsOwner)
                 character.characterNetworkManager.isInvulnerable.Value = false;
+        }
+
+        public void EnableCanDoRollingAttack()
+        {
+            canPerformRollingAttack = true;
+        }
+
+        public void DisableCanDoRollingAttack()
+        {
+            canPerformRollingAttack = false;
+        }
+
+        public void EnableCanDoBackstepAttack()
+        {
+            canPerformBackstepAttack = true;
+        }
+
+        public void DisableCanDoBackstepAttack()
+        {
+            canPerformBackstepAttack = false;
+        }
+
+        public virtual void EnableCanDoCombo()
+        {
+
+        }
+
+        public virtual void DisableCanDoCombo()
+        {
+
         }
     }
 }

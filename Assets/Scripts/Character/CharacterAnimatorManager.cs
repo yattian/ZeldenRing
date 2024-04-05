@@ -180,15 +180,5 @@ namespace YT
             // Tell server we played animation, and to play animation for all
             character.characterNetworkManager.NotifyTheServerOfAttackActionAnimationServerRpc(NetworkManager.Singleton.LocalClientId, targetAnimation, applyRootMotion);
         }
-
-        public virtual void EnableCanDoCombo()
-        {
-
-        }
-
-        public virtual void DisableCanDoCombo()
-        {
-
-        }
     }
 }
