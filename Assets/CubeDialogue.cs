@@ -9,7 +9,7 @@ namespace YT
     {
         [SerializeField] private CubeDialogueData cubeDialogueData; // Reference to CubeDialogueData for this cube
 
-        public void Interact()
+        public void Old_Interact()
         {
             if (cubeDialogueData != null)
             {

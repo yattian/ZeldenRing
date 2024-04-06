@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This is attempt 1
+// PlayerInteractionManager is attempt 2
+
 namespace YT
 {
     interface IInteractable
     {
-        public void Interact();
+        public void Old_Interact();
     }
 
     public class PlayerInteractorManager : CharacterInteractManager
@@ -50,7 +53,7 @@ namespace YT
                 {
                     if (!hasInteracted && hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj))
                     {
-                        interactObj.Interact();
+                        interactObj.Old_Interact();
                         hasInteracted = true; // Set the flag to indicate interaction
                     }
                 }

@@ -248,7 +248,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8081350555120700669}
-  - component: {fileID: 1635058039987700708}
+  - component: {fileID: 7015691632564519156}
+  - component: {fileID: 2606813096419226838}
   m_Layer: 6
   m_Name: Md_Char_Low_Poly_Giant_Wild_v1
   m_TagString: Untagged
@@ -266,13 +267,21 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.79, y: 1.79, z: 1.79}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3528339202325666464}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!137 &1635058039987700708
-SkinnedMeshRenderer:
+--- !u!33 &7015691632564519156
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281867271806282303}
+  m_Mesh: {fileID: 4300000, guid: a50cd06a0668d1a418d586a2944e3ed5, type: 3}
+--- !u!23 &2606813096419226838
+MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -286,12 +295,12 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 3
+  m_RayTracingMode: 2
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 812036f620754c34aa91753182721f3e, type: 2}
+  - {fileID: 2100000, guid: caf01dd5152f3934d8079e6160aa3b1e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -312,66 +321,7 @@ SkinnedMeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  serializedVersion: 2
-  m_Quality: 0
-  m_UpdateWhenOffscreen: 0
-  m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: -4972423239971365318, guid: d62a894ea4525b241908a369f8e027b9, type: 3}
-  m_Bones:
-  - {fileID: 3002655168834275053}
-  - {fileID: 1722379243241200128}
-  - {fileID: 6758416217093431226}
-  - {fileID: 2357519137807138288}
-  - {fileID: 6624402395820752454}
-  - {fileID: 2380798114752015057}
-  - {fileID: 4102107674198943138}
-  - {fileID: 4487540762788461900}
-  - {fileID: 4673605082367472103}
-  - {fileID: 5772247518475730461}
-  - {fileID: 2750150272495142562}
-  - {fileID: 7078742224261819426}
-  - {fileID: 4264527905007911180}
-  - {fileID: 356850221722805778}
-  - {fileID: 4611730584343897667}
-  - {fileID: 6855827827747501829}
-  - {fileID: 3444092967867451305}
-  - {fileID: 2203658963957247577}
-  - {fileID: 6869778510652803302}
-  - {fileID: 3201044507713184693}
-  - {fileID: 1515595947326341447}
-  - {fileID: 4139532957134459902}
-  - {fileID: 9205280707769859609}
-  - {fileID: 107222281453272136}
-  - {fileID: 2734215044019671177}
-  - {fileID: 3160612590859328616}
-  - {fileID: 4593307796630408266}
-  - {fileID: 5852565502592708988}
-  - {fileID: 9134514136973476220}
-  - {fileID: 1888124097458435017}
-  - {fileID: 4994125138801637209}
-  - {fileID: 5721151932755928966}
-  - {fileID: 8431318869542047585}
-  - {fileID: 7987130801197110290}
-  - {fileID: 7198861206045855297}
-  - {fileID: 2034254594627564723}
-  - {fileID: 717009102951979490}
-  - {fileID: 8485299796169443036}
-  - {fileID: 2558301048562158377}
-  - {fileID: 2352431954964712356}
-  - {fileID: 9242005341930957}
-  - {fileID: 4275024332617009871}
-  - {fileID: 832683950336586430}
-  - {fileID: 16705255392609962}
-  - {fileID: 1786249278440971991}
-  - {fileID: 8809085728568905508}
-  - {fileID: 6302326882534488698}
-  - {fileID: 2139642919855744684}
-  m_BlendShapeWeights: []
-  m_RootBone: {fileID: 3002655168834275053}
-  m_AABB:
-    m_Center: {x: 0.12283623, y: -0.047492474, z: 0.0009813309}
-    m_Extent: {x: 1.8548499, y: 0.5493171, z: 2.0730793}
-  m_DirtyAABB: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1295257841118914269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,7 +1437,7 @@ GameObject:
   - component: {fileID: 3001276120804463474}
   - component: {fileID: 29228758623311728}
   m_Layer: 6
-  m_Name: Durk_Dummy_01
+  m_Name: Durk_Dummy_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1545,7 +1495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3531652191
+  GlobalObjectIdHash: 1360396223
   InScenePlacedSourceGlobalObjectIdHash: 4206090949
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1

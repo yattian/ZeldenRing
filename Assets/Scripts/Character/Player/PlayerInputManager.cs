@@ -11,37 +11,37 @@ namespace YT
 
         public static PlayerInputManager instance;
         public PlayerManager player;
-        PlayerControls playerControls;
+        private PlayerControls playerControls;
 
-        [Header("Camera Movement Input")]
+        [Header("Camera Movement Inputs")]
         [SerializeField] Vector2 camera_Input;
         public float cameraHorizontal_Input;
         public float cameraVertical_Input;
 
-        [Header("Lock on Input")]
+        [Header("Lock on Inputs")]
         [SerializeField] bool lockOn_Input;
         [SerializeField] bool lockOn_Left_Input;
         [SerializeField] bool lockOn_Right_Input;
         private Coroutine lockOnCoroutine;
 
-        [Header("Player Movement Input")]
+        [Header("Player Movement Inputs")]
         [SerializeField] Vector2 movement_Input;
         public float horizontal_Input;
         public float vertical_Input;
         public float moveAmount;
 
-        [Header("Player Action Input")]
+        [Header("Player Action Inputs")]
         [SerializeField] bool dodge_Input = false;
         [SerializeField] bool sprint_Input = false;
         [SerializeField] bool jump_Input = false;
         [SerializeField] bool switch_Right_Weapon_Input = false;
         [SerializeField] bool switch_Left_Weapon_Input = false;
-        [SerializeField] bool interact_Input = false;
+        [SerializeField] bool interaction_Input = false;
 
-        [Header("Bumper Input")]
+        [Header("Bumper Inputs")]
         [SerializeField] bool RB_Input = false;
 
-        [Header("Trigger Input")]
+        [Header("Trigger Inputs")]
         [SerializeField] bool RT_Input = false;
         [SerializeField] bool Hold_RT_Input = false;
 
@@ -52,7 +52,7 @@ namespace YT
         [SerializeField] bool que_RB_Input = false;
         [SerializeField] bool que_RT_Input = false;
 
-        [Header("Dialogue Input")]
+        [Header("Dialogue Inputs")]
         public bool isInDialogue = false;
 
         private void Awake()
@@ -141,7 +141,7 @@ namespace YT
                 };
                 playerControls.PlayerActions.SwitchRightWeapon.performed += i => switch_Right_Weapon_Input = true;
                 playerControls.PlayerActions.SwitchLeftWeapon.performed += i => switch_Left_Weapon_Input = true;
-                playerControls.PlayerActions.Interact.performed += i => interact_Input = true;
+                playerControls.PlayerActions.Interact.performed += i => interaction_Input = true;
 
                 // Bumpers
                 playerControls.PlayerActions.RB.performed += i => RB_Input = true;
@@ -211,8 +211,8 @@ namespace YT
             HandleChargeRTInput();
             HandleSwitchRightWeaponInput();
             HandleSwitchLeftWeaponInput();
-            HandleInteractionInput();
             HandleQuedInputs();
+            HandleInteractionInput();
         }
 
         // Lock on
@@ -454,10 +454,15 @@ namespace YT
 
         private void HandleInteractionInput()
         {
-            if (interact_Input)
+            if (interaction_Input)
             {
-                interact_Input = false;
-                player.playerInteractorManager.PerformInteract();
+                interaction_Input = false;
+
+                // New interaction manager
+                player.playerInteractionManager.Interact();
+
+                // Old
+                //player.playerInteractorManager.PerformInteract();
             }
         }
 

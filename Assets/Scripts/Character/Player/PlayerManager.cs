@@ -21,6 +21,7 @@ namespace YT
         [HideInInspector] public PlayerEquipmentManager playerEquipmentManager;
         [HideInInspector] public PlayerCombatManager playerCombatManager;
         [HideInInspector] public PlayerInteractorManager playerInteractorManager;
+        [HideInInspector] public PlayerInteractionManager playerInteractionManager;
 
         private bool first = true;
 
@@ -38,6 +39,7 @@ namespace YT
             playerEquipmentManager = GetComponent<PlayerEquipmentManager>();
             playerCombatManager = GetComponent<PlayerCombatManager>();
             playerInteractorManager = GetComponent<PlayerInteractorManager>();
+            playerInteractionManager = GetComponent<PlayerInteractionManager>();
         }
 
         protected override void Update()
