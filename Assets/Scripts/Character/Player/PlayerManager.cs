@@ -23,7 +23,7 @@ namespace YT
         [HideInInspector] public PlayerInteractorManager playerInteractorManager;
         [HideInInspector] public PlayerInteractionManager playerInteractionManager;
 
-        private bool first = true;
+        //private bool first = true;
 
         protected override void Awake()
         {
@@ -216,6 +216,8 @@ namespace YT
 
         public void SaveGameDataToCurrentCharacterData(ref CharacterSaveData currentCharacterData)
         {
+            currentCharacterData.sceneIndex = SceneManager.GetActiveScene().buildIndex;
+            /*
             if (first)
             {
                 currentCharacterData.sceneIndex = 1;
@@ -225,7 +227,8 @@ namespace YT
             {
                 currentCharacterData.sceneIndex = SceneManager.GetActiveScene().buildIndex;
             }
-            
+            */
+
             //Debug.Log("Saving game to " + currentCharacterData.sceneIndex);
             currentCharacterData.characterName = playerNetworkManager.characterName.Value.ToString();
             currentCharacterData.xPosition = transform.position.x;

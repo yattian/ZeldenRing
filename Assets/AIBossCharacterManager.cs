@@ -98,7 +98,7 @@ namespace YT
 
             if (!hasBeenAwakened.Value)
             {
-                characterAnimatorManager.PlayTargetActionAnimation(sleepAnimation, true);
+                animator.Play(sleepAnimation);
             }
         }
 
@@ -207,11 +207,11 @@ namespace YT
         }
 
         private void OnBossFightIsActiveChanged(bool oldStatus, bool newStatus)
-        {
-            WorldSoundFXManager.instance.PlayBossTrack(bossIntroClip, bossBattleLoopClip);
-
+        { 
             if (bossFightIsActive.Value)
             {
+                WorldSoundFXManager.instance.PlayBossTrack(bossIntroClip, bossBattleLoopClip);
+
                 GameObject bossHealthBar = 
                     Instantiate(PlayerUIManager.instance.playerUIHudManager.bossHealthBarObject, PlayerUIManager.instance.playerUIHudManager.bossHealthBarParent);
 

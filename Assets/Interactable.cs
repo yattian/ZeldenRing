@@ -5,7 +5,7 @@ using Unity.Netcode;
 
 namespace YT
 {
-    public class Interactable : MonoBehaviour
+    public class Interactable : NetworkBehaviour
     {
         public string interactableText; // Text prompt when entering the interactable (pick up item, pull lever etc)
         [SerializeField] protected Collider interactableCollider; // Collider that checks for player interaction

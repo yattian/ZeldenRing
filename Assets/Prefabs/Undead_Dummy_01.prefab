@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1763059822
+  GlobalObjectIdHash: 77142920
   InScenePlacedSourceGlobalObjectIdHash: 2911088960
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
@@ -520,7 +520,7 @@ MonoBehaviour:
   characterName: 
   aiCharacterNetworkManager: {fileID: 0}
   aiCharacterCombatManager: {fileID: 0}
-  aiCharacterLocmotionManager: {fileID: 0}
+  aiCharacterLocomotionManager: {fileID: 0}
   navMeshAgent: {fileID: 0}
   currentState: {fileID: 0}
   idle: {fileID: 11400000, guid: 7193b971a2cdaf24e97b33ccfe991e09, type: 2}
@@ -582,7 +582,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7695515630662332821}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Ankle_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -890,7 +890,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13
+  m_Radius: 0.22
   m_Height: 0.33
   m_Direction: 2
   m_Center: {x: 0, y: 0.02, z: 0}
@@ -1531,7 +1531,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5198574257174559556}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Ankle_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2916,7 +2916,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5912549913828886911}
-  m_Layer: 6
+  - component: {fileID: 4243092790977940047}
+  m_Layer: 7
   m_Name: Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2941,6 +2942,29 @@ Transform:
   - {fileID: 1965565822450713847}
   m_Father: {fileID: 4057530043478132531}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4243092790977940047
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5369437628392506137}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5615831308552391826
 GameObject:
   m_ObjectHideFlags: 0
@@ -3130,7 +3154,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.17
+  m_Radius: 0.23
   m_Height: 0.45
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
@@ -4051,10 +4075,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.14
-  m_Height: 0.4
+  m_Radius: 0.22
+  m_Height: 0.52
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0.17, y: 0, z: 0}
 --- !u!1 &8793566301233897727
 GameObject:
   m_ObjectHideFlags: 0

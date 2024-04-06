@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
+using System.IO;
 
 namespace YT
 {
@@ -252,8 +254,8 @@ namespace YT
             player.playerNetworkManager.vitality.Value = 15;
             player.playerNetworkManager.endurance.Value = 10;
             SaveGame();
-            StartCoroutine(LoadWorldScene());
-            DisableButtonSelection();
+            LoadWorldScene(worldSceneIndex);
+            //DisableButtonSelection();
         }
 
         public void LoadGame()
@@ -267,8 +269,8 @@ namespace YT
             saveFileDataWriter.saveFileName = saveFileName;
             currentCharacterData = saveFileDataWriter.LoadSaveFile();
 
-            StartCoroutine(LoadWorldScene());
-            DisableButtonSelection();
+            LoadWorldScene(worldSceneIndex);
+            //DisableButtonSelection();
         }
 
         public void SaveGame()
@@ -334,16 +336,17 @@ namespace YT
             characterSlot10 = saveFileDataWriter.LoadSaveFile();
         }
 
-        public IEnumerator LoadWorldScene()
+        public void LoadWorldScene(int buildIndex)
         {
+            string worldScene = SceneUtility.GetScenePathByBuildIndex(buildIndex);
+            NetworkManager.Singleton.SceneManager.LoadScene(worldScene, LoadSceneMode.Single);
             //  IF YOU JUST WANT 1 WORLD SCENE USE THIS
             //AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
             //Debug.Log("Loading game from build index " + currentCharacterData.sceneIndex);
             //  IF YOU WANT TO USE DIFFERENT SCENES FOR LEVELS IN YOUR PROJECT USE THIS
-            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(currentCharacterData.sceneIndex);
+            //AsyncOperation loadOperation = SceneManager.LoadSceneAsync(currentCharacterData.sceneIndex);
             
             player.LoadGameDataFromCurrentCharacterData(ref currentCharacterData);
-            yield return null;
         }
 
         public int GetWorldSceneIndex()
@@ -351,10 +354,12 @@ namespace YT
             return worldSceneIndex;
         }
 
+        /*
         public void DisableButtonSelection()
         {
             buttonSelectionScript.enabled = false;
             //Debug.Log("Button selection script disabled");
         }
+        */
     }
 }

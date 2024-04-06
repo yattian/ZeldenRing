@@ -36,6 +36,14 @@ namespace YT
             aiCharacterLocomotionManager = GetComponent<AICharacterLocmotionManager>();
 
             navMeshAgent = GetComponentInChildren<NavMeshAgent>();
+            navMeshAgent.enabled = false;
+
+            Invoke("EnableNavMeshAgent", 0.025f);
+        }
+
+        private void EnableNavMeshAgent()
+        {
+            navMeshAgent.enabled = true;
         }
 
         public override void OnNetworkSpawn()
