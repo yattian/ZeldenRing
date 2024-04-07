@@ -33,12 +33,16 @@ namespace YT
         public int vitality;
         public int endurance;
 
+        [Header("Sites Of Grace")]
+        public SerializableDictionary<int, bool> sitesOfGrace; // int is I.D, bool is activation status
+
         [Header("Bosses")]
         public SerializableDictionary<int, bool> bossesAwakened; // int boss ID, bool status if awakened
         public SerializableDictionary<int, bool> bossesDefeated; // int boss ID, bool status if awakened
 
         public CharacterSaveData()
         {
+            sitesOfGrace = new SerializableDictionary<int, bool>();
             bossesAwakened = new SerializableDictionary<int, bool>();
             bossesDefeated = new SerializableDictionary<int, bool>();
         }

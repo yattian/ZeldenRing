@@ -5391,6 +5391,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: badbe3bd02d65bd428b357696eb4f5f7,
         type: 2}
+    - target: {fileID: 8767239532973041675, guid: 50fbdafc05086ed489c3e6be2aff83c0,
+        type: 3}
+      propertyPath: ConnectionData.Address
+      value: 127.0.0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

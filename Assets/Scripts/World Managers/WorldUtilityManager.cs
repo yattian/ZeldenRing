@@ -71,5 +71,29 @@ namespace YT
 
             return viewableAngle;
         }
+
+        public DamageIntensity GetDamageIntensityBasedOnPoiseDamage(float poiseDamage)
+        {
+            // Throwing daggers, small items
+            DamageIntensity damageIntensity = DamageIntensity.Ping;
+
+            // Daggers, small weapons / light attacks
+            if (poiseDamage >= 10)
+                damageIntensity = DamageIntensity.Light;
+
+            // Standard weapons / medium attacks
+            if (poiseDamage >= 30)
+                damageIntensity = DamageIntensity.Medium;
+
+            // Great weapons / heavy attacks
+            if (poiseDamage >= 70)
+                damageIntensity = DamageIntensity.Heavy;
+
+            // Ultra weapons / colossal attacks
+            if (poiseDamage >= 120)
+                damageIntensity = DamageIntensity.Colossal;
+
+            return damageIntensity;
+        }
     }
 }

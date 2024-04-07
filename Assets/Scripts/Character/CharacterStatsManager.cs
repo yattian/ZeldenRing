@@ -14,6 +14,13 @@ namespace YT {
         private float staminaTickTimer = 0;
         [SerializeField] float staminaRegenerationDelay = 2;
 
+        [Header("Blocking Absorptions")]
+        public float blockingPhysicalAbsorption;
+        public float blockingFireAbsorption;
+        public float blockingMagicAbsorption;
+        public float blockingLightningAbsorption;
+        public float blockingHolyAbsorption;
+
         protected virtual void Awake()
         {
             character = GetComponent<CharacterManager>();

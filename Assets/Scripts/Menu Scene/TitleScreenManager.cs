@@ -47,6 +47,7 @@ namespace YT
         {
             NetworkManager.Singleton.StartHost();
             //NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("192.168.4.51");
+            //NetworkManager.Singleton.NetworkConfig.ConnectionData = System.Text.Encoding.ASCII.GetBytes("220.233.199.15");
             //NetworkManager.Singleton.StartClient();
             PlayUIClickSound();
         }

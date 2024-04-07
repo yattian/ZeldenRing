@@ -11,6 +11,7 @@ namespace YT
         [SerializeField] TextMeshProUGUI popUpMessageText;
         [SerializeField] GameObject popUpMessageGameObject;
 
+        // If you plan on making these popups the same, just make 1 pop up game object
         [Header("YOU DIED Pop Up")]
         [SerializeField] GameObject youDiedPopUpGameObject;
         [SerializeField] TextMeshProUGUI youDiedPopUpBackgroundText;
@@ -22,6 +23,12 @@ namespace YT
         [SerializeField] TextMeshProUGUI bossDefeatedPopUpBackgroundText;
         [SerializeField] TextMeshProUGUI bossDefeatedPopUpText;
         [SerializeField] CanvasGroup bossDefeatedPopUpCanvasGroup; // Allows us to set the alpha to fade over time
+
+        [Header("GRACE RESTORED Pop Up")]
+        [SerializeField] GameObject graceRestoredPopUpGameObject;
+        [SerializeField] TextMeshProUGUI graceRestoredPopUpBackgroundText;
+        [SerializeField] TextMeshProUGUI graceRestoredPopUpText;
+        [SerializeField] CanvasGroup graceRestoredPopUpCanvasGroup; // Allows us to set the alpha to fade over time
 
         public void CloseAllPopUpWindows()
         {
@@ -52,6 +59,19 @@ namespace YT
 
             // Wait, then fade out the pop up
             StartCoroutine(WaitThenFadeOutPopUpOverTime(youDiedPopUpCanvasGroup, 2, 5));
+        }
+
+        public void SendGraceRestoredPopUp(string graceRestoredMessage)
+        {
+            // Activate post processing effects
+
+            graceRestoredPopUpText.text = graceRestoredMessage;
+            graceRestoredPopUpBackgroundText.text = graceRestoredMessage;
+            graceRestoredPopUpGameObject.SetActive(true);
+            graceRestoredPopUpBackgroundText.characterSpacing = 0;
+            StartCoroutine(StretchPopUpTextOverTime(graceRestoredPopUpBackgroundText, 5, 15f, 70f));
+            StartCoroutine(FadeInPopUpOverTime(graceRestoredPopUpCanvasGroup, 3));
+            StartCoroutine(WaitThenFadeOutPopUpOverTime(graceRestoredPopUpCanvasGroup, 2, 3));
         }
 
         public void SendBossDefeatedPopUp(string bossDefeatedMessage)

@@ -47,6 +47,9 @@ MonoBehaviour:
   bloodSplatterVFX: {fileID: 3548588485384254792, guid: 2f9e7dc163581394da1e00b561eed65d,
     type: 3}
   takeDamageEffect: {fileID: 11400000, guid: cda1c05c86dba474488a20f619ab8f51, type: 2}
+  takeBlockedDamageEffect: {fileID: 11400000, guid: a20004a965f77c34ca08db232ed97e32,
+    type: 2}
   instantEffects:
   - {fileID: 11400000, guid: a056b0cf65600ac4eb5a48110b415958, type: 2}
   - {fileID: 11400000, guid: cda1c05c86dba474488a20f619ab8f51, type: 2}
+  - {fileID: 11400000, guid: a20004a965f77c34ca08db232ed97e32, type: 2}

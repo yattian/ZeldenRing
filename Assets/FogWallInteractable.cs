@@ -106,7 +106,7 @@ namespace YT
             // Make this function the same time as the walking through fog wall animation length
             Physics.IgnoreCollision(player.characterController, fogWallCollider, true);
 
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(2);
 
             Physics.IgnoreCollision(player.characterController, fogWallCollider, false);
         }

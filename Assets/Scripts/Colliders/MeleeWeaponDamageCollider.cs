@@ -57,6 +57,13 @@ namespace YT
             }
         }
 
+        protected override void GetBlockingDotValues(CharacterManager damageTarget)
+        {
+            // Check if character being damaged is blocking - If blocking, check if facing correct direction
+            directionFromAttackToDamageTarget = characterCausingDamage.transform.position - damageTarget.transform.position;
+            dotValueFromAttackToDamageTarget = Vector3.Dot(directionFromAttackToDamageTarget, damageTarget.transform.forward);
+        }
+
         protected override void DamageTarget(CharacterManager damageTarget)
         {
             // We don't want to damage the same target more than once in a single attack
